@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>VIZO</title>
+
+    <!-- <link href="bower_components/bootstrap/dist/css/bootstrap-yeti.min.css" rel="stylesheet"> -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap-cosmo.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <!-- <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- <link href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet"> -->
+    <link href="bower_components/bootstrap/dist/css/styles.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+    <header class="slider">
+      <div class="container">
+        <div class="col-md-2 col-sm-2 el-logo-space">
+          <div class="row">
+            <a href="#" class="logo">VIZOV</a>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6 el-search-space">
+          <form>
+            <div class="input-group">
+              <input type="text" class="form-control input-sm" placeholder="Для поиска введите название услуги">
+              <span class="input-group-btn">
+                <button class="btn btn-default btn-sm" type="button">
+                  <i class="glyphicon glyphicon-search"></i> Найти
+                </button>
+              </span>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-4 col-sm-4 el-profile-space">
+          <div class="row">
+            <ul class="profile-links list-inline pull-right">
+              <li><a href="#">Регистрация</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Личный кабинет <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Мой профиль</a></li>
+                  <li><a href="#">Администрация</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Выход</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Nav Services -->
+    <nav class="bg-nav-services">
+      <div class="container">
+        <div class="col-md-2 col-sm-2">
+          <div class="row">
+            <ul class="nav navbar-nav ">
+              <li>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Алматы <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#almaty">Алматы</a></li>
+                  <li><a href="#astana">Астана</a></li>
+                  <li><a href="#aktau">Актау</a></li>
+                  <li><a href="#aktobe">Актобе</a></li>
+                  <li><a href="#atyrau">Атырау</a></li>
+                  <li><a href="#zhezkazgan">Жезказган</a></li>
+                  <li><a href="#karaganda">Караганда</a></li>
+                  <li><a href="#kokshetau">Кокшетау</a></li>
+                  <li><a href="#kostanaj">Костанай</a></li>
+                  <li><a href="#kyzylorda">Кызылорда</a></li>
+                  <li><a href="#pavlodar">Павлодар</a></li>
+                  <li><a href="#petropavlovsk">Петропавловск</a></li>
+                  <li><a href="#semej">Семей</a></li>
+                  <li><a href="#taldykorgan">Талдыкорган</a></li>
+                  <li><a href="#taraz">Тараз</a></li>
+                  <li><a href="#temirtau">Темиртау</a></li>
+                  <li><a href="#uralsk">Уральск</a></li>
+                  <li><a href="#ustkamenogorsk">Усть-Каменогорск</a></li>
+                  <li><a href="#shymkent">Шымкент</a></li>
+                  <li><a href="#jekibastuz">Экибастуз</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6">
+          <div class="row">
+            <ul class="nav nav-lines">
+              <li class="active">
+                <a href="#tab_call" class="" data-toggle="tab">Услуги вызова</a>
+              </li>
+              <li>
+                <a href="#tab_repair" class="" data-toggle="tab">Услуги ремонта</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-4">
+          <div class="row">
+            <button class="btn btn-success btn-sm btn-post-service pull-right" type="button">
+              <i class="glyphicon glyphicon-plus"></i> Разместить услугу
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <br>
+      <div class="tab-content">
+        <div class="tab-pane active" id="tab_call">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="service-block">
+                <img src="bower_components/bootstrap/dist/img/Icons/locked26.png" class="img-responsive center-block">
+                <h4 class="text-center"><a href="#">Вскрытие замков</a></h4>
+              </div>
+            </div>
+            <div class="col-md-3 text-center">
+              <div class="service-block">
+                <img src="bower_components/bootstrap/dist/img/Icons/cleaning2.png" class="img-responsive center-block">
+                <h4 class="text-center"><a href="#">Клининговые услуги</a></h4>
+              </div>
+            </div>
+            <div class="col-md-3 text-center">
+              <div class="service-block">
+                <img src="bower_components/bootstrap/dist/img/Icons/book283.png" class="img-responsive center-block">
+                <h4 class="text-center"><a href="#">Образовательные услуги</a></h4>
+              </div>
+            </div>
+            <div class="col-md-3 text-center">
+              <div class="service-block">
+                <img src="bower_components/bootstrap/dist/img/Icons/medical68.png" class="img-responsive center-block">
+                <h4 class="text-center"><a href="#">Услуги няни</a></h4>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-3 text-center">
+              <div class="service-block">
+                <img src="bower_components/bootstrap/dist/img/Icons/logistics3.png" class="img-responsive center-block">
+                <h4 class="text-center"><a href="#">Услуги перевозчика</a></h4>
+              </div>
+            </div>
+            <div class="col-md-3 text-center">
+              <div class="service-block">
+                <img src="bower_components/bootstrap/dist/img/Icons/pipe9.png" class="img-responsive center-block">
+                <h4 class="text-center"><a href="#">Услуги сантехника</a></h4>
+              </div>
+            </div>
+            <div class="col-md-3 text-center">
+              <div class="service-block">
+                <img src="bower_components/bootstrap/dist/img/Icons/toolbox3.png" class="img-responsive center-block">
+                <h4 class="text-center"><a href="#">Услуги плотника</a></h4>
+              </div>
+            </div>
+            <div class="col-md-3 text-center">
+              <div class="service-block">
+                <img src="bower_components/bootstrap/dist/img/Icons/light105.png" class="img-responsive center-block">
+                <h4 class="text-center"><a href="#">Услуги электрика</a></h4>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane" id="tab_repair">
+          <br>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="service-block">
+                <img src="bower_components/bootstrap/dist/img/Icons2/vehicle18.png" class="img-responsive center-block">
+                <h4 class="text-center"><a href="#">Ремонт авто</a></h4>
+              </div>
+            </div>
+            <div class="col-md-3 text-center">
+              <div class="service-block">
+                <img src="bower_components/bootstrap/dist/img/Icons2/kitchen51.png" class="img-responsive center-block">
+                <h4 class="text-center"><a href="#">Ремонт бытовой техники</a></h4>
+              </div>
+            </div>
+            <div class="col-md-3 text-center">
+              <div class="service-block">
+                <img src="bower_components/bootstrap/dist/img/Icons2/gear63.png" class="img-responsive center-block">
+                <h4 class="text-center"><a href="#">Ремонт домов и квартир</a></h4>
+              </div>
+            </div>
+            <div class="col-md-3 text-center">
+              <div class="service-block">
+                <img src="bower_components/bootstrap/dist/img/Icons2/mountain22.png" class="img-responsive center-block">
+                <h4 class="text-center"><a href="#">Ремонт обуви</a></h4>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-3 text-center">
+              <div class="service-block">
+                <img src="bower_components/bootstrap/dist/img/Icons2/winter-clothes.png" class="img-responsive center-block">
+                <h4 class="text-center"><a href="#">Ремонт одежды</a></h4>
+              </div>
+            </div>
+            <div class="col-md-3 text-center">
+              <div class="service-block">
+                <img src="bower_components/bootstrap/dist/img/Icons2/sofa.png" class="img-responsive center-block">
+                <h4 class="text-center"><a href="#">Ремонт и реставрация мебели</a></h4>
+              </div>
+            </div>
+            <div class="col-md-3 text-center">
+              <div class="service-block">
+                <img src="bower_components/bootstrap/dist/img/Icons2/washing11.png" class="img-responsive center-block">
+                <h4 class="text-center"><a href="#">Химчистка</a></h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <hr>
+      <div class="container">
+        <div class="col-md-3">
+          <p>© 2015 — 2016 «VIZOV»</p>
+        </div>
+        <div class="col-md-9">
+          <ul class="list-unstyled list-inline">
+            <li><a href="#">О проекте</a></li>
+            <li><a href="#">Написать письмо</a></li>
+            <li><a href="#">Правила сайта</a></li>
+            <li><a href="#">Реклама на сайте</a></li>
+            <li><a href="#">Карта сайта</a></li>
+          </ul>
+        </div>
+        <div class="col-md-12 text-center">
+          <br>
+          <ul class="list-inline">
+            <li><a href="#"><i class="fa fa-facebook fa-2x"></i> </a></li>
+            <li><a href="#"><i class="fa fa-vk fa-2x"></i> </a></li>
+            <li><a href="#"><i class="fa fa-google-plus fa-2x"></i> </a></li>
+            <li><a href="#"><i class="fa fa-twitter fa-2x"></i> </a></li>
+            <li><a href="#"><i class="fa fa-youtube fa-2x"></i> </a></li>
+            <li><a href="#"><i class="fa fa-linkedin fa-2x"></i> </a></li>
+            <li><a href="#"><i class="fa fa-instagram fa-2x"></i> </a></li>
+          </ul>
+        </div>
+      </div>
+      <br>
+    </footer>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>

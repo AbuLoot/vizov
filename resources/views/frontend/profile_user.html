@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>VIZO</title>
+
+    <link href="bower_components/bootstrap/dist/css/bootstrap-cosmo.min.css" rel="stylesheet">
+    <link href="bower_components/jasny-bootstrap/dist/css/fileinput.min.css" rel="stylesheet">
+    <link href="bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="bower_components/bootstrap/dist/css/styles.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+    <header class="slider">
+      <div class="container">
+        <div class="col-md-2 col-sm-2 el-logo-space">
+          <div class="row">
+            <a href="#" class="logo">VIZOV</a>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6 el-search-space">
+          <form>
+            <div class="input-group">
+              <input type="text" class="form-control input-sm" placeholder="Для поиска введите название услуги">
+              <span class="input-group-btn">
+                <button class="btn btn-default btn-sm" type="button">
+                  <i class="glyphicon glyphicon-search"></i> Найти
+                </button>
+              </span>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-4 col-sm-4 el-profile-space">
+          <div class="row">
+            <ul class="profile-links list-inline pull-right">
+              <li><a href="#">Регистрация</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Личный кабинет <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Мой профиль</a></li>
+                  <li><a href="#">Администрация</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Выход</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Nav Services -->
+    <nav class="bg-nav-services">
+      <div class="container">
+        <div class="col-md-2 col-sm-2">
+          <div class="row">
+            <ul class="nav navbar-nav ">
+              <li>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Алматы <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#almaty">Алматы</a></li>
+                  <li><a href="#astana">Астана</a></li>
+                  <li><a href="#aktau">Актау</a></li>
+                  <li><a href="#aktobe">Актобе</a></li>
+                  <li><a href="#atyrau">Атырау</a></li>
+                  <li><a href="#zhezkazgan">Жезказган</a></li>
+                  <li><a href="#karaganda">Караганда</a></li>
+                  <li><a href="#kokshetau">Кокшетау</a></li>
+                  <li><a href="#kostanaj">Костанай</a></li>
+                  <li><a href="#kyzylorda">Кызылорда</a></li>
+                  <li><a href="#pavlodar">Павлодар</a></li>
+                  <li><a href="#petropavlovsk">Петропавловск</a></li>
+                  <li><a href="#semej">Семей</a></li>
+                  <li><a href="#taldykorgan">Талдыкорган</a></li>
+                  <li><a href="#taraz">Тараз</a></li>
+                  <li><a href="#temirtau">Темиртау</a></li>
+                  <li><a href="#uralsk">Уральск</a></li>
+                  <li><a href="#ustkamenogorsk">Усть-Каменогорск</a></li>
+                  <li><a href="#shymkent">Шымкент</a></li>
+                  <li><a href="#jekibastuz">Экибастуз</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6">
+          <div class="row">
+            <ul class="nav nav-lines">
+              <li>
+                <a href="index.html#tab_call">Услуги вызова</a>
+              </li>
+              <li>
+                <a href="index.html#tab_repair">Услуги ремонта</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-4">
+          <div class="row">
+            <button class="btn btn-success btn-sm btn-post-service pull-right" type="button">
+              <i class="glyphicon glyphicon-plus"></i> Разместить услугу
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <br>
+      <div class="row">
+        <div class="col-md-3">
+
+          <div class="thumbnail">
+            <div class="caption">
+              <img src="bower_components/bootstrap/dist/img/1.jpg" class="img-responsive">
+              <h5>Thumbnail label</h5>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              Basic panel
+            </div>
+            <ul class="nav nav-pills nav-stacked">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#">Profile</a></li>
+              <li class="disabled"><a href="#">Disabled</a></li>
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                  Dropdown <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+              </li>
+            </ul>
+          <div class="list-group">
+            <a href="profile_posts.html" class="list-group-item">
+              <span class="badge">14</span>
+              Мои объявления
+            </a>
+            <a href="#" class="list-group-item active">Мой профиль</a>
+            <a href="profile_settings.html" class="list-group-item">Настройки</a>
+            <a href="#" class="list-group-item">Выход</a>
+          </div>
+          </div>
+
+          <div class="list-group">
+            <a href="profile_posts.html" class="list-group-item">
+              <span class="badge">14</span>
+              Мои объявления
+            </a>
+            <a href="#" class="list-group-item active">Мой профиль</a>
+            <a href="profile_settings.html" class="list-group-item">Настройки</a>
+            <a href="#" class="list-group-item">Выход</a>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div class="row-left">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Редактирование профиля</h3>
+              </div>
+              <div class="panel-body">
+                <form action="http://badlist.kz/update-account/10" method="post" role="form">
+                  <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input class="form-control" placeholder="Email" name="email" id="email" type="text" value="is.adilet@mail.ru" disabled="">
+                  </div>
+                  <div class="form-group">
+                    <label for="username">Ваше ФИО:</label>
+                    <input class="form-control" placeholder="Name" name="username" id="username" type="text" value="Issayev Adilet">
+                  </div>
+                  <div class="form-group">
+                    <label for="company">Имя организации:</label>
+                    <input class="form-control" placeholder="Company" name="company" id="company" type="text" value="CompNet">
+                  </div>
+                  <div class="form-group">
+                    <label for="contacts">Контакты (телефон):</label>
+                    <input class="form-control" placeholder="Contacts" name="contacts" id="contacts" type="text" value="+77078875631">
+                  </div>
+                  <input name="_token" type="hidden" value="gvtDbUmQRBIhVcwTUWylnrznxSJGlHt9ZDwph5rb">
+                  <button type="submit" name="btn-add-app" class="btn btn-success"><span class="glyphicon glyphicon-floppy-save"></span> Сохранить</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <hr>
+      <div class="container">
+        <div class="col-md-3">
+          <p>© 2015 — 2016 «VIZOV»</p>
+        </div>
+        <div class="col-md-9">
+          <ul class="list-unstyled list-inline">
+            <li><a href="#">О проекте</a></li>
+            <li><a href="#">Написать письмо</a></li>
+            <li><a href="#">Правила сайта</a></li>
+            <li><a href="#">Реклама на сайте</a></li>
+            <li><a href="#">Карта сайта</a></li>
+          </ul>
+        </div>
+        <div class="col-md-12 text-center">
+          <br>
+          <ul class="list-inline">
+            <li><a href="#"><i class="fa fa-facebook fa-2x"></i> </a></li>
+            <li><a href="#"><i class="fa fa-vk fa-2x"></i> </a></li>
+            <li><a href="#"><i class="fa fa-google-plus fa-2x"></i> </a></li>
+            <li><a href="#"><i class="fa fa-twitter fa-2x"></i> </a></li>
+            <li><a href="#"><i class="fa fa-youtube fa-2x"></i> </a></li>
+            <li><a href="#"><i class="fa fa-linkedin fa-2x"></i> </a></li>
+            <li><a href="#"><i class="fa fa-instagram fa-2x"></i> </a></li>
+          </ul>
+        </div>
+      </div>
+      <br>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/jasny-bootstrap/js/fileinput.js"></script>
+    <script src="bower_components/bootstrap-maxlength/src/bootstrap-maxlength.js"></script>
+    <script src="bower_components/bootstrap/dist/js/custom.js"></script>
+  </body>
+</html>
