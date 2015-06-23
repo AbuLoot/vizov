@@ -5,7 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\PostRequest;
 use App\Http\Controllers\Controller;
+
+use Auth;
+use App\City;
+use App\PostCall;
 
 class PostsController extends Controller
 {
@@ -26,7 +31,9 @@ class PostsController extends Controller
      */
     public function create()
     {
-        //
+        $cities = City::all();
+
+        return view('board.create_post', compact('cities'));
     }
 
     /**
@@ -34,9 +41,32 @@ class PostsController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(PostRequest $request)
     {
-        //
+        $post = new PostCall;
+
+        dd($request->all());
+        exit();
+
+        // $post->sort_id = 1,
+        $post->user_id = Auth::id();
+        $post->city_id = $request->city_id;
+        $post->section_id = $request->section_id;
+        $post->slug = str_slug($request->title);
+        $post->title = $request->title;
+        $post->price = $request->price;
+        $post->deal = $request->deal;
+        $post->description = $request->description;
+        $post->images = $request->images;
+        $post->address = $request->address;
+        $post->phone = $request->phone;
+        $post->email = $request->email;
+        $post->comment = $request->comment;
+        $post->save();
+
+        // echo "<pre>", print_r($request->all()), "</pre>";
+        // dd($request->all());
+        // exit();
     }
 
     /**

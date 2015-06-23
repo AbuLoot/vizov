@@ -3,15 +3,8 @@
 @section('content')
       <div class="col-md-6 col-md-offset-2 content-block">
         <h3 class="text-center">Авторизация</h3>
-        @if (count($errors) > 0)
-          <div class="alert alert-danger">
-            <ul>
-              @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-              @endforeach
-            </ul>
-          </div>
-        @endif
+        @include('partials.errors')
+
         <form method="POST" action="/auth/login">
           {!! csrf_field() !!}
           <div class="form-group">

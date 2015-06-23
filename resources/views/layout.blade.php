@@ -4,11 +4,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>VIZO</title>
+    <title>VIZOV</title>
 
     <link href="/bower_components/bootstrap/dist/css/bootstrap-cosmo.min.css" rel="stylesheet">
     <link href="/bower_components/bootstrap/dist/css/styles.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    @yield('styles')
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -23,7 +24,7 @@
       <div class="container">
         <div class="col-md-2 col-sm-2 el-logo-space">
           <div class="row">
-            <a href="{{ route('index') }}" class="logo">VIZOV</a>
+            <a href="{{ route('index') }}" class="logo"><i class="glyphicon glyphicon-flash"></i>VIZOV</a>
           </div>
         </div>
         <div class="col-md-6 col-sm-6 el-search-space">
@@ -48,8 +49,8 @@
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="glyphicon glyphicon-user"></i> {{ Auth::user()->name }} <span class="caret"></span></a>
                   <ul class="dropdown-menu pull-right" role="menu">
-                    <li><a href="#">Мои объявления</a></li>
-                    <li><a href="#">Мой профиль</a></li>
+                    <li><a href="/my_posts">Мои объявления</a></li>
+                    <li><a href="/my_profile">Мой профиль</a></li>
                     <li class="divider"></li>
                     <li><a href="/auth/logout">Выход</a></li>
                   </ul>
@@ -92,9 +93,9 @@
         </div>
         <div class="col-md-4 col-sm-4">
           <div class="row">
-            <button class="btn btn-success btn-sm btn-post-service pull-right" type="button">
+            <a class="btn btn-success btn-sm btn-post-service pull-right" href="{{ route('posts.create') }}">
               <i class="glyphicon glyphicon-plus"></i> Разместить услугу
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -140,5 +141,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    @yield('scripts')
   </body>
 </html>
