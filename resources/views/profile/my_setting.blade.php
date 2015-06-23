@@ -35,7 +35,7 @@
                 <h3 class="panel-title">Удаление аккаунта</h3>
               </div>
               <div class="panel-body">
-                <form action="http://badlist.kz/destroy-account" method="post" role="form">
+                <form action="" method="post" role="form">
                   <input name="_token" type="hidden" value="gvtDbUmQRBIhVcwTUWylnrznxSJGlHt9ZDwph5rb">
                   <button type="submit" class="btn btn-warning" onclick="return confirm('Удалить аккаунт?')"><span class="glyphicon glyphicon-fire"></span> Удалить</button>
                 </form>

@@ -1,6 +1,6 @@
         <div class="panel panel-default">
           <div class="panel-body">
-              <img src="bower_components/bootstrap/dist/img/1.jpg" class="img-responsive">
+              <img src="/img/no-avatar.png" class="img-responsive">
               <h5>{{ Auth::user()->name }}</h5>
           </div>
           <div class="list-group">
