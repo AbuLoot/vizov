@@ -30,6 +30,7 @@ class MyProfileRequest extends Request
             'address' => 'max:80',
             'phone' => 'max:40',
             'website' => 'max:80',
+            'avatar' => 'mimes:jpeg,bmp,png,gif',
         ];
     }
 }

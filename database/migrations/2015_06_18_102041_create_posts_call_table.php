@@ -35,6 +35,7 @@ class CreatePostsCallTable extends Migration
             $table->char('comment', 20);
             $table->char('lang', 2);
             $table->integer('status');
+            $table->timestamps();
         });
     }
 

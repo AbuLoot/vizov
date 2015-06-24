@@ -7,9 +7,9 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
-        "itsgoingd/clockwork": "dev-master",
         "bican/roles": "dev-master",
-        "fzaninotto/faker": "^1.6@dev"
+        "fzaninotto/faker": "^1.6@dev",
+        "intervention/image": "dev-master"
     },
     "require-dev": {
         "mockery/mockery": "0.9.*",

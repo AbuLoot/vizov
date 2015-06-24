@@ -26,93 +26,26 @@
               </form>
             </div>
             <ol class="breadcrumb">
-              <li><a href="#">Услуги вызова</a></li>
-              <li class="active">Вскрытие замков</li>
+              @foreach ($breadcrumbs as $breadcrumb)
+              <li><a href="#">{{ $service }}</a></li>
+              <li class="active">{{  }}</li>
             </ol>
-            <ul class="nav nav-pills">
-              <li class="active"><a href="#"><i class="glyphicon glyphicon-calendar"></i> По дате</a></li>
-              <li><a href="#">По цене</a></li>
-            </ul>
-            <div class="media">
-              <div class="media-left">
-                <a href="#">
-                  <img class="media-object" src="bower_components/bootstrap/dist/img/1.jpg" alt="..." width="200">
-                </a>
+            @foreach ($posts as $post)
+              <div class="media">
+                <div class="media-left">
+                  <a href="#">
+                    <img class="media-object" src="{{ $post->images }}" alt="..." width="200">
+                  </a>
+                </div>
+                <div class="media-body">
+                  <h3 class="media-heading">{{ $post->title }}</h3>
+                  <p>{{ $post->description }}</p>
+                </div>
               </div>
-              <div class="media-body">
-                <h4 class="media-heading">Middle aligned media</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat.</p>
-                <p class="text-right">
-                  <button class="btn btn-primary btn-sm">Посмотреть</button>
-                </p>
-              </div>
-            </div>
-            <hr>
-            <div class="media">
-              <div class="media-left">
-                <a href="#">
-                  <img class="media-object" src="bower_components/bootstrap/dist/img/1.jpg" alt="..." width="200">
-                </a>
-              </div>
-              <div class="media-body">
-                <h4 class="media-heading">Middle aligned media</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat.</p>
-                <p class="text-right">
-                  <button class="btn btn-primary btn-sm">Посмотреть</button>
-                </p>
-              </div>
-            </div>
-            <hr>
-            <div class="media">
-              <div class="media-left">
-                <a href="#">
-                  <img class="media-object" src="bower_components/bootstrap/dist/img/1.jpg" alt="..." width="200">
-                </a>
-              </div>
-              <div class="media-body">
-                <h4 class="media-heading">Middle aligned media</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat.</p>
-                <p class="text-right">
-                  <button class="btn btn-primary btn-sm">Посмотреть</button>
-                </p>
-              </div>
-            </div>
-            <hr>
-            <div class="media">
-              <div class="media-left">
-                <a href="#">
-                  <img class="media-object" src="bower_components/bootstrap/dist/img/1.jpg" alt="..." width="200">
-                </a>
-              </div>
-              <div class="media-body">
-                <h4 class="media-heading">Middle aligned media</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat.</p>
-                <p class="text-right">
-                  <button class="btn btn-primary btn-sm">Посмотреть</button>
-                </p>
-              </div>
-              <ul class="pagination">
-                <li class="disabled"><a href="#">«</a></li>
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">»</a></li>
-              </ul>
-            </div>
+              <br>
+            @endforeach
+
+            {!! $posts->render() !!}
           </div>
         </div>
       </div>

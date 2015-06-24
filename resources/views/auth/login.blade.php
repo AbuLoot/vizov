@@ -3,7 +3,7 @@
 @section('content')
       <div class="col-md-6 col-md-offset-2 content-block">
         <h3 class="text-center">Авторизация</h3>
-        @include('partials.errors')
+        @include('partials.alerts')
 
         <form method="POST" action="/auth/login">
           {!! csrf_field() !!}

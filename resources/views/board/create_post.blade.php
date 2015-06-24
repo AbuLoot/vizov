@@ -12,7 +12,7 @@
 		          <div class="form-group">
 		        		<div class="col-md-offset-3 col-md-9">
 		        			<div class="row">
-		        				@include('partials.errors')
+		        				@include('partials.alerts')
 		        			</div>
 		        		</div>
 
