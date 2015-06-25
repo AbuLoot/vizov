@@ -30,18 +30,27 @@ class IndexController extends Controller
     	return view('board.section_call', compact('sections'));
     }
 
-    public function showCall($slug, $id)
+    public function showCall($section, $id)
     {
-        $section = SectionCall::where('slug', $slug);
+        $section = SectionCall::where('slug', $section)->first();
         $posts = PostCall::where('section_id', $id)->paginate(10);
 
         $breadcrumbs = [
-            trans(Request::segment(1)),
-            $section->title,
+            'first' => trans('words.'.\Request::segment(1)),
+            'second' => $section->title
         ];
 
-        return view('board.posts', compact('posts', 'breadcrumbs'));
+        return view('board.posts_call', compact('posts', 'breadcrumbs'));
     }
+
+    public function showPostCall($post, $id)
+    {
+        $post = PostCall::find($id);
+
+        return view('board.show_post', compact('post'));
+    }
+
+    // Repair
 
     public function getRepair()
     {
@@ -50,11 +59,23 @@ class IndexController extends Controller
     	return view('board.section_repair', compact('sections'));
     }
 
-    public function showRepair($slug, $id)
+    public function showRepair($section, $id)
     {
+        $section = SectionRepair::where('slug', $section)->first();
         $posts = PostRepair::where('section_id', $id)->paginate(10);
-        $service = trans($slug);
 
-        return view('board.posts', compact('posts'));
+        $breadcrumbs = [
+            'first' => trans('words.'.\Request::segment(1)),
+            'second' => $section->title
+        ];
+
+        return view('board.posts_repair', compact('posts', 'breadcrumbs'));
+    }
+
+    public function showPostRepair($post, $id)
+    {
+        $post = PostRepair::find($id);
+
+        return view('board.show_post', compact('post'));
     }
 }

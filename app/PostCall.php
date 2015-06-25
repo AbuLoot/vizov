@@ -38,4 +38,19 @@ class PostCall extends Model
         'lang',
         'status'
     ];
+
+    public function section()
+    {
+        return $this->belongsTo('App\SectionCall');
+    }
+
+    public function city()
+    {
+        return $this->belongsTo('App\City');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

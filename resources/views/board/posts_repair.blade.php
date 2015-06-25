@@ -26,24 +26,26 @@
               </form>
             </div>
             <ol class="breadcrumb">
-              @foreach ($breadcrumbs as $breadcrumb)
-              <li><a href="#">{{ $service }}</a></li>
-              <li class="active">{{  }}</li>
+              <li><a href="{{ route('repair') }}">{{ $breadcrumbs['first'] }}</a></li>
+              <li class="active">{{ $breadcrumbs['second'] }}</li>
             </ol>
-            @foreach ($posts as $post)
+            @forelse ($posts as $post)
               <div class="media">
                 <div class="media-left">
-                  <a href="#">
+                  <a href="{{ route('show-post-repair', ['post' => $post->slug, 'id' => $post->id]) }}">
                     <img class="media-object" src="{{ $post->images }}" alt="..." width="200">
                   </a>
                 </div>
                 <div class="media-body">
-                  <h3 class="media-heading">{{ $post->title }}</h3>
+                  <h3 class="media-heading"><a href="{{ route('show-post-repair', ['post' => $post->slug, 'id' => $post->id]) }}">{{ $post->title }}</a></h3>
                   <p>{{ $post->description }}</p>
                 </div>
               </div>
               <br>
-            @endforeach
+            @empty
+              <h4>В этой рубрике пока нет объявлений.</h4>
+              <a href="{{ route('posts.create') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Добавить объявление</a>
+            @endforelse
 
             {!! $posts->render() !!}
           </div>
