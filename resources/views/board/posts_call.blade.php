@@ -37,16 +37,18 @@
                   </a>
                 </div>
                 <div class="media-body">
-                  <h4 class="col-md-8 media-heading">
-                    <a href="{{ route('show-post-call', ['post' => $post->slug, 'id' => $post->id]) }}">
-                      <b>{{ $post->title }}</b>
-                    </a>
-                  </h4>
-                  <h4 class="col-md-4 media-heading text-right text-success"><b>{{ $post->price }}</b></h4>
+                  <div class="row">
+                    <h4 class="col-md-8 media-heading">
+                      <a href="{{ route('show-post-call', ['post' => $post->slug, 'id' => $post->id]) }}">
+                        <b>{{ $post->title }}</b>
+                      </a>
+                    </h4>
+                    <h4 class="col-md-4 media-heading text-right text-success"><b>{{ $post->price }} тг</b></h4>
+                  </div>
                   <p>{{ $post->city->title }}</p>
 
                   <p>
-                    <small class="space-right">{{ $post->created_at }} Опубликовано 6 мая 2015 г.</small>
+                    <small class="space-right">{{ $post->created_at }} | Опубликовано 6 мая 2015 г.</small>
                     <small><i class="glyphicon glyphicon-user"></i> 26 просмотров</small>
                   </p>
                 </div>

@@ -17,13 +17,13 @@
                 </a>
               </div>
               <div class="media-body">
-                <h4>{{ $post->user->name }}</h4>
+                <h4><a href="#"><b>{{ $post->user->name }}</b></a></h4>
                 <div class="table-responsive">
                   <table class="table table-condensed">
                     <tbody>
                       <tr>
                         <th>Цена</th>
-                        <td class="text-success"><b>{{ $post->price }} (Договорная цена)</b></td>
+                        <td class="text-success"><b>{{ $post->price }} тг (Договорная цена)</b></td>
                       </tr>
                       <tr>
                         <th>Регион</th>
@@ -40,8 +40,8 @@
                       <tr>
                         <th>Рейтинг</th>
                         <td>
-                          <i class="glyphicon glyphicon-star text-info"></i>
-                          <i class="glyphicon glyphicon-star text-info"></i>
+                          <i class="glyphicon glyphicon-star text-primary"></i>
+                          <i class="glyphicon glyphicon-star text-primary"></i>
                           <i class="glyphicon glyphicon-star text-muted"></i>
                           <i class="glyphicon glyphicon-star text-muted"></i>
                           <i class="glyphicon glyphicon-star text-muted"></i>
@@ -51,7 +51,7 @@
                   </table>
                 </div>
               </div>
-              <hr>
+              <br>
               <p>{{ $post->description }}</p>
               <p>
                 <small class="space-right">{{ $post->created_at }} Опубликовано 6 мая 2015 г.</small>
@@ -64,22 +64,22 @@
                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false">
                   <div class="carousel-inner" role="listbox">
                     <div class="item active">
-                      <img src="bower_components/bootstrap/dist/img/1.jpg" class="img-responsive">
+                      <img src="/bower_components/bootstrap/dist/img/1.jpg" class="img-responsive">
                     </div>
                     <div class="item">
-                      <img src="bower_components/bootstrap/dist/img/2.jpg" class="img-responsive">
+                      <img src="/bower_components/bootstrap/dist/img/2.jpg" class="img-responsive">
                     </div>
                     <div class="item">
-                      <img src="bower_components/bootstrap/dist/img/3.jpg" class="img-responsive">
+                      <img src="/bower_components/bootstrap/dist/img/3.jpg" class="img-responsive">
                     </div>
                     <div class="item">
-                      <img src="bower_components/bootstrap/dist/img/4.jpg" class="img-responsive">
+                      <img src="/bower_components/bootstrap/dist/img/4.jpg" class="img-responsive">
                     </div>
                     <div class="item">
-                      <img src="bower_components/bootstrap/dist/img/5.jpg" class="img-responsive">
+                      <img src="/bower_components/bootstrap/dist/img/5.jpg" class="img-responsive">
                     </div>
                     <div class="item">
-                      <img src="bower_components/bootstrap/dist/img/6.jpg" class="img-responsive">
+                      <img src="/bower_components/bootstrap/dist/img/6.jpg" class="img-responsive">
                     </div>
                   </div>
                 </div>
@@ -89,32 +89,32 @@
               <ol class="row-right list-unstyled pull-right">
                 <li data-target="#carousel-example-generic" data-slide-to="0" class="active">
                   <a href="#" class="">
-                    <img src="bower_components/bootstrap/dist/img/1.jpg" class="img-responsive" width="95">
+                    <img src="/bower_components/bootstrap/dist/img/1.jpg" class="img-responsive" width="95">
                   </a>
                 </li>
                 <li data-target="#carousel-example-generic" data-slide-to="1" class="">
                   <a href="#" class="">
-                    <img src="bower_components/bootstrap/dist/img/2.jpg" class="img-responsive" width="95">
+                    <img src="/bower_components/bootstrap/dist/img/2.jpg" class="img-responsive" width="95">
                   </a>
                 </li>
                 <li data-target="#carousel-example-generic" data-slide-to="2" class="active">
                   <a href="#" class="">
-                    <img src="bower_components/bootstrap/dist/img/3.jpg" class="img-responsive" width="95">
+                    <img src="/bower_components/bootstrap/dist/img/3.jpg" class="img-responsive" width="95">
                   </a>
                 </li>
                 <li data-target="#carousel-example-generic" data-slide-to="3" class="">
                   <a href="#" class="">
-                    <img src="bower_components/bootstrap/dist/img/4.jpg" class="img-responsive" width="95">
+                    <img src="/bower_components/bootstrap/dist/img/4.jpg" class="img-responsive" width="95">
                   </a>
                 </li>
                 <li data-target="#carousel-example-generic" data-slide-to="4" class="active">
                   <a href="#" class="">
-                    <img src="bower_components/bootstrap/dist/img/5.jpg" class="img-responsive" width="95">
+                    <img src="/bower_components/bootstrap/dist/img/5.jpg" class="img-responsive" width="95">
                   </a>
                 </li>
                 <li data-target="#carousel-example-generic" data-slide-to="5" class="">
                   <a href="#" class="">
-                    <img src="bower_components/bootstrap/dist/img/6.jpg" class="img-responsive" width="95">
+                    <img src="/bower_components/bootstrap/dist/img/6.jpg" class="img-responsive" width="95">
                   </a>
                 </li>
               </ol>
@@ -207,7 +207,7 @@
               <div class="media">
                 <div class="media-left">
                   <a href="#">
-                    <img class="media-object" src="bower_components/bootstrap/dist/img/1.jpg" alt="..." width="90">
+                    <img class="media-object" src="/bower_components/bootstrap/dist/img/1.jpg" alt="..." width="90">
                   </a>
                 </div>
                 <div class="media-body">
@@ -225,7 +225,7 @@
               <div class="media">
                 <div class="media-left">
                   <a href="#">
-                    <img class="media-object" src="bower_components/bootstrap/dist/img/2.jpg" alt="..." width="90">
+                    <img class="media-object" src="/bower_components/bootstrap/dist/img/2.jpg" alt="..." width="90">
                   </a>
                 </div>
                 <div class="media-body">
@@ -243,7 +243,7 @@
               <div class="media">
                 <div class="media-left">
                   <a href="#">
-                    <img class="media-object" src="bower_components/bootstrap/dist/img/3.jpg" alt="..." width="90">
+                    <img class="media-object" src="/bower_components/bootstrap/dist/img/3.jpg" alt="..." width="90">
                   </a>
                 </div>
                 <div class="media-body">
@@ -261,7 +261,7 @@
               <div class="media">
                 <div class="media-left">
                   <a href="#">
-                    <img class="media-object" src="bower_components/bootstrap/dist/img/4.jpg" alt="..." width="90">
+                    <img class="media-object" src="/bower_components/bootstrap/dist/img/4.jpg" alt="..." width="90">
                   </a>
                 </div>
                 <div class="media-body">
@@ -279,7 +279,7 @@
               <div class="media">
                 <div class="media-left">
                   <a href="#">
-                    <img class="media-object" src="bower_components/bootstrap/dist/img/5.jpg" alt="..." width="90">
+                    <img class="media-object" src="/bower_components/bootstrap/dist/img/5.jpg" alt="..." width="90">
                   </a>
                 </div>
                 <div class="media-body">

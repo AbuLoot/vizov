@@ -19,7 +19,9 @@ class ProfileController extends Controller
 {
     public function getMyPosts()
     {
-    	return view('profile.my_posts');
+        $posts = Auth::user()->posts_call;
+
+    	return view('profile.my_posts', compact('posts'));
     }
 
     public function getMyProfile()
