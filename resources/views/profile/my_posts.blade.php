@@ -13,7 +13,7 @@
                 <div class="media">
                   <div class="media-left">
                     <a href="{{ route('show-post-call', ['post' => $post->slug, 'id' => $post->id]) }}">
-                      <img class="media-object" src="{{ $post->images }}" alt="..." width="200">
+                      <img class="media-object" src="/img/posts/{{ $post->user_id.'/'.$post->image }}" alt="..." width="200">
                     </a>
                   </div>
                   <div class="media-body">

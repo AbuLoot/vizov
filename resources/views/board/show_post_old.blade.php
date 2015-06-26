@@ -12,13 +12,16 @@
             <div class="media">
               <h3 class="media-heading">{{ $post->title }}</h3>
               <div class="media-left">
-                <?php 
+              	<?php 
                   if ( ! empty($post->images))
                     $images = unserialize($post->images);
                   else
                     $images = [];
+
+                  // print_r($images);
+                  // exit();
                 ?>
-                @if(empty($image))
+                @if(empty($images))
                   <img class="media-object" src="/img/no-avatar.png" alt="{{ $post->title }}" width="300">
                 @else
                   <img class="media-object" src="/img/posts/{{ $post->user_id.'/'.$post->image }}" alt="{{ $post->title }}" width="300">
@@ -48,13 +51,13 @@
                       <tr>
                         <th>Рейтинг</th>
                         <td>
-                          <big>
-                            <i class="glyphicon glyphicon-star text-info"></i>
-                            <i class="glyphicon glyphicon-star text-info"></i>
-                            <i class="glyphicon glyphicon-star text-muted"></i>
-                            <i class="glyphicon glyphicon-star text-muted"></i>
-                            <i class="glyphicon glyphicon-star text-muted"></i>
-                          </big>
+                        	<big>
+	                          <i class="glyphicon glyphicon-star text-info"></i>
+	                          <i class="glyphicon glyphicon-star text-info"></i>
+	                          <i class="glyphicon glyphicon-star text-muted"></i>
+	                          <i class="glyphicon glyphicon-star text-muted"></i>
+	                          <i class="glyphicon glyphicon-star text-muted"></i>
+                        	</big>
                         </td>
                       </tr>
                     </tbody>
@@ -74,42 +77,39 @@
                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false">
                   <div class="carousel-inner" role="listbox">
                     <?php $i = 0; ?>
-                    @foreach ($images as $key => $image)
-                      @if ($i == 0)
-                        <div class="item active">
-                          <img src="/img/posts/{{ $post->user_id.'/'.$image['image'] }}" class="img-responsive">
-                        </div>
+                  	@foreach ($images as $key => $image)
+                  		@if ($i == 0)
+		                    <div class="item active">
+		                      <img src="/img/posts/{{ $post->user_id.'/'.$image['image'] }}" class="img-responsive">
+		                    </div>
                         <?php $i++; ?>
-                      @else
-                        <div class="item">
-                          <img src="/img/posts/{{ $post->user_id.'/'.$image['image'] }}" class="img-responsive">
-                        </div>
-                      @endif
-                    @endforeach
+                  		@else
+		                    <div class="item">
+		                      <img src="/img/posts/{{ $post->user_id.'/'.$image['image'] }}" class="img-responsive">
+		                    </div>
+                  		@endif
+                  	@endfor
                   </div>
                 </div>
               </div>
             </div>
             <div class="col-md-2 gallery">
               <ol class="row-right list-unstyled pull-right">
-                <?php $i = 0; ?>
-                @foreach ($images as $key => $image)
-                  @if ($i == 0)
-                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active">
-                      <a href="#" class="">
-                        <img src="/img/posts/{{ $post->user_id.'/'.$image['mini_image'] }}" class="img-responsive" width="95">
-                      </a>
-                    </li>
-                    <?php $i++; ?>
-                  @else
-                    <li data-target="#carousel-example-generic" data-slide-to="{{ $i }}" class="">
-                      <a href="#" class="">
-                        <img src="/img/posts/{{ $post->user_id.'/'.$image['mini_image'] }}" class="img-responsive" width="95">
-                      </a>
-                    </li>
-                    <?php $i++; ?>
-                  @endif
-                @endforeach
+              	@for ($i = 0; $i < count($images); $i++)
+              		@if ($i == 0)
+		                <li data-target="#carousel-example-generic" data-slide-to="0" class="active">
+		                  <a href="#" class="">
+		                    <img src="/img/posts/{{ $post->user_id.'/'.$images[$i]['mini_image'] }}" class="img-responsive" width="95">
+		                  </a>
+		                </li>
+              		@else
+		                <li data-target="#carousel-example-generic" data-slide-to="{{ $i }}" class="">
+		                  <a href="#" class="">
+		                    <img src="/img/posts/{{ $post->user_id.'/'.$images[$i]['mini_image'] }}" class="img-responsive" width="95">
+		                  </a>
+		                </li>
+              		@endif
+              	@endfor
               </ol>
             </div>
             <div class="clearfix"></div>

@@ -50,7 +50,10 @@ class PostsController extends Controller
 
         if ($request->hasFile('images'))
         {
+            $i = 0;
+            $introImage = null;
             $images = [];
+
             foreach ($request->file('images') as $key => $image)
             {
                 if (isset($image))
@@ -64,19 +67,28 @@ class PostsController extends Controller
 
                     $file = Image::make($image);
 
-                    if ($key == 0)
-                    {
-                        $file->fit(300, null);
-                        $file->crop(300, 260);
-                        $file->save('img/posts/'.Auth::id().'/main-'.$imageName);
-                        $image = 'main-'.$imageName;
-                    }
-
-                    $file->fit(600, null);
+                    $file->resize(600, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });
                     $file->crop(600, 450);
                     $file->save('img/posts/'.Auth::id().'/'.$imageName);
 
-                    $file->fit(95, null);
+                    if ($i == 0)
+                    {
+                        $introFile = Image::make($image);
+                        $introFile->resize(300, null, function ($constraint) {
+                            $constraint->aspectRatio();
+                        });
+                        $introFile->crop(300, 200);
+                        $introFile->save('img/posts/'.Auth::id().'/main-'.$imageName);
+                        $introImage = 'main-'.$imageName;
+                        $i++;
+                    }
+
+                    // Creating mini images
+                    $file->resize(95, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });
                     $file->crop(95, 71);
                     $file->save('img/posts/'.Auth::id().'/mini-'.$imageName);
 
@@ -95,8 +107,8 @@ class PostsController extends Controller
         $post->price = $request->price;
         // $post->deal = $request->deal;
         $post->description = $request->description;
-        $post->images = $image;
-        $post->images = json_encode($images);
+        $post->images = (isset($introImage)) ? $introImage : null;
+        $post->images = serialize($images);
         $post->address = $request->address;
         $post->phone = $request->phone;
         $post->email = $request->email;
@@ -143,53 +155,81 @@ class PostsController extends Controller
 
         if ($request->hasFile('images'))
         {
-            $images = [];
+            $i = 0;
+            $introImage = null;
+            $images = (unserialize($post->images)) ? unserialize($post->images) : [];
+
             foreach ($request->file('images') as $key => $image)
             {
                 if (isset($image))
                 {
                     $imageName = $key.'-image-'.str_random(10).'.'.$image->getClientOriginalExtension();
 
-                    if ( ! file_exists('img/posts/'.Auth::id()))
+                    if ( ! file_exists('img/posts/'.$post->user_id))
                     {
-                        Storage::makeDirectory('img/posts/'.Auth::id());
+                        Storage::makeDirectory('img/posts/'.$post->user_id);
                     }
 
                     $file = Image::make($image);
+                    $file->resize(600, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });
+                    $file->crop(600, 450);
+                    $file->save('img/posts/'.$post->user_id.'/'.$imageName);
 
-                    if ($key == 0)
+                    // Creating mini images
+                    $file->resize(95, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });
+                    $file->crop(95, 71);
+                    $file->save('img/posts/'.$post->user_id.'/mini-'.$imageName);
+
+                    if ($i == 0)
                     {
-                        $file->fit(300, null);
-                        $file->crop(300, 260);
-                        $file->save('img/posts/'.Auth::id().'/main-'.$imageName);
-                        $image = 'main-'.$imageName;
+                        if (isset($images[$key]))
+                        {
+                            Storage::delete('img/posts/'.$post->user_id.'/main-'.$images[$key]['image']);
+                        }
+
+                        $introFile = Image::make($image);
+                        $introFile->fit(300, null);
+                        $introFile->crop(300, 260);
+                        $introFile->save('img/posts/'.$post->user_id.'/main-'.$imageName);
+                        $introImage = 'main-'.$imageName;
                     }
 
-                    $file->fit(600, null);
-                    $file->crop(600, 450);
-                    $file->save('img/posts/'.Auth::id().'/'.$imageName);
+                    if (isset($images[$key]))
+                    {
+                        Storage::delete([
+                            'img/posts/'.$post->user_id.'/'.$images[$key]['image'],
+                            'img/posts/'.$post->user_id.'/'.$images[$key]['mini_image']
+                        ]);
 
-                    $file->fit(95, null);
-                    $file->crop(95, 71);
-                    $file->save('img/posts/'.Auth::id().'/mini-'.$imageName);
-
-                    $images[$key]['image'] = $imageName;
-                    $images[$key]['mini-image'] = 'mini-'.$imageName;
+                        $images[$key]['image'] = $imageName;
+                        $images[$key]['mini_image'] = 'mini-'.$imageName;
+                    }
+                    else
+                    {
+                        $images[$key]['image'] = $imageName;
+                        $images[$key]['mini_image'] = 'mini-'.$imageName;
+                    }
                 }
             }
+
+            $images = array_sort_recursive($images);
+            $images = serialize($images);
         }
 
         // $post->sort_id = 1,
-        $post->user_id = Auth::id();
         $post->city_id = $request->city_id;
         $post->section_id = $request->section_id;
         $post->slug = str_slug($request->title);
         $post->title = $request->title;
         $post->price = $request->price;
-        // $post->deal = $request->deal;
+        $post->deal = $request->deal;
         $post->description = $request->description;
-        $post->images = $image;
-        $post->images = json_encode($images);
+        // $post->images = (isset($introImage)) ? $introImage : $post->image;
+        $post->images = (isset($images)) ? $images : $post->images;
         $post->address = $request->address;
         $post->phone = $request->phone;
         $post->email = $request->email;

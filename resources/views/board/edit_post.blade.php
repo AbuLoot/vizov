@@ -81,12 +81,12 @@
 		            <label for="price" class="col-md-3">Фотографии<br><br> <small class="text-muted">Объявления<br> с фотографиями привлекают клиентов<br> на 80% больше</small></label>
 		            <div class="col-md-9">
 		              <div class="row">
-		              	<?php $images = json_decode($post->images); ?>
+		              	<?php $images = unserialize($post->images); ?>
                   	@for ($i = 0; $i < 6; $i++)
                   		@if (isset($images[$i]))
 				                <div class="fileinput fileinput-new" data-provides="fileinput">
 		                      <div class="fileinput-new thumbnail" style="width: 185px; height: 120px;">
-		                        <img src="/img/posts/{{ $post->user_id.'/'.$images[$i]->mini_image }}">
+		                        <img src="/img/posts/{{ $post->user_id.'/'.$images[$i]['mini_image'] }}">
 		                      </div>
 				                  <div class="fileinput-preview fileinput-exists thumbnail" data-trigger="fileinput" style="width: 185px; height: 120px;"></div>
 				                  <div>

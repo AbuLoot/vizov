@@ -28,7 +28,7 @@ class PostRequest extends Request
             'section_id' => 'required|numeric|min:1|max:3',
             'price' => 'max:10',
             'city_id' => 'required|numeric|max:2',
-            'address' => 'required|max:80',
+            'address' => 'max:80',
             'phone' => 'required|min:5|max:40',
             'email' => 'required|max:40'
         ];
