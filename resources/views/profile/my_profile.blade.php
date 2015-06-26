@@ -41,6 +41,10 @@
                       <td>{{ $user->profile->city->title }}</td>
                     </tr>
                     <tr>
+                      <th>Адрес работы:</th>
+                      <td>{{ $user->profile->address }}</td>
+                    </tr>
+                    <tr>
                       <th>Навыки:</th>
                       <td>{{ $user->profile->skills }}</td>
                     </tr>

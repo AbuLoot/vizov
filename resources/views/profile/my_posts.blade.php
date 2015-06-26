@@ -18,12 +18,17 @@
                   </div>
                   <div class="media-body">
                     <div class="row">
-                      <h4 class="col-md-8 media-heading">
+                      <h4 class="col-md-7 media-heading">
                         <a href="{{ route('show-post-call', ['post' => $post->slug, 'id' => $post->id]) }}">
                           <b>{{ $post->title }}</b>
                         </a>
                       </h4>
-                      <h4 class="col-md-4 media-heading text-right text-success"><b>{{ $post->price }} тг</b></h4>
+                      <h4 class="col-md-3 media-heading text-right text-success"><b>{{ $post->price }} тг</b></h4>
+                      <div class="col-md-2">
+                        <a href="{{ route('posts.edit', $post->id) }}">
+                          <b>Edit</b>
+                        </a>
+                      </div>
                     </div>
                     <p>{{ $post->city->title }}</p>
 

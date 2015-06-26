@@ -57,6 +57,10 @@
                     </select>
                   </div>
                   <div class="form-group">
+                    <label for="address">Адрес вашей работы:</label>
+                    <input type="text" class="form-control" name="address" id="address" maxlength="200" placeholder="Адрес" value="{{ $user->profile->address }}">
+                  </div>
+                  <div class="form-group">
                     <label for="phone">Контакты (телефон):</label>
                     <input type="tel" class="form-control" name="phone" id="phone" maxlength="40" placeholder="Номер телефона" value="{{ $user->profile->phone }}">
                   </div>
@@ -79,7 +83,7 @@
                       </div>
                       <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
                       <div>
-                        <span class="btn btn-default btn-sm btn-file"><span class="fileinput-new">Выберите картинку</span><span class="fileinput-exists">Изменить</span><input type="file" name="avatar"></span>
+                        <span class="btn btn-default btn-sm btn-file"><span class="fileinput-new">Выберите картинку</span><span class="fileinput-exists">Изменить</span><input type="file" name="avatar" accept="image/*"></span>
                         <a href="#" class="btn btn-default btn-sm fileinput-exists" data-dismiss="fileinput">Удалить</a>
                       </div>
                     </div>

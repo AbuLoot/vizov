@@ -81,34 +81,34 @@
 		            <div class="col-md-9">
 		              <div class="row">
 		                <div class="fileinput fileinput-new" data-provides="fileinput">
-		                  <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 186px; height: 120px;"></div>
+		                  <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 185px; height: 120px;"></div>
 		                  <div>
 		                    <span class="btn btn-default btn-sm btn-file">
 		                      <span class="fileinput-new"><i class="glyphicon glyphicon-folder-open"></i>&nbsp; Выбрать</span>
 		                      <span class="fileinput-exists"><i class="glyphicon glyphicon-folder-open"></i>&nbsp;</span>
-		                      <input type="file" name="images[]">
+		                      <input type="file" name="images[]" accept="image/*">
 		                    </span>
 		                    <a href="#" class="btn btn-default btn-sm fileinput-exists" data-dismiss="fileinput"><i class="glyphicon glyphicon-trash"></i> Удалить</a>
 		                  </div>
 		                </div>
 		                <div class="fileinput fileinput-new" data-provides="fileinput">
-		                  <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 186px; height: 120px;"></div>
+		                  <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 185px; height: 120px;"></div>
 		                  <div>
 		                    <span class="btn btn-default btn-sm btn-file">
 		                      <span class="fileinput-new"><i class="glyphicon glyphicon-folder-open"></i>&nbsp; Выбрать</span>
 		                      <span class="fileinput-exists"><i class="glyphicon glyphicon-folder-open"></i>&nbsp;</span>
-		                      <input type="file" name="images[]">
+		                      <input type="file" name="images[]" accept="image/*">
 		                    </span>
 		                    <a href="#" class="btn btn-default btn-sm fileinput-exists" data-dismiss="fileinput"><i class="glyphicon glyphicon-trash"></i> Удалить</a>
 		                  </div>
 		                </div>
 		                <div class="fileinput fileinput-new" data-provides="fileinput">
-		                  <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 186px; height: 120px;"></div>
+		                  <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 185px; height: 120px;"></div>
 		                  <div>
 		                    <span class="btn btn-default btn-sm btn-file">
 		                      <span class="fileinput-new"><i class="glyphicon glyphicon-folder-open"></i>&nbsp; Выбрать</span>
 		                      <span class="fileinput-exists"><i class="glyphicon glyphicon-folder-open"></i>&nbsp;</span>
-		                      <input type="file" name="images[]">
+		                      <input type="file" name="images[]" accept="image/*">
 		                    </span>
 		                    <a href="#" class="btn btn-default btn-sm fileinput-exists" data-dismiss="fileinput"><i class="glyphicon glyphicon-trash"></i> Удалить</a>
 		                  </div>
@@ -123,7 +123,7 @@
 		                      <span class="btn btn-default btn-sm btn-file">
 		                        <span class="fileinput-new"><i class="glyphicon glyphicon-folder-open"></i>&nbsp; Выбрать</span>
 		                        <span class="fileinput-exists"><i class="glyphicon glyphicon-folder-open"></i>&nbsp;</span>
-		                        <input type="file" name="images[]">
+		                        <input type="file" name="images[]" accept="image/*">
 		                      </span>
 		                      <a href="#" class="btn btn-default btn-sm fileinput-exists" data-dismiss="fileinput"><i class="glyphicon glyphicon-trash"></i> Удалить</a>
 		                    </div>
@@ -135,7 +135,7 @@
 		                      <span class="btn btn-default btn-sm btn-file">
 		                        <span class="fileinput-new"><i class="glyphicon glyphicon-folder-open"></i>&nbsp; Выбрать</span>
 		                        <span class="fileinput-exists"><i class="glyphicon glyphicon-folder-open"></i>&nbsp;</span>
-		                        <input type="file" name="images[]">
+		                        <input type="file" name="images[]" accept="image/*">
 		                      </span>
 		                      <a href="#" class="btn btn-default btn-sm fileinput-exists" data-dismiss="fileinput"><i class="glyphicon glyphicon-trash"></i> Удалить</a>
 		                    </div>
@@ -146,7 +146,7 @@
 		                      <span class="btn btn-default btn-sm btn-file">
 		                        <span class="fileinput-new"><i class="glyphicon glyphicon-folder-open"></i>&nbsp; Выбрать</span>
 		                        <span class="fileinput-exists"><i class="glyphicon glyphicon-folder-open"></i>&nbsp;</span>
-		                        <input type="file" name="images[]">
+		                        <input type="file" name="images[]" accept="image/*">
 		                      </span>
 		                      <a href="#" class="btn btn-default btn-sm fileinput-exists" data-dismiss="fileinput"><i class="glyphicon glyphicon-trash"></i> Удалить</a>
 		                    </div>
@@ -163,8 +163,12 @@
 		            <div class="col-md-9">
 		              <div class="row">
 		                <select class="form-control" name="city_id" id="city">
-		                	@foreach($cities as $city)
-		                		<option value="{{ $city->id }}">{{ $city->title }}</option>
+		                	@foreach ($cities as $city)
+		                		@if ($city->id === $user->profile->city_id)
+		                			<option value="{{ $city->id }}" selected>{{ $city->title }}</option>
+		                		@else
+		                			<option value="{{ $city->id }}">{{ $city->title }}</option>
+		                		@endif
 		                	@endforeach
 		                </select>
 		              </div>
@@ -174,7 +178,7 @@
 		            <label for="address" class="col-md-3">Адрес</label>
 		            <div class="col-md-9">
 		              <div class="row">
-		                <input type="text" class="form-control" id="address" name="address" maxlength="80" value="{{ old('address') }}">
+		                <input type="text" class="form-control" id="address" name="address" maxlength="80" value="{{ (old('address')) ? old('address') : $user->profile->address }}">
 		              </div>
 		            </div>
 		          </div>
@@ -182,7 +186,7 @@
 		            <label for="phone" class="col-md-3">Телефон</label>
 		            <div class="col-md-9">
 		              <div class="row">
-		                <input type="tel" class="form-control" id="phone" name="phone" minlength="5" maxlength="40" value="{{ old('phone') }}" required>
+		                <input type="tel" class="form-control" id="phone" name="phone" minlength="5" maxlength="40" value="{{ (old('phone')) ? old('phone') : $user->profile->phone }}" required>
 		              </div>
 		            </div>
 		          </div>
@@ -190,7 +194,7 @@
 		            <label for="email" class="col-md-3">Email</label>
 		            <div class="col-md-9">
 		              <div class="row">
-		                <input type="email" class="form-control" id="email" name="email" maxlength="40" value="{{ old('phone') }}">
+		                <input type="email" class="form-control" id="email" name="email" maxlength="40" value="{{ (old('email')) ? old('email') : $user->email }}">
 		              </div>
 		            </div>
 		          </div>

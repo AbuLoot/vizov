@@ -24,8 +24,8 @@ class PostRequest extends Request
     public function rules()
     {
         return [
-            'title' => 'required|unique:posts_call|min:5|max:80',
-            'section_id' => 'required|numeric|max:2',
+            'title' => 'required|min:5|max:80',
+            'section_id' => 'required|numeric|min:1|max:3',
             'price' => 'max:10',
             'city_id' => 'required|numeric|max:2',
             'address' => 'required|max:80',

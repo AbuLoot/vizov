@@ -52,7 +52,7 @@ class ProfileController extends Controller
         {
             $avatar = 'ava-'.str_random(20).'.'.$request->file('avatar')->getClientOriginalExtension();
 
-            if ( ! file_exists('img/users'.$profile->id))
+            if ( ! file_exists('img/users/'.$profile->id))
             {
                 Storage::makeDirectory('img/users/'.$profile->id);
             }

@@ -45,7 +45,7 @@ class IndexController extends Controller
 
     public function showPostCall($post, $id)
     {
-        $post = PostCall::find($id);
+        $post = PostCall::findOrFail($id);
 
         return view('board.show_post', compact('post'));
     }
@@ -74,7 +74,7 @@ class IndexController extends Controller
 
     public function showPostRepair($post, $id)
     {
-        $post = PostRepair::find($id);
+        $post = PostRepair::findOrFail($id);
 
         return view('board.show_post', compact('post'));
     }

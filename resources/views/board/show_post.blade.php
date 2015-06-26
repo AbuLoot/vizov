@@ -10,10 +10,11 @@
               <li class="active">{{ $post->title }}</li>
             </ol>
             <div class="media">
-                <h3 class="media-heading">{{ $post->title }}</h3>
+              <h3 class="media-heading">{{ $post->title }}</h3>
               <div class="media-left">
+              	<?php $images = json_decode($post->images); ?>
                 <a href="#">
-                  <img class="media-object" src="{{ $post->images }}" alt="{{ $post->title }}" width="300">
+                  <img class="media-object" src="/img/posts/{{ $post->user_id.'/'.$images[0]->image }}" alt="{{ $post->title }}" width="300">
                 </a>
               </div>
               <div class="media-body">
@@ -40,11 +41,13 @@
                       <tr>
                         <th>Рейтинг</th>
                         <td>
-                          <i class="glyphicon glyphicon-star text-primary"></i>
-                          <i class="glyphicon glyphicon-star text-primary"></i>
-                          <i class="glyphicon glyphicon-star text-muted"></i>
-                          <i class="glyphicon glyphicon-star text-muted"></i>
-                          <i class="glyphicon glyphicon-star text-muted"></i>
+                        	<big>
+	                          <i class="glyphicon glyphicon-star text-info"></i>
+	                          <i class="glyphicon glyphicon-star text-info"></i>
+	                          <i class="glyphicon glyphicon-star text-muted"></i>
+	                          <i class="glyphicon glyphicon-star text-muted"></i>
+	                          <i class="glyphicon glyphicon-star text-muted"></i>
+                        	</big>
                         </td>
                       </tr>
                     </tbody>
@@ -63,63 +66,42 @@
               <div class="row">
                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false">
                   <div class="carousel-inner" role="listbox">
-                    <div class="item active">
-                      <img src="/bower_components/bootstrap/dist/img/1.jpg" class="img-responsive">
-                    </div>
-                    <div class="item">
-                      <img src="/bower_components/bootstrap/dist/img/2.jpg" class="img-responsive">
-                    </div>
-                    <div class="item">
-                      <img src="/bower_components/bootstrap/dist/img/3.jpg" class="img-responsive">
-                    </div>
-                    <div class="item">
-                      <img src="/bower_components/bootstrap/dist/img/4.jpg" class="img-responsive">
-                    </div>
-                    <div class="item">
-                      <img src="/bower_components/bootstrap/dist/img/5.jpg" class="img-responsive">
-                    </div>
-                    <div class="item">
-                      <img src="/bower_components/bootstrap/dist/img/6.jpg" class="img-responsive">
-                    </div>
+                  	@for ($i = 0; $i < count($images); $i++)
+                  		@if ($i == 0)
+		                    <div class="item active">
+		                      <img src="/img/posts/{{ $post->user_id.'/'.$images[$i]->image }}" class="img-responsive">
+		                    </div>
+                  		@else
+		                    <div class="item">
+		                      <img src="/img/posts/{{ $post->user_id.'/'.$images[$i]->image }}" class="img-responsive">
+		                    </div>
+                  		@endif
+                  	@endfor
                   </div>
                 </div>
               </div>
             </div>
             <div class="col-md-2 gallery">
               <ol class="row-right list-unstyled pull-right">
-                <li data-target="#carousel-example-generic" data-slide-to="0" class="active">
-                  <a href="#" class="">
-                    <img src="/bower_components/bootstrap/dist/img/1.jpg" class="img-responsive" width="95">
-                  </a>
-                </li>
-                <li data-target="#carousel-example-generic" data-slide-to="1" class="">
-                  <a href="#" class="">
-                    <img src="/bower_components/bootstrap/dist/img/2.jpg" class="img-responsive" width="95">
-                  </a>
-                </li>
-                <li data-target="#carousel-example-generic" data-slide-to="2" class="active">
-                  <a href="#" class="">
-                    <img src="/bower_components/bootstrap/dist/img/3.jpg" class="img-responsive" width="95">
-                  </a>
-                </li>
-                <li data-target="#carousel-example-generic" data-slide-to="3" class="">
-                  <a href="#" class="">
-                    <img src="/bower_components/bootstrap/dist/img/4.jpg" class="img-responsive" width="95">
-                  </a>
-                </li>
-                <li data-target="#carousel-example-generic" data-slide-to="4" class="active">
-                  <a href="#" class="">
-                    <img src="/bower_components/bootstrap/dist/img/5.jpg" class="img-responsive" width="95">
-                  </a>
-                </li>
-                <li data-target="#carousel-example-generic" data-slide-to="5" class="">
-                  <a href="#" class="">
-                    <img src="/bower_components/bootstrap/dist/img/6.jpg" class="img-responsive" width="95">
-                  </a>
-                </li>
+              	@for ($i = 0; $i < count($images); $i++)
+              		@if ($i == 0)
+		                <li data-target="#carousel-example-generic" data-slide-to="0" class="active">
+		                  <a href="#" class="">
+		                    <img src="/img/posts/{{ $post->user_id.'/'.$images[$i]->mini_image }}" class="img-responsive" width="95">
+		                  </a>
+		                </li>
+              		@else
+		                <li data-target="#carousel-example-generic" data-slide-to="{{ $i }}" class="">
+		                  <a href="#" class="">
+		                    <img src="/img/posts/{{ $post->user_id.'/'.$images[$i]->mini_image }}" class="img-responsive" width="95">
+		                  </a>
+		                </li>
+              		@endif
+              	@endfor
               </ol>
             </div>
             <div class="clearfix"></div>
+            <br>
 
             <div class="panel panel-default">
               <div class="panel-heading">
@@ -134,37 +116,6 @@
                 <p>Cras sit amet nibh libero, in gravida nulla.</p>
               </div>
             </div>
-
-            <!-- <div class="panel panel-default">
-              <div class="panel-heading">Добавить комментарий</div>
-              <div class="panel-body">
-                <form class="form-horizontal">
-                  <div class="form-group">
-                    <label for="name" class="col-md-2">Ваше имя</label>
-                    <div class="col-md-8">
-                      <input type="text" class="form-control input-sm" id="name" placeholder="Введите имя">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="email" class="col-md-2">Email адрес</label>
-                    <div class="col-md-8">
-                      <input type="email" class="form-control input-sm" id="email" placeholder="Введите email">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="comment" class="col-md-2">Сообщение</label>
-                    <div class="col-md-8">
-                      <textarea rows="4" class="form-control" id="comment"></textarea>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-md-offset-2 col-md-8">
-                      <button type="submit" class="btn btn-default btn-sm">Добавить</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div> -->
 
             <div class="well">
               <h4>Добавить комментарий</h4><br>
