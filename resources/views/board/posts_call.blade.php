@@ -33,7 +33,11 @@
               <div class="media">
                 <div class="media-left">
                   <a href="{{ route('show-post-call', ['post' => $post->slug, 'id' => $post->id]) }}">
-                    <img class="media-object" src="{{ $post->images }}" alt="..." width="200">
+                    @if ( ! empty($post->image))
+                      <img class="media-object" src="/img/posts/{{ $post->user_id.'/'.$post->image }}" alt="{{ $post->title }}" width="200">
+                    @else
+                      <img class="media-object" src="/img/no-main-image.png" alt="{{ $post->title }}" width="200">
+                    @endif
                   </a>
                 </div>
                 <div class="media-body">
@@ -46,9 +50,8 @@
                     <h4 class="col-md-4 media-heading text-right text-success"><b>{{ $post->price }} тг</b></h4>
                   </div>
                   <p>{{ $post->city->title }}</p>
-
                   <p>
-                    <small class="space-right">{{ $post->created_at }} | Опубликовано 6 мая 2015 г.</small>
+                    <small><i class="glyphicon glyphicon-calendar"></i> {{ $post->created_at }}</small><br>
                     <small><i class="glyphicon glyphicon-user"></i> 26 просмотров</small>
                   </p>
                 </div>
@@ -73,7 +76,7 @@
               <div class="media">
                 <div class="media-left">
                   <a href="#">
-                    <img class="media-object" src="bower_components/bootstrap/dist/img/1.jpg" alt="..." width="90">
+                    <img class="media-object" src="/bower_components/bootstrap/dist/img/1.jpg" alt="..." width="90">
                   </a>
                 </div>
                 <div class="media-body">
@@ -91,7 +94,7 @@
               <div class="media">
                 <div class="media-left">
                   <a href="#">
-                    <img class="media-object" src="bower_components/bootstrap/dist/img/2.jpg" alt="..." width="90">
+                    <img class="media-object" src="/bower_components/bootstrap/dist/img/2.jpg" alt="..." width="90">
                   </a>
                 </div>
                 <div class="media-body">
@@ -109,7 +112,7 @@
               <div class="media">
                 <div class="media-left">
                   <a href="#">
-                    <img class="media-object" src="bower_components/bootstrap/dist/img/3.jpg" alt="..." width="90">
+                    <img class="media-object" src="/bower_components/bootstrap/dist/img/3.jpg" alt="..." width="90">
                   </a>
                 </div>
                 <div class="media-body">
@@ -127,7 +130,7 @@
               <div class="media">
                 <div class="media-left">
                   <a href="#">
-                    <img class="media-object" src="bower_components/bootstrap/dist/img/4.jpg" alt="..." width="90">
+                    <img class="media-object" src="/bower_components/bootstrap/dist/img/4.jpg" alt="..." width="90">
                   </a>
                 </div>
                 <div class="media-body">
@@ -145,7 +148,7 @@
               <div class="media">
                 <div class="media-left">
                   <a href="#">
-                    <img class="media-object" src="bower_components/bootstrap/dist/img/5.jpg" alt="..." width="90">
+                    <img class="media-object" src="/bower_components/bootstrap/dist/img/5.jpg" alt="..." width="90">
                   </a>
                 </div>
                 <div class="media-body">

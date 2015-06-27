@@ -47,12 +47,12 @@ class PostsController extends Controller
     public function store(PostRequest $request)
     {
         $post = new PostCall;
+        $introImage = null;
+        $images = [];
 
         if ($request->hasFile('images'))
         {
             $i = 0;
-            $introImage = null;
-            $images = [];
 
             foreach ($request->file('images') as $key => $image)
             {
@@ -105,9 +105,9 @@ class PostsController extends Controller
         $post->slug = str_slug($request->title);
         $post->title = $request->title;
         $post->price = $request->price;
-        // $post->deal = $request->deal;
+        $post->deal = $request->deal;
         $post->description = $request->description;
-        $post->images = (isset($introImage)) ? $introImage : null;
+        $post->image = $introImage;
         $post->images = serialize($images);
         $post->address = $request->address;
         $post->phone = $request->phone;
@@ -138,6 +138,12 @@ class PostsController extends Controller
     public function edit($id)
     {
         $post = PostCall::findOrFail($id);
+
+        if (Auth::id() != $post->user_id)
+        {
+            return redirect('/my_posts');
+        }
+
         $cities = City::all();
 
         return view('board.edit_post', compact('post', 'cities'));
@@ -192,10 +198,13 @@ class PostsController extends Controller
                         }
 
                         $introFile = Image::make($image);
-                        $introFile->fit(300, null);
-                        $introFile->crop(300, 260);
+                        $introFile->resize(300, null, function ($constraint) {
+                            $constraint->aspectRatio();
+                        });
+                        $introFile->crop(300, 200);
                         $introFile->save('img/posts/'.$post->user_id.'/main-'.$imageName);
                         $introImage = 'main-'.$imageName;
+                        $i++;
                     }
 
                     if (isset($images[$key]))
@@ -226,9 +235,9 @@ class PostsController extends Controller
         $post->slug = str_slug($request->title);
         $post->title = $request->title;
         $post->price = $request->price;
-        $post->deal = $request->deal;
+        // $post->deal = $request->deal;
         $post->description = $request->description;
-        // $post->images = (isset($introImage)) ? $introImage : $post->image;
+        $post->image = (isset($introImage)) ? $introImage : $post->image;
         $post->images = (isset($images)) ? $images : $post->images;
         $post->address = $request->address;
         $post->phone = $request->phone;

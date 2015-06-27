@@ -7,7 +7,6 @@
             <ol class="breadcrumb">
               <li><a href="{{ route('call') }}">{{ trans('words.uslugi_vyzova') }}</a></li>
               <li><a href="{{ route('show-call', ['section' => $post->section->slug, 'id' => $post->section->id]) }}">{{ $post->section->title }}</a></li>
-              <li class="active">{{ $post->title }}</li>
             </ol>
             <div class="media">
               <h3 class="media-heading">{{ $post->title }}</h3>
@@ -18,10 +17,10 @@
                   else
                     $images = [];
                 ?>
-                @if(empty($image))
-                  <img class="media-object" src="/img/no-avatar.png" alt="{{ $post->title }}" width="300">
-                @else
+                @if ( ! empty($post->image))
                   <img class="media-object" src="/img/posts/{{ $post->user_id.'/'.$post->image }}" alt="{{ $post->title }}" width="300">
+                @else
+                  <img class="media-object" src="/img/no-main-image.png" alt="{{ $post->title }}" width="300">
                 @endif
               </div>
               <div class="media-body">

@@ -61,7 +61,7 @@
               <div class="media">
                 <div class="media-left">
                   <a href="#">
-                    <img class="media-object" src="bower_components/bootstrap/dist/img/1.jpg" alt="..." width="90">
+                    <img class="media-object" src="/bower_components/bootstrap/dist/img/1.jpg" alt="..." width="90">
                   </a>
                 </div>
                 <div class="media-body">
@@ -79,7 +79,7 @@
               <div class="media">
                 <div class="media-left">
                   <a href="#">
-                    <img class="media-object" src="bower_components/bootstrap/dist/img/2.jpg" alt="..." width="90">
+                    <img class="media-object" src="/bower_components/bootstrap/dist/img/2.jpg" alt="..." width="90">
                   </a>
                 </div>
                 <div class="media-body">
@@ -97,7 +97,7 @@
               <div class="media">
                 <div class="media-left">
                   <a href="#">
-                    <img class="media-object" src="bower_components/bootstrap/dist/img/3.jpg" alt="..." width="90">
+                    <img class="media-object" src="/bower_components/bootstrap/dist/img/3.jpg" alt="..." width="90">
                   </a>
                 </div>
                 <div class="media-body">
@@ -115,7 +115,7 @@
               <div class="media">
                 <div class="media-left">
                   <a href="#">
-                    <img class="media-object" src="bower_components/bootstrap/dist/img/4.jpg" alt="..." width="90">
+                    <img class="media-object" src="/bower_components/bootstrap/dist/img/4.jpg" alt="..." width="90">
                   </a>
                 </div>
                 <div class="media-body">
@@ -133,7 +133,7 @@
               <div class="media">
                 <div class="media-left">
                   <a href="#">
-                    <img class="media-object" src="bower_components/bootstrap/dist/img/5.jpg" alt="..." width="90">
+                    <img class="media-object" src="/bower_components/bootstrap/dist/img/5.jpg" alt="..." width="90">
                   </a>
                 </div>
                 <div class="media-body">

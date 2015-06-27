@@ -13,21 +13,29 @@
                 <div class="media">
                   <div class="media-left">
                     <a href="{{ route('show-post-call', ['post' => $post->slug, 'id' => $post->id]) }}">
-                      <img class="media-object" src="/img/posts/{{ $post->user_id.'/'.$post->image }}" alt="..." width="200">
+                      @if ( ! empty($post->image))
+                        <img class="media-object" src="/img/posts/{{ $post->user_id.'/'.$post->image }}" alt="{{ $post->title }}" width="200">
+                      @else
+                        <img class="media-object" src="/img/no-main-image.png" alt="{{ $post->title }}" width="200">
+                      @endif
                     </a>
                   </div>
                   <div class="media-body">
                     <div class="row">
-                      <h4 class="col-md-7 media-heading">
+                      <h5 class="col-md-6 media-heading">
                         <a href="{{ route('show-post-call', ['post' => $post->slug, 'id' => $post->id]) }}">
                           <b>{{ $post->title }}</b>
                         </a>
-                      </h4>
+                      </h5>
                       <h4 class="col-md-3 media-heading text-right text-success"><b>{{ $post->price }} тг</b></h4>
-                      <div class="col-md-2">
-                        <a href="{{ route('posts.edit', $post->id) }}">
-                          <b>Edit</b>
-                        </a>
+                      <div class="col-md-3 text-right">
+                        <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Редактировать</a>
+                        <p></p>
+                        <form method="POST" action="{{ route('posts.destroy', $post->id) }}" accept-charset="UTF-8">
+                          <input name="_method" type="hidden" value="DELETE">
+                          {!! csrf_field() !!}
+                          <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Удалить объявление?')"><span class="fa fa-times"></span> Удалить</button>
+                        </form>
                       </div>
                     </div>
                     <p>{{ $post->city->title }}</p>
@@ -38,7 +46,7 @@
                     </p>
                   </div>
                 </div>
-                <br>
+                <hr>
               @empty
                 <h4>У вас пока нет объявлений.</h4>
                 <a href="{{ route('posts.create') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Добавить объявление</a>

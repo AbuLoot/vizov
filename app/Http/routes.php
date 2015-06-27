@@ -74,19 +74,6 @@ Route::get('add_posts', function() {
     echo 'Allahu akbar!';
 });
 
-Route::get('update_posts', function() {
-
-    $faker = Faker\Factory::create();
-
-    $posts = App\PostCall::all();
-
-    foreach ($posts as $post) {
-    	$post->images = $faker->imageUrl(300, 300, 'transport');
-    	$post->save();
-    }
-
-    echo 'Allahu akbar!';
-});
 
 /*Route::get('add_cities', function() {
 	

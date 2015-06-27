@@ -30,6 +30,7 @@ class PostCall extends Model
         'price',
         'deal',
         'description',
+        'image',
         'images',
         'address' ,
         'phone',

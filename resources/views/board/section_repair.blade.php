@@ -6,7 +6,7 @@
       @foreach ($chunk as $section)
         <div class="col-md-3">
           <div class="service-block">
-            <img src="bower_components/bootstrap/dist/img/Icons2/{{ $section->image }}" class="img-responsive center-block" alt="{{ $section->title }}">
+            <img src="/bower_components/bootstrap/dist/img/Icons2/{{ $section->image }}" class="img-responsive center-block" alt="{{ $section->title }}">
             <h4 class="text-center"><a href="{{ route('repair') . '/' . $section->slug . '/' . $section->id }}">{{ $section->title }}</a></h4>
           </div>
         </div>

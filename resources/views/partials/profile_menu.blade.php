@@ -5,7 +5,7 @@
             @else
               <img src="/img/users/{{ Auth::user()->profile->id . '/' . Auth::user()->profile->avatar }}" class="img-responsive">
             @endif
-            <h5>{{ Auth::user()->name }}</h5>
+            <h5>{{ Auth::user()->name . '-' . Auth::id() }}</h5>
           </div>
           <div class="list-group">
             <a href="/my_posts" class="list-group-item @if(Request::is('my_posts')) active @endif">
