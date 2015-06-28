@@ -63,8 +63,8 @@
               <br>
               <p>{{ $post->description }}</p>
               <p>
-                <small class="space-right">{{ $post->created_at }} Опубликовано 6 мая 2015 г.</small>
-                <small><i class="glyphicon glyphicon-user"></i> 26 просмотров</small>
+                <small class="space-right">{{ $post->created_at }}</small>
+                <small><i class="glyphicon glyphicon-user"></i> 0 просмотров</small>
               </p>
             </div>
 

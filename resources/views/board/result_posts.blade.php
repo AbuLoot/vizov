@@ -43,10 +43,6 @@
                 </table>
               </form>
             </div>
-            <ol class="breadcrumb">
-              <li><a href="{{ route('call') }}">{{ trans('words.'.\Request::segment(1)) }}</a></li>
-              <li class="active">{{ $section->title }}</li>
-            </ol>
             @forelse ($posts as $post)
               <div class="media">
                 <div class="media-left">

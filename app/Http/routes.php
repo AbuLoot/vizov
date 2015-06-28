@@ -16,10 +16,11 @@ Route::get('/', ['as' => 'index', 'uses' => 'IndexController@getIndex']);
 Route::get('uslugi_vyzova', ['as' => 'call', 'uses' => 'IndexController@getCall']);
 Route::get('uslugi_vyzova/{section}/{id}', ['as' => 'show-call', 'uses' => 'IndexController@showCall'])->where(['id' => '[0-9]+']);
 Route::get('1/{post}/{id}', ['as' => 'show-post-call', 'uses' => 'IndexController@showPostCall'])->where(['id' => '[0-9]+']);
-
 Route::get('uslugi_remonta', ['as' => 'repair', 'uses' => 'IndexController@getRepair']);
 Route::get('uslugi_remonta/{section}/{id}', ['as' => 'show-repair', 'uses' => 'IndexController@showRepair'])->where(['id' => '[0-9]+']);
 Route::get('2/{post}/{id}', ['as' => 'show-post-repair', 'uses' => 'IndexController@showPostRepair'])->where(['id' => '[0-9]+']);
+
+Route::get('search_posts', ['as' => 'search-posts', 'uses' => 'IndexController@searchPosts']);
 
 Route::group(['middleware' => 'auth'], function()
 {
@@ -74,6 +75,18 @@ Route::get('add_posts', function() {
     echo 'Allahu akbar!';
 });
 
+Route::get('update_posts', function() {
+
+    $posts = App\PostCall::take(25)->get();
+
+    // dd($posts);exit();
+
+    foreach ($posts as $post) {
+    	$post->image = null;
+    	$post->save();
+    }
+    echo 'Allahu akbar!';
+});
 
 /*Route::get('add_cities', function() {
 	

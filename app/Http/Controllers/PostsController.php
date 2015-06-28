@@ -98,7 +98,7 @@ class PostsController extends Controller
             }
         }
 
-        // $post->sort_id = 1,
+        $post->sort_id = $post->increment('sort_id');
         $post->user_id = Auth::id();
         $post->city_id = $request->city_id;
         $post->section_id = $request->section_id;
@@ -158,6 +158,12 @@ class PostsController extends Controller
     public function update(PostRequest $request, $id)
     {
         $post = PostCall::findOrFail($id);
+
+        if (Auth::id() != $post->user_id)
+        {
+            return redirect('/my_posts');
+            die();
+        }
 
         if ($request->hasFile('images'))
         {
