@@ -145,6 +145,7 @@ class PostsController extends Controller
         }
 
         $cities = City::all();
+        $section = Section::all();
 
         return view('board.edit_post', compact('post', 'cities'));
     }
@@ -241,7 +242,7 @@ class PostsController extends Controller
         $post->slug = str_slug($request->title);
         $post->title = $request->title;
         $post->price = $request->price;
-        // $post->deal = $request->deal;
+        $post->deal = $request->deal;
         $post->description = $request->description;
         $post->image = (isset($introImage)) ? $introImage : $post->image;
         $post->images = (isset($images)) ? $images : $post->images;

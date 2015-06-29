@@ -15,6 +15,7 @@ class CreateSectionCallTable extends Migration
         Schema::create('section_call', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('sort_id');
+            $table->integer('service_id');
             $table->string('slug');
             $table->string('title');
             $table->string('image');

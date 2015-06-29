@@ -13,11 +13,6 @@ class City extends Model
 
     public function section_call()
     {
-        return $this->hasMany('App\SectionCall');
-    }
-
-    public function section_repair()
-    {
-        return $this->hasMany('App\SectionRepair');
+        return $this->hasMany('App\Section');
     }
 }

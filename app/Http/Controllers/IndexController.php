@@ -8,8 +8,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\SectionCall;
-use App\SectionRepair;
+use Session;
+
+use App\Section;
 
 use App\PostCall;
 use App\PostRepair;
@@ -18,21 +19,21 @@ class IndexController extends Controller
 {
     public function getIndex()
     {
-        $sections = SectionCall::all();
+        $sections = Section::where('service_id', 1)->get();
 
         return view('board.section_call', compact('sections'));
     }
 
     public function getCall()
     {
-        $sections = SectionCall::all();
+        $sections = Section::where('service_id', 1)->get();
 
     	return view('board.section_call', compact('sections'));
     }
 
     public function showCall($section, $id)
     {
-        $section = SectionCall::where('slug', $section)->first();
+        $section = Section::where('slug', $section)->first();
         $posts = PostCall::where('section_id', $id)->paginate(10);
 
         return view('board.posts_call', compact('posts', 'section'));
@@ -49,22 +50,17 @@ class IndexController extends Controller
 
     public function getRepair()
     {
-        $sections = SectionRepair::all();
+        $sections = Section::where('service_id', 2)->get();
 
     	return view('board.section_repair', compact('sections'));
     }
 
     public function showRepair($section, $id)
     {
-        $section = SectionRepair::where('slug', $section)->first();
+        $section = Section::where('slug', $section)->first();
         $posts = PostRepair::where('section_id', $id)->paginate(10);
 
-        $breadcrumbs = [
-            'first' => trans('words.'.\Request::segment(1)),
-            'second' => $section->title
-        ];
-
-        return view('board.posts_repair', compact('posts', 'breadcrumbs'));
+        return view('board.posts_repair', compact('posts', 'section'));
     }
 
     public function showPostRepair($post, $id)
@@ -76,19 +72,24 @@ class IndexController extends Controller
 
     public function searchPosts(Request $request)
     {
+        
+    }
+
+    public function filterPosts(Request $request)
+    {
         $section_id = (int) $request->section_id;
         $city_id = (int) $request->city_id;
         $image = ($request->image == 'on') ? 'AND image IS NOT NULL' : '';
         $from = ($request->from) ? (int) $request->from : 0;
         $to = ($request->to) ? (int) $request->to : 9999999;
 
-        $section = SectionCall::find($section_id);
+        $section = Section::find($section_id);
         $posts = PostCall::where('section_id', $section_id)
             ->where('city_id', $city_id)
             ->whereRaw('price >= '.$from.' AND price <= '.$to.' '.$image)
             ->where('status', 0)
-            ->paginate(20);
+            ->get();
 
-        return view('board.posts_call', compact('posts', 'section'));
+        return view('board.found_posts', compact('posts', 'section'));
     }
 }

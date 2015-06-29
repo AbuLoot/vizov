@@ -42,7 +42,7 @@ class PostCall extends Model
 
     public function section()
     {
-        return $this->belongsTo('App\SectionCall');
+        return $this->belongsTo('App\Section');
     }
 
     public function city()

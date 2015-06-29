@@ -43,6 +43,10 @@
                 </table>
               </form>
             </div>
+            <ol class="breadcrumb">
+              <li><a href="{{ route('call') }}">{{ trans('words.uslugi_vyzova') }}</a></li>
+              <li class="active">{{ $section->title }}</li>
+            </ol>
             @forelse ($posts as $post)
               <div class="media">
                 <div class="media-left">
@@ -72,11 +76,9 @@
               </div>
               <br>
             @empty
-              <h4>В этой рубрике пока нет объявлений.</h4>
+              <h4>Ничего не найдено.</h4>
               <a href="{{ route('posts.create') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Добавить объявление</a>
             @endforelse
-
-            {!! $posts->render() !!}
           </div>
         </div>
       </div>

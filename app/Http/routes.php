@@ -20,7 +20,8 @@ Route::get('uslugi_remonta', ['as' => 'repair', 'uses' => 'IndexController@getRe
 Route::get('uslugi_remonta/{section}/{id}', ['as' => 'show-repair', 'uses' => 'IndexController@showRepair'])->where(['id' => '[0-9]+']);
 Route::get('2/{post}/{id}', ['as' => 'show-post-repair', 'uses' => 'IndexController@showPostRepair'])->where(['id' => '[0-9]+']);
 
-Route::get('search_posts', ['as' => 'search-posts', 'uses' => 'IndexController@searchPosts']);
+Route::get('search', ['uses' => 'IndexController@searchPosts']);
+Route::get('filter', ['uses' => 'IndexController@filterPosts']);
 
 Route::group(['middleware' => 'auth'], function()
 {
@@ -124,35 +125,37 @@ Route::get('update_posts', function() {
     echo 'Allahu akbar!';
 });*/
 
-/*Route::get('add_section', function() {
+// Route::get('add_section', function() {
 
-	$sections = [
-		'Ремонт авто',
-		'Ремонт бытовой техники',
-		'Ремонт домов и квартир',
-		'Ремонт обуви',
-		'Ремонт одежды',
-		'Ремонт и реставрация мебели',
-		'Химчистка',
-	];
-	$images = [
-		'vehicle18.png',
-		'kitchen51.png',
-		'gear63.png',
-		'mountain22.png',
-		'winter-clothes.png',
-		'sofa.png',
-		'washing11.png'
-	];
 
-    $i = 1;
-    foreach ($sections as $key => $value) {
-		$item = new \App\SectionRepair;
-    	$item->sort_id = $i++;
-    	$item->slug = str_slug($value);
-    	$item->title = $value;
-    	$item->image = $images[$key];
-    	$item->save();
-    }
-    echo 'Allahu akbar!';
-});*/
+// 	$sections = [
+// 		'Ремонт авто',
+// 		'Ремонт бытовой техники',
+// 		'Ремонт домов и квартир',
+// 		'Ремонт обуви',
+// 		'Ремонт одежды',
+// 		'Ремонт и реставрация мебели',
+// 		'Химчистка',
+// 	];
+// 	$images = [
+// 		'vehicle18.png',
+// 		'kitchen51.png',
+// 		'gear63.png',
+// 		'mountain22.png',
+// 		'winter-clothes.png',
+// 		'sofa.png',
+// 		'washing11.png'
+// 	];
+
+//     $i = 1;
+//     foreach ($sections as $key => $value) {
+// 		$item = new \App\SectionCall;
+//     	$item->sort_id = $item->increment('sort_id');
+//     	$item->service_id = 2;
+//     	$item->slug = str_slug($value);
+//     	$item->title = $value;
+//     	$item->image = $images[$key];
+//     	$item->save();
+//     }
+//     echo 'Allahu akbar!';
+// });

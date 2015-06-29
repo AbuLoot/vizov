@@ -28,7 +28,7 @@ class CreatePostsCallTable extends Migration
             $table->string('price');
             $table->string('deal');
             $table->text('description');
-            $table->text('image');
+            $table->text('image')->nullable();
             $table->text('images');
             $table->string('address');
             $table->string('phone');

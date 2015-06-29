@@ -5,7 +5,7 @@
         <div class="row">
           <div class="content-block">
             <div class="well well-sm hidden-xs">
-              <form action="/search_posts" class="form-inline">
+              <form action="/filter" class="form-inline">
                 <input type="hidden" name="section_id" value="{{ $section->id }}">
                 <table class="table-condensed">
                   <tr>
@@ -44,7 +44,7 @@
               </form>
             </div>
             <ol class="breadcrumb">
-              <li><a href="{{ route('call') }}">{{ trans('words.'.\Request::segment(1)) }}</a></li>
+              <li><a href="{{ route('call') }}">{{ trans('words.1.uslugi_vyzova') }}</a></li>
               <li class="active">{{ $section->title }}</li>
             </ol>
             @forelse ($posts as $post)

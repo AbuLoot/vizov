@@ -28,11 +28,11 @@
           </div>
         </div>
         <div class="col-md-6 col-sm-6 el-search-space">
-          <form>
+          <form action="/search">
             <div class="input-group">
-              <input type="text" class="form-control input-sm" placeholder="Для поиска введите название услуги">
+              <input type="text" class="form-control input-sm" name="text" placeholder="Для поиска введите название услуги">
               <span class="input-group-btn">
-                <button class="btn btn-default btn-sm" type="button">
+                <button class="btn btn-default btn-sm" type="submit">
                   <i class="glyphicon glyphicon-search"></i> Найти
                 </button>
               </span>
@@ -69,11 +69,10 @@
           <div class="row">
             <ul class="nav navbar-nav ">
               <li>
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Алматы <span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">RU <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                @foreach(\App\City::all() as $city)
-                  <li><a href="#{{ $city->slug }}">{{ $city->title }}</a></li>
-                @endforeach
+                  <li><a href="#">RU</a></li>
+                  <li><a href="#">KZ</a></li>
                 </ul>
               </li>
             </ul>

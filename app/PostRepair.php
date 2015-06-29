@@ -41,7 +41,7 @@ class PostRepair extends Model
 
     public function section()
     {
-        return $this->belongsTo('App\SectionRepair');
+        return $this->belongsTo('App\Section');
     }
 
     public function city()
