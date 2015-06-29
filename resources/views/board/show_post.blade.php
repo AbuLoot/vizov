@@ -5,7 +5,7 @@
         <div class="row">
           <div class="content-block">
             <ol class="breadcrumb">
-              <li><a href="{{ route('call') }}">{{ trans('words.uslugi_vyzova') }}</a></li>
+              <li><a href="{{ route(trans('services.'.$post->section->service_id.'.route')) }}">{{ trans('services.'.$post->section->service_id.'.title') }}</a></li>
               <li><a href="{{ route('show-call', ['section' => $post->section->slug, 'id' => $post->section->id]) }}">{{ $post->section->title }}</a></li>
             </ol>
             <div class="media">

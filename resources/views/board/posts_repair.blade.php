@@ -44,7 +44,7 @@
               </form>
             </div>
             <ol class="breadcrumb">
-              <li><a href="{{ route('repair') }}">{{ trans('words.2.uslugi_remonta') }}</a></li>
+              <li><a href="{{ route(trans('services.'.$section->service_id.'.route')) }}">{{ trans('services.'.$section->service_id.'.title') }}</a></li>
               <li class="active">{{ $section->title }}</li>
             </ol>
             @forelse ($posts as $post)

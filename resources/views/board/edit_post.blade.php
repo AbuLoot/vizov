@@ -29,6 +29,10 @@
                 <div class="col-md-9">
                   <div class="row">
                     <select class="form-control" name="section_id" id="section">
+                      <?php  ?>
+                      @foreach ($section as $item)
+
+                      @endforeach
                       <optgroup label="Услуги вызова">
                         <option value="1">Вскрытие замков</option>
                         <option value="2">Клининговые услуги</option>

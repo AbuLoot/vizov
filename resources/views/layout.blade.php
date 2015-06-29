@@ -81,10 +81,10 @@
         <div class="col-md-6 col-sm-6">
           <div class="row">
             <ul class="nav nav-lines">
-              <li class="@if(Request::is('/') OR Request::path() == 'uslugi_vyzova') active @endif">
+              <li class="@if (Request::is('/') OR Request::path() == 'uslugi_vyzova') active @endif">
                 <a href="{{ route('call') }}">Услуги вызова</a>
               </li>
-              <li class="@if(Request::path() == 'uslugi_remonta') active @endif">
+              <li class="@if (Request::path() == 'uslugi_remonta') active @endif">
                 <a href="{{ route('repair') }}">Услуги ремонта</a>
               </li>
             </ul>
