@@ -72,21 +72,26 @@ class IndexController extends Controller
 
     public function searchPosts(Request $request)
     {
-        
+        $text = trim(strip_tags($request->text));
+
+        $posts = PostCall::where('description', 'LIKE', '%'.$text.'%')
+            ->orWhere('title', 'LIKE', '%'.$text.'%')
+            ->get();
+
+        return view('board.found_posts', compact('text', 'posts'));
     }
 
     public function filterPosts(Request $request)
     {
-        $section_id = (int) $request->section_id;
-        $city_id = (int) $request->city_id;
+        $section_id = ($request->section_id) ? 'section_id = '.$request->section_id.' AND ' : '';
+        $city_id = ($request->city_id) ? (int) $request->city_id : '';
         $image = ($request->image == 'on') ? 'AND image IS NOT NULL' : '';
         $from = ($request->from) ? (int) $request->from : 0;
         $to = ($request->to) ? (int) $request->to : 9999999;
 
         $section = Section::find($section_id);
-        $posts = PostCall::where('section_id', $section_id)
-            ->where('city_id', $city_id)
-            ->whereRaw('price >= '.$from.' AND price <= '.$to.' '.$image)
+        $posts = PostCall::where('city_id', $city_id)
+            ->whereRaw($section_id.' price >= '.$from.' AND price <= '.$to.' '.$image)
             ->where('status', 0)
             ->get();
 

@@ -65,7 +65,7 @@
                         <b>{{ $post->title }}</b>
                       </a>
                     </h4>
-                    <h4 class="col-md-4 media-heading text-right text-success"><b>{{ $post->price }} тг</b></h4>
+                    <h4 class="col-md-4 media-heading text-right text-success"><b>{{ $post->price }} тг</b> @if ($post->deal == 'on') Торг&nbsp;возможен @endif</h4>
                   </div>
                   <p>{{ $post->city->title }}</p>
                   <p>

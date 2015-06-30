@@ -6,7 +6,7 @@
           <div class="content-block">
             <div class="well well-sm hidden-xs">
               <form action="/filter" class="form-inline">
-                <input type="hidden" name="section_id" value="{{ $section->id }}">
+                <input type="hidden" name="section_id" value="{{ (isset($section)) ? $section->id : null }}">
                 <table class="table-condensed">
                   <tr>
                     <th>Город</th>
@@ -43,10 +43,15 @@
                 </table>
               </form>
             </div>
-            <ol class="breadcrumb">
-              <li><a href="{{ route(trans('services.'.$section->service_id.'.route')) }}">{{ trans('services.'.$section->service_id.'.title') }}</a></li>
-              <li class="active">{{ $section->title }}</li>
-            </ol>
+            @if (isset($section))
+              <ol class="breadcrumb">
+                <li><a href="{{ route(trans('services.'.$section->service_id.'.route')) }}">{{ trans('services.'.$section->service_id.'.title') }}</a></li>
+                <li class="active">{{ $section->title }}</li>
+              </ol>
+            @endif
+            @if (isset($text))
+              <h3>Результат поиска «{{ $text }}»</h3>
+            @endif
             @forelse ($posts as $post)
               <div class="media">
                 <div class="media-left">

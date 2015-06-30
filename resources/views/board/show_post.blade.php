@@ -24,7 +24,7 @@
                 @endif
               </div>
               <div class="media-body">
-                <h4><a href="#"><b>{{ $post->user->name }}</b></a></h4>
+                <h4><a href="/profile/{{ $post->user->id }}"><b>{{ $post->user->name }}</b></a></h4>
                 <div class="table-responsive">
                   <table class="table table-condensed">
                     <tbody>

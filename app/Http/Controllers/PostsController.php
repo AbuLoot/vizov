@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 
 use Auth;
 use App\City;
+use App\Section;
 use App\PostCall;
 use Image;
 use Storage;
@@ -147,7 +148,7 @@ class PostsController extends Controller
         $cities = City::all();
         $section = Section::all();
 
-        return view('board.edit_post', compact('post', 'cities'));
+        return view('board.edit_post', compact('post', 'cities', 'section'));
     }
 
     /**

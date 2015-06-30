@@ -38,8 +38,10 @@
                         </form>
                       </div>
                     </div>
-                    <p>{{ $post->city->title }}</p>
-
+                    <p>
+                      <b>Город:</b> {{ $post->city->title }}<br>
+                      <b>Рубрика:</b> {{ $post->section->title }}
+                    </p>
                     <p>
                       <small class="space-right">{{ $post->created_at }} | Опубликовано 6 мая 2015 г.</small>
                       <small><i class="glyphicon glyphicon-user"></i> 26 просмотров</small>
