@@ -4,9 +4,8 @@
       <div class="content-block">
         <h3 class="col-md-offset-2">Редактирование объявления</h3>
 
-        <div class="row">
-          <div class="col-md-8">
-
+          <div class="row">
+            <div class="col-md-8">
             <form action="{{ route('posts.update', $post->id) }}" method="post" class="form-horizontal" enctype="multipart/form-data">
               <input name="_method" type="hidden" value="PUT">
               {!! csrf_field() !!}

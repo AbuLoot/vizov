@@ -45,7 +45,7 @@
               @if (Auth::guest())
                 <li><a href="/auth/login">Войти</a></li>
                 <li><a href="/auth/register">Регистрация</a></li>
-              @else
+              @elseif (Auth::check() AND Auth::user()->is('user'))
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="glyphicon glyphicon-user"></i> {{ Auth::user()->name }} <span class="caret"></span></a>
                   <ul class="dropdown-menu pull-right" role="menu">
@@ -56,6 +56,19 @@
                   </ul>
                 </li>
               @endif
+
+              @role('admin')
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="glyphicon glyphicon-user"></i> {{ Auth::user()->name }} <span class="caret"></span></a>
+                  <ul class="dropdown-menu pull-right" role="menu">
+                    <li><a href="/admin/users">Пользователи</a></li>
+                    <li><a href="/admin/section">Рубрики</a></li>
+                    <li><a href="/admin/posts">Объявления</a></li>
+                    <li class="divider"></li>
+                    <li><a href="/auth/logout">Выход</a></li>
+                  </ul>
+                </li>
+              @endrole
             </ul>
           </div>
         </div>
@@ -65,20 +78,7 @@
     <!-- Nav Services -->
     <nav class="bg-nav-services">
       <div class="container">
-        <div class="col-md-2 col-sm-2">
-          <div class="row">
-            <ul class="nav navbar-nav ">
-              <li>
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">RU <span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">RU</a></li>
-                  <li><a href="#">KZ</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-md-6 col-sm-6">
+        <div class="col-md-offset-2 col-sm-offset-2 col-md-6 col-sm-6">
           <div class="row">
             <ul class="nav nav-lines">
               <li class="@if (Request::is('/') OR Request::path() == 'uslugi_vyzova') active @endif">

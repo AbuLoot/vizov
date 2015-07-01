@@ -1,6 +1,6 @@
         <div class="panel panel-default">
           <div class="panel-body">
-            @if(empty(Auth::user()->profile->avatar))
+            @if (empty(Auth::user()->profile->avatar))
               <img src="/img/no-avatar.png" class="img-responsive">
             @else
               <img src="/img/users/{{ Auth::user()->profile->id . '/' . Auth::user()->profile->avatar }}" class="img-responsive">

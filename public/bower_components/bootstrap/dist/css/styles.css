@@ -64,12 +64,12 @@ body {
 }
 .nav-lines > li > a {
   color: #737373;
-  padding: 15px 15px 13px;
+  padding: 15px 15px 14px;
   margin-right: 2px;
   line-height: 1.42857143;
 }
 .nav-lines > li > a:hover {
-  padding-bottom: 11px;
+  padding-bottom: 10px;
   background-color: transparent;
   border-bottom: 4px solid #2780e3;
 }
@@ -78,7 +78,7 @@ body {
 .nav-lines > li.active > a:focus {
   color: #555;
   cursor: default;
-  padding-bottom: 11px;
+  padding-bottom: 10px;
   background-color: transparent;
   border-bottom: 4px solid #2780e3;
 }
@@ -125,6 +125,14 @@ body {
 }
 .space-right {
   margin-right: 20px;
+}
+
+/* Admin styles */
+.btn-delete {
+  display: inline;
+}
+.table-admin > tbody > tr > td {
+  vertical-align: middle;
 }
 
 .footer {

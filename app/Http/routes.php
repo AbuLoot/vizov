@@ -37,6 +37,12 @@ Route::group(['middleware' => 'auth'], function()
 	Route::post('my_setting/{id}', ['uses' => 'ProfileController@postMySetting']);
 });
 
+Route::group(['prefix' => 'admin', 'middleware' => 'role:admin'], function()
+{
+    Route::resource('section', 'AdminSectionController');
+    Route::resource('users', 'AdminUsersController');
+});
+
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
