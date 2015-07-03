@@ -19,14 +19,14 @@ class IndexController extends Controller
 {
     public function getIndex()
     {
-        $sections = Section::where('service_id', 1)->get();
+        $sections = Section::where('service_id', 1)->orderBy('sort_id')->get();
 
         return view('board.section_call', compact('sections'));
     }
 
     public function getCall()
     {
-        $sections = Section::where('service_id', 1)->get();
+        $sections = Section::where('service_id', 1)->orderBy('sort_id')->get();
 
     	return view('board.section_call', compact('sections'));
     }
@@ -50,7 +50,7 @@ class IndexController extends Controller
 
     public function getRepair()
     {
-        $sections = Section::where('service_id', 2)->get();
+        $sections = Section::where('service_id', 2)->orderBy('sort_id')->get();
 
     	return view('board.section_repair', compact('sections'));
     }
@@ -74,8 +74,8 @@ class IndexController extends Controller
     {
         $text = trim(strip_tags($request->text));
 
-        $posts = PostCall::where('description', 'LIKE', '%'.$text.'%')
-            ->orWhere('title', 'LIKE', '%'.$text.'%')
+        $posts = PostCall::where('title', 'LIKE', '%'.$text.'%')
+            ->orWhere('description', 'LIKE', '%'.$text.'%')
             ->get();
 
         return view('board.found_posts', compact('text', 'posts'));

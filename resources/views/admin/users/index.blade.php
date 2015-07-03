@@ -7,30 +7,28 @@
           <div class="col-md-12">
             @include('partials.alerts')
             <p class="text-right">
-              <a href="/admin/section/create" class="btn btn-success btn-sm">Добавить рубрику</a>
+              <a href="/admin/users/create" class="btn btn-success btn-sm">Добавить пользователя</a>
             </p>
             <div class="table-responsive">
-              <table class="table-admin table table-striped table-condensed">
+              <table class="table table-striped table-condensed table-hover">
                 <tr>
                   <th>№</th>
-                  <th>Название</th>
-                  <th>Картинка</th>
-                  <th>Услуга</th>
-                  <th>Номер</th>
+                  <th>Имя</th>
+                  <th>Email</th>
+                  <th>ip</th>
                   <th class="text-right">Функции</th>
                 </tr>
                 <?php $i = 1; ?>
-                @forelse ($section as $item)
+                @forelse ($users as $user)
                   <tr>
                     <td><b>{{ $i++ }}</b></td>
-                    <td>{{ $item->title }}</td>
-                    <td><img src="/img/section/{{ $item->image }}" width="64"></td>
-                    <td>{{ trans('services.'.$item->service_id.'.title') }}</td>
-                    <td>{{ $item->sort_id }}</td>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td>{{ $user->ip }}</td>
                     <td class="text-right">
-                      <a class="btn btn-primary btn-xs" href="{{ url(trans('services.'.$item->service_id.'.slug').'/'.$item->slug.'/'.$item->id) }}" title="Просмотр страницы" target="_blank"><span class="fa fa-file"></span></a>
-                      <a class="btn btn-primary btn-xs" href="{{ route('admin.section.edit', $item->id) }}" title="Редактировать"><span class="fa fa-edit"></span></a>
-                      <form method="POST" action="{{ route('admin.section.destroy', $item->id) }}" accept-charset="UTF-8" class="btn-delete">
+                      <a class="btn btn-primary btn-xs" href="{{ url(trans('services.'.$user->service_id.'.slug').'/'.$user->slug.'/'.$user->id) }}" title="Просмотр страницы" target="_blank"><span class="fa fa-file"></span></a>
+                      <a class="btn btn-primary btn-xs" href="{{ route('admin.users.edit', $user->id) }}" title="Редактировать"><span class="fa fa-edit"></span></a>
+                      <form method="POST" action="{{ route('admin.users.destroy', $user->id) }}" accept-charset="UTF-8" class="btn-delete">
                         <input name="_method" type="hidden" value="DELETE">
                         <input name="_token" type="hidden" value="{{ csrf_token() }}">
                         <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Удалить запись?')"><span class="fa fa-times"></span></button>

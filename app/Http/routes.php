@@ -39,8 +39,8 @@ Route::group(['middleware' => 'auth'], function()
 
 Route::group(['prefix' => 'admin', 'middleware' => 'role:admin'], function()
 {
-    Route::resource('section', 'AdminSectionController');
     Route::resource('users', 'AdminUsersController');
+    Route::resource('section', 'AdminSectionController');
 });
 
 // Authentication routes...

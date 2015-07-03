@@ -127,8 +127,6 @@
             <li><a href="#"><i class="fa fa-vk fa-2x"></i> </a></li>
             <li><a href="#"><i class="fa fa-google-plus fa-2x"></i> </a></li>
             <li><a href="#"><i class="fa fa-twitter fa-2x"></i> </a></li>
-            <li><a href="#"><i class="fa fa-youtube fa-2x"></i> </a></li>
-            <li><a href="#"><i class="fa fa-linkedin fa-2x"></i> </a></li>
             <li><a href="#"><i class="fa fa-instagram fa-2x"></i> </a></li>
           </ul>
         </div>

@@ -18,7 +18,7 @@ class AdminUsersController extends Controller
     {
         $users = \App\User::all();
 
-        dd($users);
+        return view('admin.users.index', compact('users'));
     }
 
     /**
