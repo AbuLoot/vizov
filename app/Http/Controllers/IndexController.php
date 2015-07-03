@@ -19,14 +19,20 @@ class IndexController extends Controller
 {
     public function getIndex()
     {
-        $sections = Section::where('service_id', 1)->orderBy('sort_id')->get();
+        $sections = Section::where('service_id', 1)
+            ->where('status', 1)
+            ->orderBy('sort_id')
+            ->get();
 
         return view('board.section_call', compact('sections'));
     }
 
     public function getCall()
     {
-        $sections = Section::where('service_id', 1)->orderBy('sort_id')->get();
+        $sections = Section::where('service_id', 1)
+            ->where('status', 1)
+            ->orderBy('sort_id')
+            ->get();
 
     	return view('board.section_call', compact('sections'));
     }
@@ -50,7 +56,10 @@ class IndexController extends Controller
 
     public function getRepair()
     {
-        $sections = Section::where('service_id', 2)->orderBy('sort_id')->get();
+        $sections = Section::where('service_id', 2)
+            ->where('status', 1)
+            ->orderBy('sort_id')
+            ->get();
 
     	return view('board.section_repair', compact('sections'));
     }

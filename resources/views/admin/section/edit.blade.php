@@ -124,7 +124,7 @@
                       @if ($item->status == 1)
                         <input type="checkbox" id="status" name="status" checked> Активен
                       @else
-                        <input type="checkbox" id="status" name="status"> Неактивен
+                        <input type="checkbox" id="status" name="status"> Активен
                       @endif
                     </label>
                   </div>

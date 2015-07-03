@@ -20,7 +20,7 @@ class AdminSectionController extends Controller
      */
     public function index()
     {
-        $section = Section::all();
+        $section = Section::orderBy('service_id')->get();
 
         return view('admin.section.index', compact('section'));
     }
@@ -42,32 +42,34 @@ class AdminSectionController extends Controller
      */
     public function store(SectionRequest $request)
     {
-        // $section = new Section;
-        dd($request->all());
-
-        if (empty($request->sort_id)) {
-            echo gettype($request->sort_id);
-        }
-
-        exit();
+        $section = new Section;
 
         if ($request->hasFile('image'))
         {
             $image = $request->file('image')->getClientOriginalName();
             $request->file('image')->move('img/section/', $image);
         }
+        else
+        {
+            $image = 'no-image';
+        }
 
-        $section->sort_id = $request->sort_id;
+        if ($request->sort_id > 0)
+            $section->sort_id = $request->sort_id;
+        else
+            $section->sort_id = $section->increment('sort_id', 1);
         $section->service_id = $request->service_id;
         $section->title = $request->title;
         $section->slug = ( ! empty($request->slug)) ? $request->slug : str_slug($request->title);
-        if (isset($image))
-            $section->image = $image;
+        $section->image = $image;
         $section->title_description = $request->title_description;
         $section->meta_description = $request->meta_description;
         $section->text = $request->text;
         $section->lang = $request->lang;
-        $section->status = $request->status;
+        if ($request->status == 'on')
+            $section->status = 1;
+        else
+            $section->status = 0;
         $section->save();
 
         return redirect('/admin/section')->with('status', 'Рубрика добавлена!');
@@ -81,7 +83,7 @@ class AdminSectionController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -118,7 +120,10 @@ class AdminSectionController extends Controller
             }
         }
 
-        $section->sort_id = $request->sort_id;
+        if ($request->sort_id > 0)
+            $section->sort_id = $request->sort_id;
+        else
+            $section->sort_id = $section->increment('sort_id', Section::count());
         $section->service_id = $request->service_id;
         $section->title = $request->title;
         $section->slug = ( ! empty($request->slug)) ? $request->slug : str_slug($request->title);
@@ -128,7 +133,10 @@ class AdminSectionController extends Controller
         $section->meta_description = $request->meta_description;
         $section->text = $request->text;
         $section->lang = $request->lang;
-        $section->status = $request->status;
+        if ($request->status == 'on')
+            $section->status = 1;
+        else
+            $section->status = 0;
         $section->save();
 
         return redirect('/admin/section')->with('status', 'Рубрика обновлена!');
@@ -142,6 +150,15 @@ class AdminSectionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $section = Section::find($id);
+
+        if (Storage::exists('img/section/'.$section->image))
+        {
+            Storage::delete('img/section/'.$section->image);
+        }
+
+        $section->delete();
+
+        return redirect('/admin/section')->with('status', 'Рубрика удалена!');
     }
 }
