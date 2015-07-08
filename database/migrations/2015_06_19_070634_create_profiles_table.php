@@ -19,13 +19,14 @@ class CreateProfilesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('city_id')->unsigned();
             $table->foreign('city_id')->references('id')->on('cities');
-            $table->integer('service_id');
+            $table->integer('section_id');
             $table->integer('stars');
             $table->string('phone');
             $table->string('skills');
             $table->string('address');
             $table->string('website');
             $table->string('avatar');
+            $table->text('about');
             $table->text('portfolio');
             $table->timestamps();
         });

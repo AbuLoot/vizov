@@ -29,23 +29,18 @@
                   <div class="row">
                     <select class="form-control" name="section_id" id="section">
                       <optgroup label="Услуги вызова">
-                        <option value="1">Вскрытие замков</option>
-                        <option value="2">Клининговые услуги</option>
-                        <option value="3">Образовательные услуги</option>
-                        <option value="4">Услуги няни</option>
-                        <option value="5">Услуги перевозчика</option>
-                        <option value="6">Услуги сантехника</option>
-                        <option value="7">Услуги плотника</option>
-                        <option value="8">Услуги электрика</option>
+                        @foreach ($section as $item)
+                          @if ($item->service_id == 1)
+                            <option value="{{ $item->id }}">{{ $item->title }}</option>
+                          @endif
+                        @endforeach
                       </optgroup>
                       <optgroup label="Услуги ремонта">
-                        <option value="9">Ремонт авто</option>
-                        <option value="10">Ремонт бытовой техники</option>
-                        <option value="11">Ремонт домов и квартир</option>
-                        <option value="12">Ремонт обуви</option>
-                        <option value="13">Ремонт одежды</option>
-                        <option value="14">Ремонт и реставрация мебели</option>
-                        <option value="15">Химчистка</option>
+                        @foreach ($section as $item)
+                          @if ($item->service_id == 2)
+                            <option value="{{ $item->id }}">{{ $item->title }}</option>
+                          @endif
+                        @endforeach
                       </optgroup>
                     </select>
                   </div>

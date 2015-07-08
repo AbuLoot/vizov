@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSectionRepairTable extends Migration
+class CreateServicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,12 @@ class CreateSectionRepairTable extends Migration
      */
     public function up()
     {
-        Schema::create('section_repair', function (Blueprint $table) {
+        Schema::create('services', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('sort_id');
+            $table->string('route');
             $table->string('slug');
             $table->string('title');
-            $table->string('image');
             $table->string('title_description');
             $table->string('meta_description');
             $table->text('text');
@@ -34,6 +34,6 @@ class CreateSectionRepairTable extends Migration
      */
     public function down()
     {
-        Schema::drop('section_repair');
+        //
     }
 }

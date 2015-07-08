@@ -20,7 +20,7 @@ class CreatePostsCallTable extends Migration
             $table->integer('city_id')->unsigned();
             $table->foreign('city_id')->references('id')->on('cities');
             $table->integer('section_id')->unsigned();
-            $table->foreign('section_id')->references('id')->on('section_call');
+            $table->foreign('section_id')->references('id')->on('section');
             $table->string('slug');
             $table->string('title');
             $table->string('title_description');

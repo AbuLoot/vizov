@@ -36,8 +36,9 @@ class PostsController extends Controller
     {
         $user = Auth::user();
         $cities = City::all();
+        $section = Section::all();
 
-        return view('board.create_post', compact('user', 'cities'));
+        return view('board.create_post', compact('user', 'cities', 'section'));
     }
 
     /**

@@ -11,6 +11,7 @@ use Auth;
 use App\User;
 use App\Profile;
 use App\City;
+use App\Section;
 use App\Http\Requests\MyProfileRequest;
 use Image;
 use Storage;
@@ -35,8 +36,9 @@ class ProfileController extends Controller
     {
         $user = User::find(Auth::id());
         $cities = City::all();
+        $section = Section::all();
 
-        return view('profile.my_profile_edit', compact('user', 'cities'));
+        return view('profile.my_profile_edit', compact('user', 'cities', 'section'));
     }
 
     public function postMyProfile(MyProfileRequest $request, $id)
@@ -73,8 +75,8 @@ class ProfileController extends Controller
         $user->save();
 
         $profile->city_id = $request->city_id;
-        if ($request->service_id != 0) 
-            $profile->service_id = $request->service_id;
+        if ($request->section_id != 0)
+            $profile->section_id = $request->section_id;
         $profile->phone =  $request->phone;
         $profile->skills = $request->skills;
         $profile->address = $request->address;
@@ -94,5 +96,12 @@ class ProfileController extends Controller
     public function postMySetting()
     {
 
+    }
+
+    public function getProfile($id)
+    {
+        $profile = Profile::findOrFail($id);
+
+        return view('profile.profile_user', compact('profile'));
     }
 }

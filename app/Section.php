@@ -12,4 +12,9 @@ class Section extends Model
     {
         return $this->hasMany('App\PostCall', 'section_id');
     }
+
+    public function profiles()
+    {
+    	return $this->hasMany('App\Profile', 'section_id');
+    }
 }

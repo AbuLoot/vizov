@@ -23,6 +23,8 @@ Route::get('2/{post}/{id}', ['as' => 'show-post-repair', 'uses' => 'IndexControl
 Route::get('search', ['uses' => 'IndexController@searchPosts']);
 Route::get('filter', ['uses' => 'IndexController@filterPosts']);
 
+Route::get('profile/{id}', ['uses' => 'ProfileController@getProfile']);
+
 Route::group(['middleware' => 'auth'], function()
 {
 	Route::resource('posts', 'PostsController');
@@ -77,19 +79,6 @@ Route::get('add_posts', function() {
     	$post->address = $faker->address;
     	$post->phone = $faker->phoneNumber;
     	$post->email = $faker->email;
-    	$post->save();
-    }
-    echo 'Allahu akbar!';
-});
-
-Route::get('update_posts', function() {
-
-    $posts = App\PostCall::take(25)->get();
-
-    // dd($posts);exit();
-
-    foreach ($posts as $post) {
-    	$post->image = null;
     	$post->save();
     }
     echo 'Allahu akbar!';

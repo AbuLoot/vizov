@@ -28,11 +28,11 @@
                     <td><img src="/img/section/{{ $item->image }}" width="64"></td>
                     <td>{{ trans('services.'.$item->service_id.'.title') }}</td>
                     <td>{{ $item->sort_id }}</td>
-                      @if ($item->status == 1)
-                        <td class="success">Активен</td>
-                      @else
-                        <td class="danger">Неактивен</td>
-                      @endif
+                    @if ($item->status == 1)
+                      <td class="success">Активен</td>
+                    @else
+                      <td class="danger">Неактивен</td>
+                    @endif
                     <td class="text-right">
                       <a class="btn btn-primary btn-xs" href="{{ url(trans('services.'.$item->service_id.'.slug').'/'.$item->slug.'/'.$item->id) }}" title="Просмотр страницы" target="_blank"><span class="fa fa-file"></span></a>
                       <a class="btn btn-primary btn-xs" href="{{ route('admin.section.edit', $item->id) }}" title="Редактировать"><span class="fa fa-edit"></span></a>

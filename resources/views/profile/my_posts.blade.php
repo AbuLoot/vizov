@@ -43,7 +43,7 @@
                       <b>Рубрика:</b> {{ $post->section->title }}
                     </p>
                     <p>
-                      <small class="space-right">{{ $post->created_at }} | Опубликовано 6 мая 2015 г.</small>
+                      <small class="space-right">{{ $post->created_at }}</small>
                       <small><i class="glyphicon glyphicon-user"></i> 26 просмотров</small>
                     </p>
                   </div>

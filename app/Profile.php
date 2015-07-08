@@ -17,4 +17,10 @@ class Profile extends Model
     {
         return $this->belongsTo('App\City');
     }
+
+    public function section()
+    {
+        return $this->belongsTo('App\Section');
+    }
+
 }

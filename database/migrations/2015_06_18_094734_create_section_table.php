@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSectionCallTable extends Migration
+class CreateSectionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateSectionCallTable extends Migration
      */
     public function up()
     {
-        Schema::create('section_call', function (Blueprint $table) {
+        Schema::create('section', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('sort_id');
             $table->integer('service_id');
