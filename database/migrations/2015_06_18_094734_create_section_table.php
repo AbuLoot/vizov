@@ -15,7 +15,8 @@ class CreateSectionTable extends Migration
         Schema::create('section', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('sort_id');
-            $table->integer('service_id');
+            $table->integer('service_id')->unsigned();
+            $table->foreign('service_id')->references('id')->on('services');
             $table->string('slug');
             $table->string('title');
             $table->string('image');

@@ -64,6 +64,7 @@
                     <li><a href="/admin/users">Пользователи</a></li>
                     <li><a href="/admin/section">Рубрики</a></li>
                     <li><a href="/admin/posts">Объявления</a></li>
+                    <li><a href="/admin/pages">Страницы</a></li>
                     <li class="divider"></li>
                     <li><a href="/auth/logout">Выход</a></li>
                   </ul>
@@ -75,7 +76,6 @@
       </div>
     </header>
 
-    <!-- Nav Services -->
     <nav class="bg-nav-services">
       <div class="container">
         <div class="col-md-offset-2 col-sm-offset-2 col-md-6 col-sm-6">

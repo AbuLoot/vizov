@@ -9,9 +9,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Session;
-
 use App\Section;
-
 use App\PostCall;
 use App\PostRepair;
 
@@ -24,7 +22,7 @@ class IndexController extends Controller
             ->orderBy('sort_id')
             ->get();
 
-        return view('board.section_call', compact('sections'));
+        return view('board.section', compact('sections'));
     }
 
     public function getCall()
@@ -34,13 +32,13 @@ class IndexController extends Controller
             ->orderBy('sort_id')
             ->get();
 
-    	return view('board.section_call', compact('sections'));
+    	return view('board.section', compact('sections'));
     }
 
     public function showCall($section, $id)
     {
         $section = Section::where('slug', $section)->first();
-        $posts = PostCall::where('section_id', $id)->paginate(10);
+        $posts = PostCall::where('section_id', $id)->orderBy('id', 'DESC')->paginate(10);
 
         return view('board.posts_call', compact('posts', 'section'));
     }
@@ -61,7 +59,7 @@ class IndexController extends Controller
             ->orderBy('sort_id')
             ->get();
 
-    	return view('board.section_repair', compact('sections'));
+    	return view('board.section', compact('sections'));
     }
 
     public function showRepair($section, $id)

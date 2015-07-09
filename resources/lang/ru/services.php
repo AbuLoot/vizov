@@ -1,7 +1,7 @@
 <?php
 
 return [
-	
+
 	"1" => [
 		"route" => "call",
 		"slug" => "uslugi_vyzova",

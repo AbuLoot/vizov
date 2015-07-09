@@ -25,7 +25,7 @@ class MyProfileRequest extends Request
     {
         return [
             'name' => 'required|min:3|max:60',
-            'section_id' => 'required|numeric|max:4',
+            'section_id' => 'required|numeric',
             'city_id' => 'required|numeric|max:2',
             'address' => 'max:80',
             'phone' => 'max:40',
