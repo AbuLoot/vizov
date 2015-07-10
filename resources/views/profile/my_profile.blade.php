@@ -22,11 +22,23 @@
                   </tr>
                   <tr>
                     <th>Cфера работы:</th>
-                    <td>{{ $user->profile->section->title }}</td>
+                    <td>
+                      @if ($user->profile->section_id == 0)
+                        Не указан
+                      @else
+                        {{ $user->profile->section->title }}
+                      @endif
+                    </td>
                   </tr>
                   <tr>
                     <th>Город:</th>
-                    <td>{{ $user->profile->city->title }}</td>
+                    <td>
+                      @if ($user->profile->city_id == 0)
+                        Не указан
+                      @else
+                        {{ $user->profile->city->title }}
+                      @endif
+                    </td>
                   </tr>
                   <tr>
                     <th>Адрес работы:</th>
