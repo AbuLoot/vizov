@@ -107,7 +107,8 @@ class PostsController extends Controller
         $post->slug = str_slug($request->title);
         $post->title = $request->title;
         $post->price = $request->price;
-        $post->deal = $request->deal;
+        if (isset($post->deal))
+            $post->deal = $request->deal;
         $post->description = $request->description;
         $post->image = $introImage;
         $post->images = serialize($images);
@@ -265,6 +266,34 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = PostCall::findOrFail($id);
+
+        if (Auth::id() != $post->user_id)
+        {
+            return redirect('/my_posts');
+            die();
+        }
+
+        if ( ! empty($post->images))
+        {
+            $images = unserialize($post->images);
+
+            foreach ($images as $key => $image)
+            {
+                if ($key == 0)
+                {
+                    Storage::delete('img/posts/'.$post->user_id.'/main-'.$image['image']);
+                }
+
+                Storage::delete([
+                    'img/posts/'.$post->user_id.'/'.$image['image'],
+                    'img/posts/'.$post->user_id.'/'.$image['mini_image']
+                ]);
+            }
+        }
+
+        $post->delete();
+
+        return redirect('/my_posts');
     }
 }

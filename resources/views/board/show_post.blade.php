@@ -30,7 +30,7 @@
                     <tbody>
                       <tr>
                         <th>Цена</th>
-                        <td class="text-success"><b>{{ $post->price }} тг (Договорная цена)</b></td>
+                        <td class="text-success"><b>{{ $post->price }} тг  @if ($post->deal == 'on') (Торг&nbsp;возможен) @endif</b></td>
                       </tr>
                       <tr>
                         <th>Регион</th>

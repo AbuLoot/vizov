@@ -103,8 +103,7 @@
                 </div>
                 <hr>
               @empty
-                <h4>У вас пока нет объявлений.</h4>
-                <a href="{{ route('posts.create') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Добавить объявление</a>
+                <h4>Нет объявлений.</h4>
               @endforelse
             </div>
           </div>

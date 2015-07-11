@@ -27,13 +27,13 @@
                           <b>{{ $post->title }}</b>
                         </a>
                       </h5>
-                      <h4 class="col-md-3 media-heading text-right text-success"><b>{{ $post->price }} тг</b></h4>
+                      <h4 class="col-md-3 media-heading text-right text-success"><b>{{ $post->price }} тг</b> @if ($post->deal == 'on') Торг&nbsp;возможен @endif</h4>
                       <div class="col-md-3 text-right">
                         <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Редактировать</a>
                         <p></p>
                         <form method="POST" action="{{ route('posts.destroy', $post->id) }}" accept-charset="UTF-8">
                           <input name="_method" type="hidden" value="DELETE">
-                          {!! csrf_field() !!}
+                          <input name="_token" type="hidden" value="{{ csrf_token() }}">
                           <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Удалить объявление?')"><span class="fa fa-times"></span> Удалить</button>
                         </form>
                       </div>

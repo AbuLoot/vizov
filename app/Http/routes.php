@@ -62,7 +62,7 @@ Route::post('password/email', 'Auth\PasswordController@postEmail');
 Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
-Route::get('add_posts', function() {
+/*Route::get('add_posts', function() {
 
     $faker = Faker\Factory::create();
 
@@ -91,7 +91,7 @@ Route::get('add_posts', function() {
     }
     echo 'Allahu akbar!';
 });
-
+*/
 /*Route::get('add_cities', function() {
 	
 	$cities = [

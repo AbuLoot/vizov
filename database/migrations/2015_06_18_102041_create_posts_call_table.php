@@ -35,6 +35,7 @@ class CreatePostsCallTable extends Migration
             $table->string('email');
             $table->char('comment', 20);
             $table->char('lang', 2);
+            $table->interger('views');
             $table->integer('status');
             $table->timestamps();
         });
