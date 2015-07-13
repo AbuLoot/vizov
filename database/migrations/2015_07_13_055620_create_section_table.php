@@ -36,6 +36,6 @@ class CreateSectionTable extends Migration
      */
     public function down()
     {
-        Schema::drop('section_call');
+        Schema::drop('section');
     }
 }

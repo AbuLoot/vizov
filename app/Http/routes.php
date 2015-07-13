@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
-
 Route::get('/', ['as' => 'index', 'uses' => 'IndexController@getIndex']);
 
 Route::get('uslugi_vyzova', ['as' => 'call', 'uses' => 'IndexController@getCall']);
@@ -36,13 +25,16 @@ Route::group(['middleware' => 'auth'], function()
 	Route::post('my_profile/{id}', ['uses' => 'ProfileController@postMyProfile']);
 
 	Route::get('my_setting', ['uses' => 'ProfileController@getMySetting']);
-	Route::post('my_setting/{id}', ['uses' => 'ProfileController@postMySetting']);
+	Route::post('reset_password', ['as' => 'reset-password', 'uses' => 'ProfileController@postResetPassword']);
+	Route::post('delete_account', ['as' => 'delete-account', 'uses' => 'ProfileController@postDeleteAccount']);
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => 'role:admin'], function()
 {
     Route::resource('users', 'AdminUsersController');
     Route::resource('section', 'AdminSectionController');
+    Route::resource('posts', 'AdminPostsController');
+    Route::resource('pages', 'AdminPagesController');
 });
 
 // Authentication routes...

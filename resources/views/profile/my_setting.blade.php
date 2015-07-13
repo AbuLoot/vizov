@@ -12,31 +12,50 @@
                 <h3 class="panel-title">Изменение пароля</h3>
               </div>
               <div class="panel-body">
-                <form action="" method="post" role="form">
+                <form method="POST" action="{{ route('reset-password') }}" role="form">
+                  <input name="_method" type="hidden" value="PUT">
+                  <input name="_token" type="hidden" value="{{ csrf_token() }}">
                   <div class="form-group">
-                    <label for="old-password">Старый пароль:</label>
-                    <input class="form-control" placeholder="Old Password" name="old-password" id="old-password" type="password">
+                    <label for="password">Старый пароль:</label>
+                    <input class="form-control" placeholder="Старый пароль" name="password" id="password" type="password" minlength="6" maxlength="60" required>
                   </div>
                   <div class="form-group">
-                    <label for="new-password">Новый пароль:</label>
-                    <input class="form-control" placeholder="New Password" name="new-password" id="new-password" type="password">
+                    <label for="new_password">Новый пароль:</label>
+                    <input class="form-control" placeholder="Новый пароль" name="new_password" id="new_password" type="password" minlength="6" maxlength="60" required>
                   </div>
                   <div class="form-group">
-                    <label for="new-password-again">Повторите новый пароль:</label>
-                    <input class="form-control" placeholder="New Password Again" name="new-password-again" id="new-password-again" type="password">
+                    <label for="new_password_confirmation">Введите еще раз новый пароль:</label>
+                    <input class="form-control" placeholder="Подтвердите новый пароль" name="new_password_confirmation" id="new_password_confirmation" type="password" minlength="6" maxlength="60" required>
                   </div>
-                  <button type="submit" name="btn-add-app" class="btn btn-default"><span class="glyphicon glyphicon-floppy-save"></span> Изменить</button>
+                  <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-floppy-save"></span> Изменить</button>
                 </form>
               </div>
             </div>
+
+            <script type="text/javascript">
+              window.onload = function () {
+                document.getElementById("new_password").onchange = validatePassword;
+                document.getElementById("new_password_confirmation").onchange = validatePassword;
+              }
+              function validatePassword() {
+                var pass2 = document.getElementById("new_password_confirmation").value;
+                var pass1 = document.getElementById("new_password").value;
+                if (pass1 != pass2)
+                  document.getElementById("new_password_confirmation").setCustomValidity("Пароли не совпадают");
+                else
+                  document.getElementById("new_password_confirmation").setCustomValidity('');
+                  //empty string means no validation error
+              }
+            </script>
 
             <div class="panel panel-warning">
               <div class="panel-heading">
                 <h3 class="panel-title">Удаление аккаунта</h3>
               </div>
               <div class="panel-body">
-                <form action="" method="post" role="form">
-                  <input name="_token" type="hidden" value="gvtDbUmQRBIhVcwTUWylnrznxSJGlHt9ZDwph5rb">
+                <form method="POST" action="{{ route('delete-account') }}" accept-charset="UTF-8">
+                  <input name="_method" type="hidden" value="DELETE">
+                  <input name="_token" type="hidden" value="{{ csrf_token() }}">
                   <button type="submit" class="btn btn-warning" onclick="return confirm('Удалить аккаунт?')"><span class="glyphicon glyphicon-fire"></span> Удалить</button>
                 </form>
               </div>

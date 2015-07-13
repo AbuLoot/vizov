@@ -93,7 +93,12 @@ class ProfileController extends Controller
     	return view('profile.my_setting');
     }
 
-    public function postMySetting()
+    public function postResetPassword(Request $request)
+    {
+        dd($request->all());
+    }
+
+    public function postDeleteAccount()
     {
 
     }

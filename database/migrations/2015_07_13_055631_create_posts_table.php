@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePostsCallTable extends Migration
+class CreatePostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreatePostsCallTable extends Migration
      */
     public function up()
     {
-        Schema::create('posts_call', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('sort_id')->unsigned();
             $table->integer('user_id')->unsigned();
@@ -21,6 +21,8 @@ class CreatePostsCallTable extends Migration
             $table->foreign('city_id')->references('id')->on('cities');
             $table->integer('section_id')->unsigned();
             $table->foreign('section_id')->references('id')->on('section');
+            $table->integer('service_id')->unsigned();
+            $table->foreign('service_id')->references('id')->on('services');
             $table->string('slug');
             $table->string('title');
             $table->string('title_description');
@@ -35,7 +37,7 @@ class CreatePostsCallTable extends Migration
             $table->string('email');
             $table->char('comment', 20);
             $table->char('lang', 2);
-            $table->interger('views');
+            $table->integer('views');
             $table->integer('status');
             $table->timestamps();
         });
@@ -48,6 +50,6 @@ class CreatePostsCallTable extends Migration
      */
     public function down()
     {
-        Schema::drop('posts_call');
+        Schema::drop('posts');
     }
 }
