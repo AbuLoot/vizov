@@ -94,7 +94,7 @@
               <div class="panel-body">
                 <div class="media">
                   <div class="media-left">
-                    <a href="#">
+                    <a href="/profile/{{ $profile->id }}">
                       @if (empty($profile->avatar))
                         <img src="/img/no-avatar.png" class="media-object" alt="..." width="90">
                       @else
@@ -103,7 +103,7 @@
                     </a>
                   </div>
                   <div class="media-body">
-                    <h5 class="media-heading">{{ $profile->user->name }}</h5>
+                    <h5 class="media-heading"><a href="/profile/{{ $profile->id }}">{{ $profile->user->name }}</a></h5>
                     <p>{{ $profile->section->title }}</p>
                     <i class="glyphicon glyphicon-star text-success"></i>
                     <i class="glyphicon glyphicon-star text-success"></i>

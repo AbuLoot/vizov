@@ -20,16 +20,16 @@ class ProfileController extends Controller
 {
     public function getProfile($id)
     {
-        $profile = Profile::where('user_id', $id)->first();
+        $profile = Profile::find($id);
 
         return view('profile.profile_user', compact('profile'));
     }
 
     public function getProfiles()
     {
-        $profile = Profile::where('status', 1)->paginate(15);
+        $profiles = Profile::paginate(15);
 
-        return view('profile.profile_users', compact('profiles'));
+        return view('profile.profiles_users', compact('profiles'));
     }
 
     public function getMyPosts()

@@ -24,7 +24,7 @@
       <div class="container">
         <div class="col-md-2 col-sm-2 el-logo-space">
           <div class="row">
-            <a href="{{ route('index') }}" class="logo"><i class="glyphicon glyphicon-flash"></i>VIZOV</a>
+            <a href="{{ route('index') }}" class="logo"><i class="fa fa-exchange"></i> VIZOV</a>
           </div>
         </div>
         <div class="col-md-6 col-sm-6 el-search-space">

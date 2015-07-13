@@ -46,8 +46,9 @@ class IndexController extends Controller
     public function showPostCall($post, $id)
     {
         $post = Post::findOrFail($id);
+        $profiles = Profile::take(5)->get();
 
-        return view('board.show_post', compact('post'));
+        return view('board.show_post', compact('post', 'profiles'));
     }
 
     // Repair

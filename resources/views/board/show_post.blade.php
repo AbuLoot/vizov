@@ -24,7 +24,7 @@
                 @endif
               </div>
               <div class="media-body">
-                <h4><a href="/profile/{{ $post->user->id }}"><b>{{ $post->user->name }}</b></a></h4>
+                <h4><a href="/profile/{{ $post->user->profile->id }}"><b>{{ $post->user->name }}</b></a></h4>
                 <div class="table-responsive">
                   <table class="table table-condensed">
                     <tbody>
@@ -157,96 +157,31 @@
             <div class="panel-heading">
               <h3 class="panel-title">Топ по рейтингу</h3>
             </div>
-            <div class="panel-body">
-              <div class="media">
-                <div class="media-left">
-                  <a href="#">
-                    <img class="media-object" src="/bower_components/bootstrap/dist/img/1.jpg" alt="..." width="90">
-                  </a>
-                </div>
-                <div class="media-body">
-                  <h5 class="media-heading">Arman Batyr</h5>
-                  <p>Ремонт бытовой техники</p>
-                  <i class="glyphicon glyphicon-star text-success"></i>
-                  <i class="glyphicon glyphicon-star text-success"></i>
-                  <i class="glyphicon glyphicon-star text-success"></i>
-                  <i class="glyphicon glyphicon-star text-success"></i>
-                  <i class="glyphicon glyphicon-star text-success"></i>
-                </div>
-              </div>
-            </div>
-            <div class="panel-body">
-              <div class="media">
-                <div class="media-left">
-                  <a href="#">
-                    <img class="media-object" src="/bower_components/bootstrap/dist/img/2.jpg" alt="..." width="90">
-                  </a>
-                </div>
-                <div class="media-body">
-                  <h5 class="media-heading">Arman Batyr</h5>
-                  <p>Ремонт бытовой техники</p>
-                  <i class="glyphicon glyphicon-star text-success"></i>
-                  <i class="glyphicon glyphicon-star text-success"></i>
-                  <i class="glyphicon glyphicon-star text-success"></i>
-                  <i class="glyphicon glyphicon-star"></i>
-                  <i class="glyphicon glyphicon-star"></i>
+            @foreach ($profiles as $profile)
+              <div class="panel-body">
+                <div class="media">
+                  <div class="media-left">
+                    <a href="/profile/{{ $profile->id }}">
+                      @if (empty($profile->avatar))
+                        <img src="/img/no-avatar.png" class="media-object" alt="..." width="90">
+                      @else
+                        <img src="/img/users/{{ $profile->user->id . '/' . $profile->avatar }}" class="media-object" alt="..." width="90">
+                      @endif
+                    </a>
+                  </div>
+                  <div class="media-body">
+                    <h5 class="media-heading"><a href="/profile/{{ $profile->id }}">{{ $profile->user->name }}</a></h5>
+                    <p>{{ $profile->section->title }}</p>
+                    <i class="glyphicon glyphicon-star text-success"></i>
+                    <i class="glyphicon glyphicon-star text-success"></i>
+                    <i class="glyphicon glyphicon-star"></i>
+                    <i class="glyphicon glyphicon-star"></i>
+                    <i class="glyphicon glyphicon-star"></i>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="panel-body">
-              <div class="media">
-                <div class="media-left">
-                  <a href="#">
-                    <img class="media-object" src="/bower_components/bootstrap/dist/img/3.jpg" alt="..." width="90">
-                  </a>
-                </div>
-                <div class="media-body">
-                  <h5 class="media-heading">Arman Batyr</h5>
-                  <p>Ремонт бытовой техники</p>
-                  <i class="glyphicon glyphicon-star text-success"></i>
-                  <i class="glyphicon glyphicon-star text-success"></i>
-                  <i class="glyphicon glyphicon-star"></i>
-                  <i class="glyphicon glyphicon-star"></i>
-                  <i class="glyphicon glyphicon-star"></i>
-                </div>
-              </div>
-            </div>
-            <div class="panel-body">
-              <div class="media">
-                <div class="media-left">
-                  <a href="#">
-                    <img class="media-object" src="/bower_components/bootstrap/dist/img/4.jpg" alt="..." width="90">
-                  </a>
-                </div>
-                <div class="media-body">
-                  <h5 class="media-heading">Arman Batyr</h5>
-                  <p>Ремонт бытовой техники</p>
-                  <i class="glyphicon glyphicon-star text-success"></i>
-                  <i class="glyphicon glyphicon-star text-success"></i>
-                  <i class="glyphicon glyphicon-star"></i>
-                  <i class="glyphicon glyphicon-star"></i>
-                  <i class="glyphicon glyphicon-star"></i>
-                </div>
-              </div>
-            </div>
-            <div class="panel-body">
-              <div class="media">
-                <div class="media-left">
-                  <a href="#">
-                    <img class="media-object" src="/bower_components/bootstrap/dist/img/5.jpg" alt="..." width="90">
-                  </a>
-                </div>
-                <div class="media-body">
-                  <h5 class="media-heading">Arman Batyr</h5>
-                  <p>Ремонт бытовой техники</p>
-                  <i class="glyphicon glyphicon-star text-success"></i>
-                  <i class="glyphicon glyphicon-star text-success"></i>
-                  <i class="glyphicon glyphicon-star"></i>
-                  <i class="glyphicon glyphicon-star"></i>
-                  <i class="glyphicon glyphicon-star"></i>
-                </div>
-              </div>
-            </div>
+            @endforeach
+            <div class="panel-footer"><a href="/profiles">Все пользователи</a></div>
           </div>
         </div>
       </div>

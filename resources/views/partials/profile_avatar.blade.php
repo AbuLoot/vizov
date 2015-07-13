@@ -7,4 +7,5 @@
             @endif
             <h5 class="text-center">{{ $profile->user->name }}</h5>
           </div>
+          <div class="panel-footer"><a href="/profiles">Все пользователи</a></div>
         </div>
