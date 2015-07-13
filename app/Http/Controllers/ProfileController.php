@@ -20,7 +20,7 @@ class ProfileController extends Controller
 {
     public function getProfile($id)
     {
-        $profile = Profile::findOrFail($id);
+        $profile = Profile::where('user_id', $id)->first();
 
         return view('profile.profile_user', compact('profile'));
     }

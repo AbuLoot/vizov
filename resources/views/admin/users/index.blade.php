@@ -26,7 +26,7 @@
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->ip }}</td>
                     <td class="text-right">
-                      <a class="btn btn-primary btn-xs" href="{{ url(trans('services.'.$user->service_id.'.slug').'/'.$user->slug.'/'.$user->id) }}" title="Просмотр страницы" target="_blank"><span class="fa fa-file"></span></a>
+                      <a class="btn btn-primary btn-xs" href="/profile/{{ $user->id }}" title="Просмотр профиля" target="_blank"><span class="fa fa-file"></span></a>
                       <a class="btn btn-primary btn-xs" href="{{ route('admin.users.edit', $user->id) }}" title="Редактировать"><span class="fa fa-edit"></span></a>
                       <form method="POST" action="{{ route('admin.users.destroy', $user->id) }}" accept-charset="UTF-8" class="btn-delete">
                         <input name="_method" type="hidden" value="DELETE">

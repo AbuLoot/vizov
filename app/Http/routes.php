@@ -58,24 +58,24 @@ Route::post('password/reset', 'Auth\PasswordController@postReset');
 
     $faker = Faker\Factory::create();
 
-    for ($i = 1; $i <= 25; $i++)
+    for ($i = 1; $i <= 20; $i++)
     {
-    	$post = new \App\PostCall;
+    	$post = new \App\Post;
 		$post->sort_id = $i;
-    	$post->user_id = rand(3, 9);
+    	$post->user_id = rand(5, 9);
     	$post->city_id = rand(1, 2);
-    	$post->section_id = rand(1, 2);
+    	$post->service_id = 1;
+    	$post->section_id = rand(2, 3);
 
     	$title = $faker->sentence(5);
+
     	$post->slug = str_slug($title);
 		$post->title = $title;
-
     	$post->title_description = $title;
     	$post->meta_description = $faker->text(200);
     	$post->price = $faker->numberBetween($min = 1000, $max = 9000);
-    	$post->deal = on;
+    	// $post->deal = 'on';
 		$post->description = $faker->text;
-    	$post->images = $faker->imageUrl(300, 300, 'transport');
     	$post->address = $faker->address;
     	$post->phone = $faker->phoneNumber;
     	$post->email = $faker->email;

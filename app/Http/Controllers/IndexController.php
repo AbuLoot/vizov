@@ -81,6 +81,7 @@ class IndexController extends Controller
 
         $posts = Post::where('title', 'LIKE', '%'.$text.'%')
             ->orWhere('description', 'LIKE', '%'.$text.'%')
+            ->where('status', 1)
             ->paginate(10);
 
         return view('board.found_posts', compact('text', 'posts'));
@@ -88,17 +89,30 @@ class IndexController extends Controller
 
     public function filterPosts(Request $request)
     {
-        $section_id = ($request->section_id) ? 'section_id = '.$request->section_id.' AND ' : '';
-        $city_id = ($request->city_id) ? (int) $request->city_id : '';
-        $image = ($request->image == 'on') ? 'AND image IS NOT NULL' : '';
-        $from = ($request->from) ? (int) $request->from : 0;
-        $to = ($request->to) ? (int) $request->to : 9999999;
+        $query  = ($request->section_id)
+            ? 'section_id = ' . (int) $request->section_id . ' AND '
+            : null;
 
-        $section = Section::find($section_id);
-        $posts = Post::where('city_id', $city_id)
-            ->whereRaw($section_id.' price >= '.$from.' AND price <= '.$to.' '.$image)
-            ->where('status', 0)
-            ->get();
+        $query .= ($request->city_id)
+            ? 'city_id = ' . (int) $request->city_id . ' AND '
+            : null;
+
+        $query .= ($request->image == 'on')
+            ? 'image IS NOT NULL AND '
+            : null;
+
+        $query .= ($request->from)
+            ? 'price >= ' . (int) $request->from . ' AND '
+            : 'price >= 0 AND ';
+
+        $query .= ($request->to)
+            ? 'price <= ' . (int) $request->to
+            : 'price <= 9999999';
+
+        $section = Section::find($request->section_id);
+        $posts = Post::whereRaw($query)
+            ->where('status', 1)
+            ->paginate(10);
 
         return view('board.found_posts', compact('posts', 'section'));
     }
