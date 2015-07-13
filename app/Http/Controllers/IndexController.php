@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 
 use App\Section;
 use App\Post;
+use App\Profile;
 
 class IndexController extends Controller
 {
@@ -37,8 +38,9 @@ class IndexController extends Controller
     {
         $section = Section::where('slug', $section)->first();
         $posts = Post::where('section_id', $id)->orderBy('id', 'DESC')->paginate(10);
+        $profiles = Profile::take(5)->get();
 
-        return view('board.posts_call', compact('posts', 'section'));
+        return view('board.posts_call', compact('posts', 'section', 'profiles'));
     }
 
     public function showPostCall($post, $id)

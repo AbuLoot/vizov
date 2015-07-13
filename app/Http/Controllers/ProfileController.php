@@ -25,6 +25,13 @@ class ProfileController extends Controller
         return view('profile.profile_user', compact('profile'));
     }
 
+    public function getProfiles()
+    {
+        $profile = Profile::where('status', 1)->paginate(15);
+
+        return view('profile.profile_users', compact('profiles'));
+    }
+
     public function getMyPosts()
     {
         $posts = Auth::user()->posts;

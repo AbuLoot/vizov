@@ -13,6 +13,7 @@ Route::get('search', ['uses' => 'IndexController@searchPosts']);
 Route::get('filter', ['uses' => 'IndexController@filterPosts']);
 
 Route::get('profile/{id}', ['uses' => 'ProfileController@getProfile']);
+Route::get('profiles', ['uses' => 'ProfileController@getProfiles']);
 
 Route::group(['middleware' => 'auth'], function()
 {
