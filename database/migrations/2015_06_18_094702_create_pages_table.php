@@ -21,7 +21,7 @@ class CreatePagesTable extends Migration
             $table->string('meta_description');
             $table->text('text');
             $table->char('lang', 2)->default('ru');
-            $table->integer('status');
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }

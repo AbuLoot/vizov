@@ -71,7 +71,7 @@
 
               <h3>Все объявления пользователя "{{ $profile->user->name }}"</h3>
 
-              @forelse ($profile->user->posts_call as $post)
+              @forelse ($profile->user->posts as $post)
                 <div class="media">
                   <div class="media-left">
                     <a href="{{ route('show-post-call', ['post' => $post->slug, 'id' => $post->id]) }}">

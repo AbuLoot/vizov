@@ -82,8 +82,8 @@ Route::post('password/reset', 'Auth\PasswordController@postReset');
     	$post->save();
     }
     echo 'Allahu akbar!';
-});
-*/
+});*/
+
 /*Route::get('add_cities', function() {
 	
 	$cities = [
@@ -120,37 +120,37 @@ Route::post('password/reset', 'Auth\PasswordController@postReset');
     echo 'Allahu akbar!';
 });*/
 
-// Route::get('add_section', function() {
 
+/*Route::get('add_section', function() {
 
-// 	$sections = [
-// 		'Ремонт авто',
-// 		'Ремонт бытовой техники',
-// 		'Ремонт домов и квартир',
-// 		'Ремонт обуви',
-// 		'Ремонт одежды',
-// 		'Ремонт и реставрация мебели',
-// 		'Химчистка',
-// 	];
-// 	$images = [
-// 		'vehicle18.png',
-// 		'kitchen51.png',
-// 		'gear63.png',
-// 		'mountain22.png',
-// 		'winter-clothes.png',
-// 		'sofa.png',
-// 		'washing11.png'
-// 	];
+	$sections = [
+		'Ремонт авто',
+		'Ремонт бытовой техники',
+		'Ремонт домов и квартир',
+		'Ремонт обуви',
+		'Ремонт одежды',
+		'Ремонт и реставрация мебели',
+		'Химчистка',
+	];
+	$images = [
+		'vehicle18.png',
+		'kitchen51.png',
+		'gear63.png',
+		'mountain22.png',
+		'winter-clothes.png',
+		'sofa.png',
+		'washing11.png'
+	];
 
-//     $i = 1;
-//     foreach ($sections as $key => $value) {
-// 		$item = new \App\SectionCall;
-//     	$item->sort_id = $item->increment('sort_id');
-//     	$item->service_id = 2;
-//     	$item->slug = str_slug($value);
-//     	$item->title = $value;
-//     	$item->image = $images[$key];
-//     	$item->save();
-//     }
-//     echo 'Allahu akbar!';
-// });
+    $i = 1;
+    foreach ($sections as $key => $value) {
+		$item = new \App\Section;
+    	$item->sort_id = $i++;
+    	$item->service_id = 2;
+    	$item->slug = str_slug($value);
+    	$item->title = $value;
+    	$item->image = $images[$key];
+    	$item->save();
+    }
+    echo 'Allahu akbar!';
+});*/

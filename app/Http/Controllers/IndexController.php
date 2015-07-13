@@ -8,10 +8,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use Session;
 use App\Section;
-use App\PostCall;
-use App\PostRepair;
+use App\Post;
 
 class IndexController extends Controller
 {
@@ -38,14 +36,14 @@ class IndexController extends Controller
     public function showCall($section, $id)
     {
         $section = Section::where('slug', $section)->first();
-        $posts = PostCall::where('section_id', $id)->orderBy('id', 'DESC')->paginate(10);
+        $posts = Post::where('section_id', $id)->orderBy('id', 'DESC')->paginate(10);
 
         return view('board.posts_call', compact('posts', 'section'));
     }
 
     public function showPostCall($post, $id)
     {
-        $post = PostCall::findOrFail($id);
+        $post = Post::findOrFail($id);
 
         return view('board.show_post', compact('post'));
     }
@@ -65,25 +63,25 @@ class IndexController extends Controller
     public function showRepair($section, $id)
     {
         $section = Section::where('slug', $section)->first();
-        $posts = PostRepair::where('section_id', $id)->paginate(10);
+        $posts = Post::where('section_id', $id)->paginate(10);
 
         return view('board.posts_repair', compact('posts', 'section'));
     }
 
     public function showPostRepair($post, $id)
     {
-        $post = PostRepair::findOrFail($id);
+        $post = Post::findOrFail($id);
 
         return view('board.show_post', compact('post'));
     }
 
     public function searchPosts(Request $request)
     {
-        $text = trim(strip_tags($request->text));
+        $text = trim(strip_tags($request->get('text')));
 
-        $posts = PostCall::where('title', 'LIKE', '%'.$text.'%')
+        $posts = Post::where('title', 'LIKE', '%'.$text.'%')
             ->orWhere('description', 'LIKE', '%'.$text.'%')
-            ->get();
+            ->paginate(10);
 
         return view('board.found_posts', compact('text', 'posts'));
     }
@@ -97,7 +95,7 @@ class IndexController extends Controller
         $to = ($request->to) ? (int) $request->to : 9999999;
 
         $section = Section::find($section_id);
-        $posts = PostCall::where('city_id', $city_id)
+        $posts = Post::where('city_id', $city_id)
             ->whereRaw($section_id.' price >= '.$from.' AND price <= '.$to.' '.$image)
             ->where('status', 0)
             ->get();

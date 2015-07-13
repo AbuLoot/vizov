@@ -84,6 +84,8 @@
               <h4>Ничего не найдено.</h4>
               <a href="{{ route('posts.create') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Добавить объявление</a>
             @endforelse
+
+            {!! $posts->render() !!}
           </div>
         </div>
       </div>

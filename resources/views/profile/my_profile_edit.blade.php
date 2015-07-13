@@ -81,7 +81,7 @@
                         @if(empty($user->profile->avatar))
                           <img src="/img/no-avatar.png">
                         @else
-                          <img src="/img/users/{{ $user->profile->id . '/' . $user->profile->avatar }}">
+                          <img src="/img/users/{{ $user->id . '/' . $user->profile->avatar }}">
                         @endif
                       </div>
                       <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>

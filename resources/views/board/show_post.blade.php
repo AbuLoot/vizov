@@ -45,16 +45,8 @@
                         <td>{{ $post->phone }}</td>
                       </tr>
                       <tr>
-                        <th>Рейтинг</th>
-                        <td>
-                          <big>
-                            <i class="glyphicon glyphicon-star text-info"></i>
-                            <i class="glyphicon glyphicon-star text-info"></i>
-                            <i class="glyphicon glyphicon-star text-muted"></i>
-                            <i class="glyphicon glyphicon-star text-muted"></i>
-                            <i class="glyphicon glyphicon-star text-muted"></i>
-                          </big>
-                        </td>
+                        <th>Электронная почта</th>
+                        <td>{{ $post->email }}</td>
                       </tr>
                     </tbody>
                   </table>

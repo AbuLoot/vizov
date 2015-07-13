@@ -19,10 +19,10 @@ class CreatePostsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('city_id')->unsigned();
             $table->foreign('city_id')->references('id')->on('cities');
-            $table->integer('section_id')->unsigned();
-            $table->foreign('section_id')->references('id')->on('section');
             $table->integer('service_id')->unsigned();
             $table->foreign('service_id')->references('id')->on('services');
+            $table->integer('section_id')->unsigned();
+            $table->foreign('section_id')->references('id')->on('section');
             $table->string('slug');
             $table->string('title');
             $table->string('title_description');
@@ -38,7 +38,7 @@ class CreatePostsTable extends Migration
             $table->char('comment', 20);
             $table->char('lang', 2);
             $table->integer('views');
-            $table->integer('status');
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }

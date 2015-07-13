@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 use App\City;
 use App\Section;
-use App\PostCall;
+use App\Post;
 use Image;
 use Storage;
 
@@ -48,7 +48,9 @@ class PostsController extends Controller
      */
     public function store(PostRequest $request)
     {
-        $post = new PostCall;
+        $post = new Post;
+        $section = Section::findOrFail($request->section_id);
+
         $introImage = null;
         $images = [];
 
@@ -100,9 +102,10 @@ class PostsController extends Controller
             }
         }
 
-        $post->sort_id = $post->increment('sort_id');
+        // $post->sort_id = 1;
         $post->user_id = Auth::id();
         $post->city_id = $request->city_id;
+        $post->service_id = $section->service_id;
         $post->section_id = $request->section_id;
         $post->slug = str_slug($request->title);
         $post->title = $request->title;
@@ -140,13 +143,7 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        $post = PostCall::findOrFail($id);
-
-        if (Auth::id() != $post->user_id)
-        {
-            return redirect('/my_posts');
-        }
-
+        $post = Auth::user()->posts()->find($id);
         $cities = City::all();
         $section = Section::all();
 
@@ -161,13 +158,7 @@ class PostsController extends Controller
      */
     public function update(PostRequest $request, $id)
     {
-        $post = PostCall::findOrFail($id);
-
-        if (Auth::id() != $post->user_id)
-        {
-            return redirect('/my_posts');
-            die();
-        }
+        $post = Auth::user()->posts()->find($id);
 
         if ($request->hasFile('images'))
         {
@@ -247,8 +238,10 @@ class PostsController extends Controller
         $post->price = $request->price;
         $post->deal = $request->deal;
         $post->description = $request->description;
-        $post->image = (isset($introImage)) ? $introImage : $post->image;
-        $post->images = (isset($images)) ? $images : $post->images;
+        if (isset($introImage))
+            $post->image = $introImage;
+        if (isset($images))
+            $post->images = $images;
         $post->address = $request->address;
         $post->phone = $request->phone;
         $post->email = $request->email;
@@ -266,13 +259,7 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        $post = PostCall::findOrFail($id);
-
-        if (Auth::id() != $post->user_id)
-        {
-            return redirect('/my_posts');
-            die();
-        }
+        $post = Auth::user()->posts()->find($id);
 
         if ( ! empty($post->images))
         {

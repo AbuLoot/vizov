@@ -41,13 +41,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasOne('App\Profile');
     }
 
-    public function posts_call()
+    public function posts()
     {
-        return $this->hasMany('App\PostCall');
-    }
-
-    public function posts_repair()
-    {
-        return $this->hasMany('App\PostRepair');
+        return $this->hasMany('App\Post');
     }
 }

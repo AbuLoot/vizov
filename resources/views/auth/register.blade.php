@@ -12,6 +12,14 @@
             <input type="text" class="form-control" id="name" name="name" minlength="3" maxlength="60" placeholder="Введите имя" value="{{ old('name') }}" required>
           </div>
           <div class="form-group">
+            <label for="city" class="control-label">Город</label>
+            <select class="form-control" id="city" name="city_id">
+              @foreach ($cities as $city)
+                <option value="{{ $city->id }}">{{ $city->title }}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class="form-group">
             <label for="email" class="control-label">Email</label>
             <input type="email" class="form-control" id="email" name="email" minlength="8" maxlength="60" placeholder="Введите email" value="{{ old('email') }}" required>
           </div>

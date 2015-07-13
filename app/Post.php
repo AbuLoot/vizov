@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PostRepair extends Model
+class Post extends Model
 {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'posts_repair';
+    protected $table = 'posts';
 
     /**
      * The attributes that are mass assignable.
@@ -22,6 +22,7 @@ class PostRepair extends Model
 		'sort_id',
 		'user_id',
 		'city_id',
+        'service_id',
         'section_id',
         'slug',
         'title',
@@ -30,12 +31,14 @@ class PostRepair extends Model
         'price',
         'deal',
         'description',
+        'image',
         'images',
         'address' ,
         'phone',
         'email',
         'comment',
         'lang',
+        'views',
         'status'
     ];
 
