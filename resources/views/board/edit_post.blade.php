@@ -6,9 +6,9 @@
 
           <div class="row">
             <div class="col-md-8">
-            <form action="{{ route('posts.update', $post->id) }}" method="post" class="form-horizontal" enctype="multipart/form-data">
-              <input name="_method" type="hidden" value="PUT">
-              {!! csrf_field() !!}
+            <form action="{{ route('posts.update', $post->id) }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
+              <input type="hidden" name="_method" value="PUT">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div class="form-group">
                 <div class="col-md-offset-3 col-md-9">
                   <div class="row">
@@ -169,9 +169,13 @@
                 <div class="col-md-9">
                   <div class="row">
                     <select class="form-control" id="comment" name="comment">
-                      <option value="all">Всем</option>
-                      <option value="nobody">Никому</option>
-                      <option value="registered_users">Только зарегистрированным пользователям</option>
+                      @foreach (trans('comment') as $key => $value)
+                        @if ($key === $post->comment)
+                          <option value="{{ $key }}" selected>{{ $value }}</option>
+                        @else
+                          <option value="{{ $key }}">{{ $value }}</option>
+                        @endif
+                      @endforeach
                     </select>
                     <br>
                     <p>Размещая объявления на сайте, вы соглашаетесь с <a href="#">этими правилами</a>.</p>

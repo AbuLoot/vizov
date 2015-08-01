@@ -153,6 +153,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Intervention\Image\ImageServiceProvider::class,
+        Codehappy\Captcha\CaptchaServiceProvider::class
     ],
 
     /*

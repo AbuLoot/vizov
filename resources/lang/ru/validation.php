@@ -118,6 +118,9 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'name' => 'Имя',
+        'comment' => 'Сообщение'
+    ],
 
 ];

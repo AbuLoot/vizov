@@ -8,12 +8,12 @@
         <div class="col-md-9">
           <div class="row-left">
             <div class="content-block">
-              <h3>{{ $profile->user->name }}</h3>
               @include('partials.alerts')
+              <h3>{{ $profile->user->name }}</h3>
               <div class="table-responsive">
                 <table class="table table-striped table-hover">
                   <tr>
-                    <th>Email:</th>
+                    <th width="170">Email:</th>
                     <td>{{ $profile->user->email }}</td>
                   </tr>
                   <tr>
@@ -101,8 +101,7 @@
                           <b>Рубрика:</b> {{ $post->section->title }}
                         </p>
                         <p>
-                          <small class="space-right">{{ $post->created_at }}</small>
-                          <small><i class="glyphicon glyphicon-user"></i> 26 просмотров</small>
+                          <small>{{ $post->created_at }}</small> | <small>{{ $post->views }} просмотров</small> | <small>Комментарии: {{ $post->comments->count() }}</small>
                         </p>
                       </div>
                     </div>
@@ -114,41 +113,51 @@
                 <div class="tab-pane fade" id="reviews">
                   <div class="panel panel-default">
                     <div class="panel-heading">
-                      <i class="fa fa-comments"></i> Комментарии: 3
+                      <i class="fa fa-comments"></i> Комментарии: {{ $profile->comments->count() }}
                     </div>
                     <div class="panel-body">
-                      <b class="space-right">Arman</b> <small>Опубликовано 6 мая 2015 г. <a href="#">Ответить</a></small>
-                      <p>Cras sit amet nibh libero, in gravida nulla.</p>
-                      <b class="space-right">Arman</b> <small>Опубликовано 6 мая 2015 г. <a href="#">Ответить</a></small>
-                      <p>Cras sit amet nibh libero, in gravida nulla.</p>
-                      <b class="space-right">Arman</b> <small>Опубликовано 6 мая 2015 г. <a href="#">Ответить</a></small>
-                      <p>Cras sit amet nibh libero, in gravida nulla.</p>
+                      @foreach ($profile->comments as $comment)
+                        <p>
+                          <b>{{ $comment->name }}</b><br>
+                          {{ $comment->comment }}<br>
+                          <small>Опубликовано {{ $comment->created_at }}.</small>
+                        </p>
+                      @endforeach
                     </div>
                   </div>
 
                   <div class="well">
                     <h4>Добавить комментарий</h4><br>
-                    <form class="form-horizontal">
+                    <form action="/review" method="POST" class="form-horizontal">
+                      <input name="_token" type="hidden" value="{{ csrf_token() }}">
+                      <input name="id" type="hidden" value="{{ $profile->id }}">
+                      <input name="type" type="hidden" value="profile">
                       <div class="form-group">
                         <label for="name" class="col-md-2">Ваше имя</label>
-                        <div class="col-md-8">
-                          <input type="text" class="form-control input-sm" id="name" placeholder="Введите имя">
+                        <div class="col-md-10">
+                          <input type="text" class="form-control input-sm" id="name" name="name" minlength="3" maxlength="60" placeholder="Введите имя" value="{{ old('name') }}" required>
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="email" class="col-md-2">Email адрес</label>
-                        <div class="col-md-8">
-                          <input type="email" class="form-control input-sm" id="email" placeholder="Введите email">
+                        <div class="col-md-10">
+                          <input type="email" class="form-control input-sm" id="email" name="email" minlength="8" maxlength="60" placeholder="Введите email" value="{{ old('eamil') }}" required>
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="comment" class="col-md-2">Сообщение</label>
-                        <div class="col-md-8">
-                          <textarea rows="4" class="form-control" id="comment"></textarea>
+                        <div class="col-md-10">
+                          <textarea rows="3" class="form-control" id="comment" name="comment" maxlength="2000" required>{{ old('comment') }}</textarea>
                         </div>
                       </div>
+                      <!-- <div class="form-group">
+                        <label for="captcha" class="col-md-2">Код</label>
+                        <div class="col-md-10">
+                          {!! captcha !!}
+                        </div>
+                      </div> -->
                       <div class="form-group">
-                        <div class="col-md-offset-2 col-md-8">
+                        <div class="col-md-offset-2 col-md-10">
                           <button type="submit" class="btn btn-default btn-sm">Добавить</button>
                         </div>
                       </div>

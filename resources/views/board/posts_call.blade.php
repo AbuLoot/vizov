@@ -4,7 +4,7 @@
       <div class="col-md-8">
         <div class="row">
           <div class="content-block">
-            <div class="well well-sm hidden-xs">
+            <div class="well well-modified well-sm hidden-xs">
               <form action="/filter" class="form-inline">
                 <input type="hidden" name="section_id" value="{{ $section->id }}">
                 <table class="table-condensed">
@@ -90,8 +90,8 @@
             <div class="panel-heading">
               <h3 class="panel-title">Топ по рейтингу</h3>
             </div>
-            @foreach ($profiles as $profile)
-              <div class="panel-body">
+            <div class="panel-body">
+              @foreach ($profiles as $profile)
                 <div class="media">
                   <div class="media-left">
                     <a href="/profile/{{ $profile->id }}">
@@ -112,9 +112,9 @@
                     <i class="glyphicon glyphicon-star"></i>
                   </div>
                 </div>
-              </div>
-            @endforeach
-            <div class="panel-footer"><a href="/profiles">Все пользователи</a></div>
+              @endforeach
+            </div>
+            <div class="panel-footer"><a href="/profiles">Все специалисты</a></div>
           </div>
         </div>
       </div>

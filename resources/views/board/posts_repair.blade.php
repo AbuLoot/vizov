@@ -107,8 +107,6 @@
                   <i class="glyphicon glyphicon-star text-success"></i>
                 </div>
               </div>
-            </div>
-            <div class="panel-body">
               <div class="media">
                 <div class="media-left">
                   <a href="#">
@@ -125,8 +123,6 @@
                   <i class="glyphicon glyphicon-star"></i>
                 </div>
               </div>
-            </div>
-            <div class="panel-body">
               <div class="media">
                 <div class="media-left">
                   <a href="#">
@@ -143,8 +139,6 @@
                   <i class="glyphicon glyphicon-star"></i>
                 </div>
               </div>
-            </div>
-            <div class="panel-body">
               <div class="media">
                 <div class="media-left">
                   <a href="#">
@@ -161,8 +155,6 @@
                   <i class="glyphicon glyphicon-star"></i>
                 </div>
               </div>
-            </div>
-            <div class="panel-body">
               <div class="media">
                 <div class="media-left">
                   <a href="#">

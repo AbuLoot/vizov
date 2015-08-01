@@ -6,11 +6,14 @@ use App\City;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\CommentRequest;
 use App\Http\Controllers\Controller;
 
+use URL;
 use App\Section;
 use App\Post;
 use App\Profile;
+use App\Comment;
 
 class IndexController extends Controller
 {
@@ -46,6 +49,9 @@ class IndexController extends Controller
     public function showPostCall($post, $id)
     {
         $post = Post::findOrFail($id);
+        $post->views = ++$post->views;
+        $post->save();
+
         $profiles = Profile::take(5)->get();
 
         return view('board.show_post', compact('post', 'profiles'));
@@ -74,6 +80,8 @@ class IndexController extends Controller
     public function showPostRepair($post, $id)
     {
         $post = Post::findOrFail($id);
+        $post->views = ++$post->views;
+        $post->save();
 
         return view('board.show_post', compact('post'));
     }
@@ -85,6 +93,7 @@ class IndexController extends Controller
         $posts = Post::where('title', 'LIKE', '%'.$text.'%')
             ->orWhere('description', 'LIKE', '%'.$text.'%')
             ->where('status', 1)
+            ->orderBy('id', 'DESC')
             ->paginate(10);
 
         return view('board.found_posts', compact('text', 'posts'));
@@ -94,15 +103,15 @@ class IndexController extends Controller
     {
         $query  = ($request->section_id)
             ? 'section_id = ' . (int) $request->section_id . ' AND '
-            : null;
+            : NULL;
 
         $query .= ($request->city_id)
             ? 'city_id = ' . (int) $request->city_id . ' AND '
-            : null;
+            : NULL;
 
         $query .= ($request->image == 'on')
             ? 'image IS NOT NULL AND '
-            : null;
+            : NULL;
 
         $query .= ($request->from)
             ? 'price >= ' . (int) $request->from . ' AND '
@@ -115,8 +124,55 @@ class IndexController extends Controller
         $section = Section::find($request->section_id);
         $posts = Post::whereRaw($query)
             ->where('status', 1)
+            ->orderBy('id', 'DESC')
             ->paginate(10);
 
         return view('board.found_posts', compact('posts', 'section'));
+    }
+
+    public function saveReview(CommentRequest $request)
+    {
+        $url = explode('/', URL::previous());
+        $id = end($url);
+
+        if ($request->id === $id AND $request->type === 'post')
+        {
+            $comment = new Comment;
+            $comment->parent_id = $request->id;
+            $comment->parent_type = 'App\Profile';
+            $comment->name = $request->name;
+            $comment->email = $request->email;
+            $comment->comment = $request->comment;
+            $comment->save();
+
+            return redirect()->back()->with('status', 'Отзыв добавлен!');
+        }
+        else
+        {
+            return redirect()->back()->with('status', 'Ошибка!');
+        }
+    }
+
+    public function saveComment(CommentRequest $request)
+    {
+        $url = explode('/', URL::previous());
+        $id = end($url);
+
+        if ($request->id === $id AND $request->type === 'post')
+        {
+            $comment = new Comment;
+            $comment->parent_id = $request->id;
+            $comment->parent_type = 'App\Post';
+            $comment->name = $request->name;
+            $comment->email = $request->email;
+            $comment->comment = $request->comment;
+            $comment->save();
+
+            return redirect()->back()->with('status', 'Комментарии добавлен!');
+        }
+        else
+        {
+            return redirect()->back()->with('status', 'Ошибка!');
+        }
     }
 }

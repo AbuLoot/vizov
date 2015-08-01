@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\User;
+use App\Profile;
+
 class AdminUsersController extends Controller
 {
     /**
@@ -16,9 +19,9 @@ class AdminUsersController extends Controller
      */
     public function index()
     {
-        $users = \App\User::all();
+        $profiles = Profile::with('user')->paginate(50);
 
-        return view('admin.users.index', compact('users'));
+        return view('admin.users.index', compact('profiles'));
     }
 
     /**

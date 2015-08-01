@@ -1,0 +1,16 @@
+{
+    "name": "codehappy/captcha",
+    "description": "Simple captcha",
+    "type": "package",
+    "require": {
+        "intervention/image": "dev-master"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Issayev Adilet",
+            "email": "issayev.adilet@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}

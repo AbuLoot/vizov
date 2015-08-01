@@ -48,7 +48,6 @@ class PostsController extends Controller
      */
     public function store(PostRequest $request)
     {
-        $post = new Post;
         $section = Section::findOrFail($request->section_id);
 
         $introImage = null;
@@ -102,7 +101,7 @@ class PostsController extends Controller
             }
         }
 
-        // $post->sort_id = 1;
+        $post = new Post;
         $post->user_id = Auth::id();
         $post->city_id = $request->city_id;
         $post->service_id = $section->service_id;
@@ -110,7 +109,7 @@ class PostsController extends Controller
         $post->slug = str_slug($request->title);
         $post->title = $request->title;
         $post->price = $request->price;
-        if (isset($post->deal))
+        if ($request->deal)
             $post->deal = $request->deal;
         $post->description = $request->description;
         $post->image = $introImage;
@@ -230,7 +229,6 @@ class PostsController extends Controller
             $images = serialize($images);
         }
 
-        // $post->sort_id = 1,
         $post->city_id = $request->city_id;
         $post->section_id = $request->section_id;
         $post->slug = str_slug($request->title);

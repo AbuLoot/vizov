@@ -23,4 +23,8 @@ class Profile extends Model
         return $this->belongsTo('App\Section');
     }
 
+    public function comments()
+    {
+        return $this->morphMany('App\Comment', 'parent');
+    }
 }

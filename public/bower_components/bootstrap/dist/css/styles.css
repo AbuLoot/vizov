@@ -4,7 +4,8 @@
   }
 }
 body {
-  background-color: #F1F1F1;
+  /*background-color: #F2F2F2;*/
+  background-color: #f5f8fa;
 }
 
 /* Header */
@@ -52,8 +53,8 @@ body {
 /* Nav Services */
 .bg-nav-services {
   background-color: #FFFFFF;
-  -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.05);
-  box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+  -webkit-box-shadow: 0 1px 0 rgb(221, 221, 221);
+  box-shadow: 0 1px 0 rgb(221, 221, 221);
 }
 
 
@@ -65,7 +66,6 @@ body {
 .nav-lines > li > a {
   color: #737373;
   padding: 15px 15px 14px;
-  margin-right: 2px;
   line-height: 1.42857143;
 }
 .nav-lines > li > a:hover {
@@ -102,21 +102,21 @@ body {
 .service-block {
   background: #fff;
   padding: 10px;
-  border-radius: 2px;
-  -webkit-border-radius: 2px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 .content-block {
   background: #fff;
   padding: 10px 20px;
-  border-radius: 2px;
-  -webkit-border-radius: 2px;
-  /*box-shadow: 0 2px 4px rgba(0,0,0,0.1);*/ 
+  border: 1px solid #dddddd;
+  /*box-shadow: 0 2px 4px rgba(0,0,0,0.1);*/
   /*-webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.1);*/
-  border-bottom: 1px solid #dddddd;
-  border-left: 1px solid #dddddd;
-  border-right: 1px solid #dddddd;
+}
+.well-modified {
+  background-color: #D4EEFF;
+  border: none;
+  box-shadow: inset none;
+  -webkit-box-shadow: none;
 }
 
 /* Gallery */
@@ -125,9 +125,6 @@ body {
 }
 .gallery ol li:hover {
   outline: 4px solid #9954bb;
-}
-.space-right {
-  margin-right: 20px;
 }
 
 /* Admin styles */

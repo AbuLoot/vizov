@@ -16,19 +16,25 @@
                   <th>Имя</th>
                   <th>Email</th>
                   <th>ip</th>
+                  <th>Статус</th>
                   <th class="text-right">Функции</th>
                 </tr>
                 <?php $i = 1; ?>
-                @forelse ($users as $user)
+                @forelse ($profiles as $profile)
                   <tr>
                     <td><b>{{ $i++ }}</b></td>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>{{ $user->ip }}</td>
+                    <td><a href="/profile/{{ $profile->id }}" target="_blank">{{ $profile->user->name }}</a></td>
+                    <td>{{ $profile->user->email }}</td>
+                    <td>{{ $profile->user->ip }}</td>
+                    @if ($profile->user->status == 1)
+                      <td class="success">Активен</td>
+                    @else
+                      <td class="danger">Неактивен</td>
+                    @endif
                     <td class="text-right">
-                      <a class="btn btn-primary btn-xs" href="/profile/{{ $user->id }}" title="Просмотр профиля" target="_blank"><span class="fa fa-file"></span></a>
-                      <a class="btn btn-primary btn-xs" href="{{ route('admin.users.edit', $user->id) }}" title="Редактировать"><span class="fa fa-edit"></span></a>
-                      <form method="POST" action="{{ route('admin.users.destroy', $user->id) }}" accept-charset="UTF-8" class="btn-delete">
+                      <a class="btn btn-primary btn-xs" href="/profile/{{ $profile->user->id }}" title="Просмотр профиля" target="_blank"><span class="fa fa-file"></span></a>
+                      <a class="btn btn-primary btn-xs" href="{{ route('admin.users.edit', $profile->user->id) }}" title="Редактировать"><span class="fa fa-edit"></span></a>
+                      <form method="POST" action="{{ route('admin.users.destroy', $profile->user->id) }}" accept-charset="UTF-8" class="btn-delete">
                         <input name="_method" type="hidden" value="DELETE">
                         <input name="_token" type="hidden" value="{{ csrf_token() }}">
                         <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Удалить запись?')"><span class="fa fa-times"></span></button>

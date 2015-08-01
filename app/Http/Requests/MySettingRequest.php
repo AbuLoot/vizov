@@ -13,7 +13,7 @@ class MySettingRequest extends Request
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**

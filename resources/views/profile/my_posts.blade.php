@@ -29,12 +29,12 @@
                       </h5>
                       <h4 class="col-md-3 media-heading text-right text-success"><b>{{ $post->price }} тг</b> @if ($post->deal == 'on') Торг&nbsp;возможен @endif</h4>
                       <div class="col-md-3 text-right">
-                        <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Редактировать</a>
+                        <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-block btn-primary btn-xs"><i class="fa fa-edit"></i> Редактировать</a>
                         <p></p>
                         <form method="POST" action="{{ route('posts.destroy', $post->id) }}" accept-charset="UTF-8">
                           <input name="_method" type="hidden" value="DELETE">
                           <input name="_token" type="hidden" value="{{ csrf_token() }}">
-                          <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Удалить объявление?')"><span class="fa fa-times"></span> Удалить</button>
+                          <button type="submit" class="btn btn-block btn-danger btn-xs" onclick="return confirm('Удалить объявление?')"><span class="fa fa-times"></span> Удалить</button>
                         </form>
                       </div>
                     </div>
@@ -43,8 +43,7 @@
                       <b>Рубрика:</b> {{ $post->section->title }}
                     </p>
                     <p>
-                      <small class="space-right">{{ $post->created_at }}</small>
-                      <small><i class="glyphicon glyphicon-user"></i> 26 просмотров</small>
+                      <small>{{ $post->created_at }}</small> | <small>{{ $post->views }} просмотров</small> | <small>Комментарии: {{ $post->comments->count() }}</small>
                     </p>
                   </div>
                 </div>

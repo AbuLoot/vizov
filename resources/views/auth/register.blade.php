@@ -24,7 +24,7 @@
             <input type="email" class="form-control" id="email" name="email" minlength="8" maxlength="60" placeholder="Введите email" value="{{ old('email') }}" required>
           </div>
           <div class="form-group">
-            <label for="password" class="control-label">Пароль</label>
+            <label for="password" class="control-label">Пароль</label> (более 6 символов)
             <input type="password" class="form-control" id="password" name="password" minlength="6" maxlength="60" placeholder="Введите пароль" required>
           </div>
           <div class="form-group">

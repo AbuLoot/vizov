@@ -15,6 +15,9 @@ Route::get('filter', ['uses' => 'IndexController@filterPosts']);
 Route::get('profile/{id}', ['uses' => 'ProfileController@getProfile']);
 Route::get('profiles', ['uses' => 'ProfileController@getProfiles']);
 
+Route::post('review', ['uses' => 'IndexController@saveReview']);
+Route::post('comment', ['uses' => 'IndexController@saveComment']);
+
 Route::group(['middleware' => 'auth'], function()
 {
 	Route::resource('posts', 'PostsController');

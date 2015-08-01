@@ -5,7 +5,7 @@
         <div class="col-md-9">
           <div class="row-left">
             <div class="content-block">
-              <h2>Все пользователи сервиса VIZOV.KZ</h2>
+              <h2>Все специалисты сервиса VIZOV.KZ</h2>
               @foreach ($profiles as $profile)
                 <div class="panel-body">
                   <div class="media">
@@ -20,7 +20,11 @@
                     </div>
                     <div class="media-body">
                       <h5 class="media-heading"><a href="/profile/{{ $profile->id }}">{{ $profile->user->name }}</a></h5>
-                      <p>{{ $profile->section->title }}</p>
+                      @if ($profile->section_id == 0)
+                        <p>&nbsp;</p>
+                      @else
+                        <p>{{ $profile->section->title }}</p>
+                      @endif
                       <i class="glyphicon glyphicon-star text-success"></i>
                       <i class="glyphicon glyphicon-star text-success"></i>
                       <i class="glyphicon glyphicon-star"></i>
@@ -32,9 +36,6 @@
               @endforeach
             </div>
           </div>
-        </div>
-        <div class="col-md-3">
-          
         </div>
       </div>
 @endsection

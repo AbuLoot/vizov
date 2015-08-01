@@ -8,7 +8,7 @@
           <div class="col-md-8">
 
             <form action="{{ route('posts.store') }}" method="post" class="form-horizontal" enctype="multipart/form-data">
-              {!! csrf_field() !!}
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div class="form-group">
                 <div class="col-md-offset-3 col-md-9">
                   <div class="row">

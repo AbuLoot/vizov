@@ -13,7 +13,7 @@
               <div class="table-responsive">
                 <table class="table table-striped table-hover">
                   <tr>
-                    <th>Email:</th>
+                    <th width="170">Email:</th>
                     <td>{{ $user->email }}</td>
                   </tr>
                   <tr>
