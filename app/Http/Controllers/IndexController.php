@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\City;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -10,6 +9,7 @@ use App\Http\Requests\CommentRequest;
 use App\Http\Controllers\Controller;
 
 use URL;
+use App\City;
 use App\Section;
 use App\Post;
 use App\Profile;
@@ -17,15 +17,7 @@ use App\Comment;
 
 class IndexController extends Controller
 {
-    public function getIndex()
-    {
-        $sections = Section::where('service_id', 1)
-            ->where('status', 1)
-            ->orderBy('sort_id')
-            ->get();
-
-        return view('board.section', compact('sections'));
-    }
+    // Section Call
 
     public function getCall()
     {
@@ -39,11 +31,12 @@ class IndexController extends Controller
 
     public function showCall($section, $id)
     {
+        $cities = City::all();
         $section = Section::where('slug', $section)->first();
         $posts = Post::where('section_id', $id)->orderBy('id', 'DESC')->paginate(10);
         $profiles = Profile::take(5)->get();
 
-        return view('board.posts_call', compact('posts', 'section', 'profiles'));
+        return view('board.posts', compact('cities', 'posts', 'section', 'profiles'));
     }
 
     public function showPostCall($post, $id)
@@ -54,10 +47,10 @@ class IndexController extends Controller
 
         $profiles = Profile::take(5)->get();
 
-        return view('board.show_post', compact('post', 'profiles'));
+        return view('board.post', compact('post', 'profiles'));
     }
 
-    // Repair
+    // Section Repair
 
     public function getRepair()
     {
@@ -71,10 +64,12 @@ class IndexController extends Controller
 
     public function showRepair($section, $id)
     {
+        $cities = City::all();
         $section = Section::where('slug', $section)->first();
-        $posts = Post::where('section_id', $id)->paginate(10);
+        $posts = Post::where('section_id', $id)->orderBy('id', 'DESC')->paginate(10);
+        $profiles = Profile::take(5)->get();
 
-        return view('board.posts_repair', compact('posts', 'section'));
+        return view('board.posts', compact('cities', 'posts', 'section', 'profiles'));
     }
 
     public function showPostRepair($post, $id)
@@ -83,20 +78,28 @@ class IndexController extends Controller
         $post->views = ++$post->views;
         $post->save();
 
-        return view('board.show_post', compact('post'));
+        $profiles = Profile::take(5)->get();
+
+        return view('board.post', compact('post', 'profiles'));
     }
+
+    // Additional functionality
 
     public function searchPosts(Request $request)
     {
         $text = trim(strip_tags($request->get('text')));
 
+        $cities = City::all();
+        $profiles = Profile::take(5)->get();
         $posts = Post::where('title', 'LIKE', '%'.$text.'%')
             ->orWhere('description', 'LIKE', '%'.$text.'%')
             ->where('status', 1)
             ->orderBy('id', 'DESC')
             ->paginate(10);
 
-        return view('board.found_posts', compact('text', 'posts'));
+        $posts->appends(['text' => $text]);
+
+        return view('board.found_posts', compact('cities', 'text', 'posts', 'profiles'));
     }
 
     public function filterPosts(Request $request)
@@ -121,13 +124,23 @@ class IndexController extends Controller
             ? 'price <= ' . (int) $request->to
             : 'price <= 9999999';
 
-        $section = Section::find($request->section_id);
+        $cities = City::all();
+        $section = Section::findOrFail($request->section_id);
+        $profiles = Profile::take(5)->get();
         $posts = Post::whereRaw($query)
             ->where('status', 1)
             ->orderBy('id', 'DESC')
             ->paginate(10);
 
-        return view('board.found_posts', compact('posts', 'section'));
+        $posts->appends([
+            'section_id' => (int) $request->section_id,
+            'city_id' => (int) $request->city_id,
+            'image' => ($request->image == 'on') ? 'on' : NULL,
+            'from' => (int) $request->from,
+            'to' => (int) $request->to,
+        ]);
+
+        return view('board.found_posts', compact('cities', 'section', 'profiles', 'posts'));
     }
 
     public function saveReview(CommentRequest $request)
@@ -135,7 +148,7 @@ class IndexController extends Controller
         $url = explode('/', URL::previous());
         $id = end($url);
 
-        if ($request->id === $id AND $request->type === 'post')
+        if ($request->id === $id AND $request->type === 'profile')
         {
             $comment = new Comment;
             $comment->parent_id = $request->id;

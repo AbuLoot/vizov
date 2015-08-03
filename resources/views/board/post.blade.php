@@ -6,7 +6,7 @@
           <div class="content-block">
             @include('partials.alerts')
             <ol class="breadcrumb">
-              <li><a href="{{ route(trans('services.'.$post->section->service_id.'.route')) }}">{{ trans('services.'.$post->section->service_id.'.title') }}</a></li>
+              <li><a href="{{ route($post->section->service->route) }}">{{ $post->section->service->title }}</a></li>
               <li><a href="{{ route('show-call', ['section' => $post->section->slug, 'id' => $post->section->id]) }}">{{ $post->section->title }}</a></li>
             </ol>
             <div class="media">

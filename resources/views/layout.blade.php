@@ -4,15 +4,16 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>VIZOV</title>
+    <meta name="author" content="Issayev Adilet">
+    <meta name="description" content="Vizov.kz">
 
     <link href="/bower_components/bootstrap/dist/css/bootstrap-cosmo.min.css" rel="stylesheet">
     <link href="/bower_components/bootstrap/dist/css/styles.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     @yield('styles')
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -81,11 +82,14 @@
         <div class="col-md-offset-2 col-sm-offset-2 col-md-6 col-sm-6">
           <div class="row">
             <ul class="nav nav-lines">
-              <li class="@if (Request::is('/') OR Request::path() == 'uslugi_vyzova') active @endif">
+              <li class="@if (Request::is('/') OR Request::is('uslugi_vyzova')) active @endif">
                 <a href="{{ route('call') }}">Услуги вызова</a>
               </li>
-              <li class="@if (Request::path() == 'uslugi_remonta') active @endif">
+              <li class="@if (Request::is('uslugi_remonta')) active @endif">
                 <a href="{{ route('repair') }}">Услуги ремонта</a>
+              </li>
+              <li class="@if (Request::is('materials')) active @endif">
+                <a href="#">Строительные материалы</a>
               </li>
             </ul>
           </div>

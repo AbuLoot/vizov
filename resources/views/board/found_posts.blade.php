@@ -4,7 +4,7 @@
       <div class="col-md-8">
         <div class="row">
           <div class="content-block">
-            <div class="well well-sm hidden-xs">
+            <div class="well well-modified well-sm hidden-xs">
               <form action="/filter" class="form-inline">
                 <input type="hidden" name="section_id" value="{{ (isset($section)) ? $section->id : null }}">
                 <table class="table-condensed">
@@ -12,13 +12,17 @@
                     <th>Город</th>
                     <td>
                       <select class="form-control input-sm" name="city_id">
-                        @foreach(\App\City::all() as $city)
-                          <option value="{{ $city->id }}">{{ $city->title }}</option>
+                        @foreach($cities as $city)
+                          @if ($city->id === Request::input('city_id'))
+                            <option value="{{ $city->id }}" selected>{{ $city->title }}</option>
+                          @else
+                            <option value="{{ $city->id }}">{{ $city->title }}</option>
+                          @endif
                         @endforeach
                       </select>
                       <div class="checkbox">
                         <label>
-                          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="image"> Только с фото
+                          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="image" @if (Request::input('image')) checked @endif> Только с фото
                         </label>
                       </div>
                     </td>
@@ -28,11 +32,11 @@
                     <th>Цена</th>
                     <td>
                       <div class="input-group input-group-sm">
-                        <input type="text" class="form-control" name="from" placeholder="от">
+                        <input type="text" class="form-control" name="from" placeholder="от" value="{{ (Request::input('from')) ? Request::input('from') : NULL }}">
                       </div>
                       <label>-</label>
                       <div class="input-group input-group-sm">
-                        <input type="text" class="form-control" name="to" placeholder="до">
+                        <input type="text" class="form-control" name="to" placeholder="до" value="{{ (Request::input('to')) ? Request::input('to') : NULL }}">
                         <div class="input-group-addon">тг</div>
                       </div>
                     </td>
@@ -46,7 +50,7 @@
 
             @if (isset($section))
               <ol class="breadcrumb">
-                <li><a href="{{ route(trans('services.'.$section->service_id.'.route')) }}">{{ trans('services.'.$section->service_id.'.title') }}</a></li>
+                <li><a href="{{ route($section->service->route) }}">{{ $section->service->title }}</a></li>
                 <li class="active">{{ $section->title }}</li>
               </ol>
             @endif
@@ -73,19 +77,20 @@
                         <b>{{ $post->title }}</b>
                       </a>
                     </h4>
-                    <h4 class="col-md-4 media-heading text-right text-success"><b>{{ $post->price }} тг</b></h4>
+                    <h4 class="col-md-4 media-heading text-right text-success"><b>{{ $post->price }} тг</b> @if ($post->deal == 'on') Торг&nbsp;возможен @endif</h4>
                   </div>
                   <p>{{ $post->city->title }}</p>
                   <p>
-                    <small><i class="glyphicon glyphicon-calendar"></i> {{ $post->created_at }}</small><br>
-                    <small><i class="glyphicon glyphicon-user"></i> 26 просмотров</small>
+                    <small>{{ $post->created_at }}</small> | <small>Просмотров: {{ $post->views }}</small>
                   </p>
                 </div>
               </div>
               <br>
             @empty
               <h4>Ничего не найдено.</h4>
-              <a href="{{ route('posts.create') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Добавить объявление</a>
+              <p>
+                <a href="{{ route('posts.create') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Добавить объявление</a>
+              </p>
             @endforelse
 
             {!! $posts->render() !!}
@@ -94,7 +99,36 @@
       </div>
       <div class="col-md-4">
         <div class="row-right">
-          @include('partials.top_rated')
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Топ по рейтингу</h3>
+            </div>
+            <div class="panel-body">
+              @foreach ($profiles as $profile)
+                <div class="media">
+                  <div class="media-left">
+                    <a href="/profile/{{ $profile->id }}">
+                      @if (empty($profile->avatar))
+                        <img src="/img/no-avatar.png" class="media-object" alt="..." width="90">
+                      @else
+                        <img src="/img/users/{{ $profile->user->id . '/' . $profile->avatar }}" class="media-object" alt="..." width="90">
+                      @endif
+                    </a>
+                  </div>
+                  <div class="media-body">
+                    <h5 class="media-heading"><a href="/profile/{{ $profile->id }}">{{ $profile->user->name }}</a></h5>
+                    <p>{{ $profile->section->title }}</p>
+                    <i class="glyphicon glyphicon-star text-success"></i>
+                    <i class="glyphicon glyphicon-star text-success"></i>
+                    <i class="glyphicon glyphicon-star"></i>
+                    <i class="glyphicon glyphicon-star"></i>
+                    <i class="glyphicon glyphicon-star"></i>
+                  </div>
+                </div>
+              @endforeach
+            </div>
+            <div class="panel-footer"><a href="/profiles">Все специалисты</a></div>
+          </div>
         </div>
       </div>
 @endsection

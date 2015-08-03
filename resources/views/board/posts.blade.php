@@ -12,7 +12,7 @@
                     <th>Город</th>
                     <td>
                       <select class="form-control input-sm" name="city_id">
-                        @foreach(\App\City::all() as $city)
+                        @foreach($cities as $city)
                           <option value="{{ $city->id }}">{{ $city->title }}</option>
                         @endforeach
                       </select>
@@ -44,7 +44,7 @@
               </form>
             </div>
             <ol class="breadcrumb">
-              <li><a href="{{ route(trans('services.'.$section->service_id.'.route')) }}">{{ trans('services.'.$section->service_id.'.title') }}</a></li>
+              <li><a href="{{ route($section->service->route) }}">{{ $section->service->title }}</a></li>
               <li class="active">{{ $section->title }}</li>
             </ol>
             @forelse ($posts as $post)
@@ -69,8 +69,7 @@
                   </div>
                   <p>{{ $post->city->title }}</p>
                   <p>
-                    <small><i class="glyphicon glyphicon-calendar"></i> {{ $post->created_at }}</small><br>
-                    <small><i class="glyphicon glyphicon-user"></i> 26 просмотров</small>
+                    <small>{{ $post->created_at }}</small> | <small>Просмотров: {{ $post->views }}</small>
                   </p>
                 </div>
               </div>

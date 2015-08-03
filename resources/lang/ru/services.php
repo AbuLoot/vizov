@@ -7,6 +7,7 @@ return [
 		"slug" => "uslugi_vyzova",
 		"title" => "Услуги вызова",
 	],
+
 	"2" => [
 		"route" => "repair",
 		"slug" => "uslugi_remonta",
