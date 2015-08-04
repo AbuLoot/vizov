@@ -31,7 +31,7 @@
         <div class="col-md-6 col-sm-6 el-search-space">
           <form action="/search">
             <div class="input-group">
-              <input type="text" class="form-control input-sm" name="text" placeholder="Для поиска введите название услуги" required>
+              <input type="text" class="form-control input-sm" name="text" minlength="2" maxlength="100" placeholder="Для поиска введите название услуги" required>
               <span class="input-group-btn">
                 <button class="btn btn-default btn-sm" type="submit">
                   <i class="glyphicon glyphicon-search"></i> Найти
@@ -89,7 +89,7 @@
                 <a href="{{ route('repair') }}">Услуги ремонта</a>
               </li>
               <li class="@if (Request::is('materials')) active @endif">
-                <a href="#">Строительные материалы</a>
+                <a href="#">Стройматериалы</a>
               </li>
             </ul>
           </div>

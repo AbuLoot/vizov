@@ -104,11 +104,13 @@
                   <div class="media-body">
                     <h5 class="media-heading"><a href="/profile/{{ $profile->id }}">{{ $profile->user->name }}</a></h5>
                     <p>{{ $profile->section->title }}</p>
-                    <i class="glyphicon glyphicon-star text-success"></i>
-                    <i class="glyphicon glyphicon-star text-success"></i>
-                    <i class="glyphicon glyphicon-star"></i>
-                    <i class="glyphicon glyphicon-star"></i>
-                    <i class="glyphicon glyphicon-star"></i>
+                    <div>
+                      <i class="glyphicon glyphicon-star text-success"></i>
+                      <i class="glyphicon glyphicon-star text-success"></i>
+                      <i class="glyphicon glyphicon-star"></i>
+                      <i class="glyphicon glyphicon-star"></i>
+                      <i class="glyphicon glyphicon-star"></i>
+                    </div>
                   </div>
                 </div>
               @endforeach

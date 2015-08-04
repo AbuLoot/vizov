@@ -4,8 +4,8 @@
   }
 }
 body {
-  /*background-color: #F2F2F2;*/
   background-color: #f5f8fa;
+  /*background-color: #F2F2F2;*/
 }
 
 /* Header */
@@ -102,6 +102,7 @@ body {
 .service-block {
   background: #fff;
   padding: 10px;
+  border: 1px solid #dddddd;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
@@ -109,8 +110,8 @@ body {
   background: #fff;
   padding: 10px 20px;
   border: 1px solid #dddddd;
-  /*box-shadow: 0 2px 4px rgba(0,0,0,0.1);*/
-  /*-webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.1);*/
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 .well-modified {
   background-color: #D4EEFF;
@@ -124,7 +125,7 @@ body {
   margin-bottom: 5px;
 }
 .gallery ol li:hover {
-  outline: 4px solid #9954bb;
+  outline: 3px solid #9954bb;
 }
 
 /* Admin styles */

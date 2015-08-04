@@ -8,12 +8,10 @@ use App\Http\Requests;
 use App\Http\Requests\CommentRequest;
 use App\Http\Controllers\Controller;
 
-use URL;
 use App\City;
 use App\Section;
 use App\Post;
 use App\Profile;
-use App\Comment;
 
 class IndexController extends Controller
 {
@@ -125,7 +123,7 @@ class IndexController extends Controller
             : 'price <= 9999999';
 
         $cities = City::all();
-        $section = Section::findOrFail($request->section_id);
+        $section = Section::find($request->section_id);
         $profiles = Profile::take(5)->get();
         $posts = Post::whereRaw($query)
             ->where('status', 1)
@@ -141,51 +139,5 @@ class IndexController extends Controller
         ]);
 
         return view('board.found_posts', compact('cities', 'section', 'profiles', 'posts'));
-    }
-
-    public function saveReview(CommentRequest $request)
-    {
-        $url = explode('/', URL::previous());
-        $id = end($url);
-
-        if ($request->id === $id AND $request->type === 'profile')
-        {
-            $comment = new Comment;
-            $comment->parent_id = $request->id;
-            $comment->parent_type = 'App\Profile';
-            $comment->name = $request->name;
-            $comment->email = $request->email;
-            $comment->comment = $request->comment;
-            $comment->save();
-
-            return redirect()->back()->with('status', 'Отзыв добавлен!');
-        }
-        else
-        {
-            return redirect()->back()->with('status', 'Ошибка!');
-        }
-    }
-
-    public function saveComment(CommentRequest $request)
-    {
-        $url = explode('/', URL::previous());
-        $id = end($url);
-
-        if ($request->id === $id AND $request->type === 'post')
-        {
-            $comment = new Comment;
-            $comment->parent_id = $request->id;
-            $comment->parent_type = 'App\Post';
-            $comment->name = $request->name;
-            $comment->email = $request->email;
-            $comment->comment = $request->comment;
-            $comment->save();
-
-            return redirect()->back()->with('status', 'Комментарии добавлен!');
-        }
-        else
-        {
-            return redirect()->back()->with('status', 'Ошибка!');
-        }
     }
 }

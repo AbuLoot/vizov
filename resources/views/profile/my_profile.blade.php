@@ -13,15 +13,15 @@
               <div class="table-responsive">
                 <table class="table table-striped table-hover">
                   <tr>
-                    <th width="170">Email:</th>
+                    <td width="170">Email</td>
                     <td>{{ $user->email }}</td>
                   </tr>
                   <tr>
-                    <th>Ваше ФИО:</th>
+                    <td>Ваше ФИО</td>
                     <td>{{ $user->name }}</td>
                   </tr>
                   <tr>
-                    <th>Cфера работы:</th>
+                    <td>Cфера работы</td>
                     <td>
                       @if ($user->profile->section_id == 0)
                         Не указан
@@ -31,7 +31,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <th>Город:</th>
+                    <td>Город</td>
                     <td>
                       @if ($user->profile->city_id == 0)
                         Не указан
@@ -41,23 +41,23 @@
                     </td>
                   </tr>
                   <tr>
-                    <th>Адрес работы:</th>
+                    <td>Адрес работы</td>
                     <td>{{ $user->profile->address }}</td>
                   </tr>
                   <tr>
-                    <th>Навыки:</th>
+                    <td>Навыки</td>
                     <td>{{ $user->profile->skills }}</td>
                   </tr>
                   <tr>
-                    <th>Телефон:</th>
+                    <td>Телефон</td>
                     <td>{{ $user->profile->phone }}</td>
                   </tr>
                   <tr>
-                    <th>Веб-сайт:</th>
+                    <td>Веб-сайт</td>
                     <td>{{ $user->profile->website }}</td>
                   </tr>
                   <tr>
-                    <th>Рейтинг:</th>
+                    <td>Рейтинг</td>
                     <td>
                       <i class="glyphicon glyphicon-star text-success"></i>
                       <i class="glyphicon glyphicon-star text-success"></i>

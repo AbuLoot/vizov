@@ -42,6 +42,11 @@ class Post extends Model
         'status'
     ];
 
+    public function getCreatedAtAttribute($value)
+    {
+        return date('j '.trans('date.month.'.date('F', strtotime($value))).', Y', strtotime($value));
+    }
+
     public function section()
     {
         return $this->belongsTo('App\Section');

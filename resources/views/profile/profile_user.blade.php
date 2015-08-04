@@ -13,15 +13,15 @@
               <div class="table-responsive">
                 <table class="table table-striped table-hover">
                   <tr>
-                    <th width="170">Email:</th>
+                    <td width="170">Email</td>
                     <td>{{ $profile->user->email }}</td>
                   </tr>
                   <tr>
-                    <th>ФИО:</th>
+                    <td>ФИО</td>
                     <td>{{ $profile->user->name }}</td>
                   </tr>
                   <tr>
-                    <th>Cфера работы:</th>
+                    <td>Cфера работы</td>
                     <td>
                       @if ($profile->section_id == 0)
                         Не указан
@@ -31,7 +31,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <th>Город:</th>
+                    <td>Город</td>
                     <td>
                       @if ($profile->city_id == 0)
                         Не указан
@@ -41,23 +41,23 @@
                     </td>
                   </tr>
                   <tr>
-                    <th>Адрес работы:</th>
+                    <td>Адрес работы</td>
                     <td>{{ $profile->address }}</td>
                   </tr>
                   <tr>
-                    <th>Навыки:</th>
+                    <td>Навыки</td>
                     <td>{{ $profile->skills }}</td>
                   </tr>
                   <tr>
-                    <th>Телефон:</th>
+                    <td>Телефон</td>
                     <td>{{ $profile->phone }}</td>
                   </tr>
                   <tr>
-                    <th>Веб-сайт:</th>
+                    <td>Веб-сайт</td>
                     <td>{{ $profile->website }}</td>
                   </tr>
                   <tr>
-                    <th>Рейтинг:</th>
+                    <td>Рейтинг</td>
                     <td>
                       <i class="glyphicon glyphicon-star text-success"></i>
                       <i class="glyphicon glyphicon-star text-success"></i>
@@ -70,12 +70,12 @@
               </div>
 
               <ul class="nav nav-tabs">
-                <li class="active"><a href="#posts" data-toggle="tab"><i class="fa fa-th-list"></i> Все объявления</a></li>
-                <li><a href="#reviews" data-toggle="tab"><i class="fa fa-comments"></i> Отзывы</a></li>
+                <li class="@if (old('id')) NULL @else active @endif"><a href="#posts" data-toggle="tab"><i class="fa fa-th-list"></i> Все объявления</a></li>
+                <li class="@if (old('id')) active @endif"><a href="#reviews" data-toggle="tab"><i class="fa fa-comments"></i> Отзывы</a></li>
               </ul>
               <br>
               <div id="myTabContent" class="tab-content">
-                <div class="tab-pane fade active in" id="posts">
+                <div class="tab-pane fade @if (old('id')) NULL @else active in @endif" id="posts">
                   @forelse ($profile->user->posts as $post)
                     <div class="media">
                       <div class="media-left">
@@ -110,18 +110,27 @@
                     <h4>Нет объявлений.</h4>
                   @endforelse
                 </div>
-                <div class="tab-pane fade" id="reviews">
+                <div class="tab-pane fade @if (old('id')) active in @endif" id="reviews">
                   <div class="panel panel-default">
                     <div class="panel-heading">
-                      <i class="fa fa-comments"></i> Комментарии: {{ $profile->comments->count() }}
+                      <i class="fa fa-comments"></i> Отзывов: {{ $profile->comments->count() }}
                     </div>
                     <div class="panel-body">
                       @foreach ($profile->comments as $comment)
                         <p>
                           <b>{{ $comment->name }}</b><br>
                           {{ $comment->comment }}<br>
+                          <span>
+                            @for ($i = 1; $i <= 5; $i++)
+                              @if ($i <= $comment->stars)
+                                <i class="glyphicon glyphicon-star text-success"></i>
+                              @else
+                                <i class="glyphicon glyphicon-star text-muted"></i>
+                              @endif
+                            @endfor
+                          </span><br>
                           <small>Опубликовано {{ $comment->created_at }}.</small>
-                        </p>
+                        </p><hr>
                       @endforeach
                     </div>
                   </div>
@@ -141,7 +150,7 @@
                       <div class="form-group">
                         <label for="email" class="col-md-2">Email адрес</label>
                         <div class="col-md-10">
-                          <input type="email" class="form-control input-sm" id="email" name="email" minlength="8" maxlength="60" placeholder="Введите email" value="{{ old('eamil') }}" required>
+                          <input type="email" class="form-control input-sm" id="email" name="email" minlength="8" maxlength="60" placeholder="Введите email" value="{{ old('email') }}" required>
                         </div>
                       </div>
                       <div class="form-group">
@@ -156,6 +165,51 @@
                           {!! captcha !!}
                         </div>
                       </div> -->
+                      <div class="form-group">
+                        <label for="comment" class="col-md-2">Оценка услуги</label>
+                        <div class="col-md-10">
+                          <label>
+                            <input type="radio" name="stars" value="1">
+                            <i class="glyphicon glyphicon-star text-success"></i>
+                            <i class="glyphicon glyphicon-star text-muted"></i>
+                            <i class="glyphicon glyphicon-star text-muted"></i>
+                            <i class="glyphicon glyphicon-star text-muted"></i>
+                            <i class="glyphicon glyphicon-star text-muted"></i>
+                          </label><br>
+                          <label>
+                            <input type="radio" name="stars" value="2">
+                            <i class="glyphicon glyphicon-star text-success"></i>
+                            <i class="glyphicon glyphicon-star text-success"></i>
+                            <i class="glyphicon glyphicon-star text-muted"></i>
+                            <i class="glyphicon glyphicon-star text-muted"></i>
+                            <i class="glyphicon glyphicon-star text-muted"></i>
+                          </label><br>
+                          <label>
+                            <input type="radio" name="stars" value="3">
+                            <i class="glyphicon glyphicon-star text-success"></i>
+                            <i class="glyphicon glyphicon-star text-success"></i>
+                            <i class="glyphicon glyphicon-star text-success"></i>
+                            <i class="glyphicon glyphicon-star text-muted"></i>
+                            <i class="glyphicon glyphicon-star text-muted"></i>
+                          </label><br>
+                          <label>
+                            <input type="radio" name="stars" value="4">
+                            <i class="glyphicon glyphicon-star text-success"></i>
+                            <i class="glyphicon glyphicon-star text-success"></i>
+                            <i class="glyphicon glyphicon-star text-success"></i>
+                            <i class="glyphicon glyphicon-star text-success"></i>
+                            <i class="glyphicon glyphicon-star text-muted"></i>
+                          </label><br>
+                          <label>
+                            <input type="radio" name="stars" value="5">
+                            <i class="glyphicon glyphicon-star text-success"></i>
+                            <i class="glyphicon glyphicon-star text-success"></i>
+                            <i class="glyphicon glyphicon-star text-success"></i>
+                            <i class="glyphicon glyphicon-star text-success"></i>
+                            <i class="glyphicon glyphicon-star text-success"></i>
+                          </label>
+                        </div>
+                      </div>
                       <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                           <button type="submit" class="btn btn-default btn-sm">Добавить</button>

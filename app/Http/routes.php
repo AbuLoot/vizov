@@ -1,7 +1,7 @@
 <?php
 
+// Board
 Route::get('/', ['as' => 'index', 'uses' => 'IndexController@getCall']);
-
 Route::get('uslugi_vyzova', ['as' => 'call', 'uses' => 'IndexController@getCall']);
 Route::get('uslugi_vyzova/{section}/{id}', ['as' => 'show-call', 'uses' => 'IndexController@showCall'])->where(['id' => '[0-9]+']);
 Route::get('1/{post}/{id}', ['as' => 'show-post-call', 'uses' => 'IndexController@showPostCall'])->where(['id' => '[0-9]+']);
@@ -10,14 +10,17 @@ Route::get('uslugi_remonta', ['as' => 'repair', 'uses' => 'IndexController@getRe
 Route::get('uslugi_remonta/{section}/{id}', ['as' => 'show-repair', 'uses' => 'IndexController@showRepair'])->where(['id' => '[0-9]+']);
 Route::get('2/{post}/{id}', ['as' => 'show-post-repair', 'uses' => 'IndexController@showPostRepair'])->where(['id' => '[0-9]+']);
 
+// Search tools
 Route::get('search', ['uses' => 'IndexController@searchPosts']);
 Route::get('filter', ['uses' => 'IndexController@filterPosts']);
 
+// Profile
 Route::get('profile/{id}', ['uses' => 'ProfileController@getProfile']);
 Route::get('profiles', ['uses' => 'ProfileController@getProfiles']);
 
-Route::post('review', ['uses' => 'IndexController@saveReview']);
-Route::post('comment', ['uses' => 'IndexController@saveComment']);
+// Comment
+Route::post('review', ['uses' => 'CommentController@saveReview']);
+Route::post('comment', ['uses' => 'CommentController@saveComment']);
 
 Route::group(['middleware' => 'auth'], function()
 {

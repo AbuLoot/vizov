@@ -25,28 +25,28 @@
                 @endif
               </div>
               <div class="media-body">
-                <h5>&nbsp;&nbsp;<i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;<a href="/profile/{{ $post->user->profile->id }}"><b>{{ $post->user->name }}</b></a></h5>
+                <h5>&nbsp;&nbsp;<i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;<a href="/profile/{{ $post->user->profile->id }}">{{ $post->user->name }}</a></h5>
                 <div class="table-responsive">
                   <table class="table table-condensed">
                     <tbody>
                       <tr>
-                        <th>Цена</th>
+                        <td>Цена</td>
                         <td class="text-success"><b>{{ $post->price }} тг  @if ($post->deal == 'on') | Торг&nbsp;возможен @endif</b></td>
                       </tr>
                       <tr>
-                        <th>Регион</th>
+                        <td>Город</td>
                         <td>{{ $post->city->title }}</td>
                       </tr>
                       <tr>
-                        <th>Адрес</th>
+                        <td>Адрес</td>
                         <td>{{ $post->address }}</td>
                       </tr>
                       <tr>
-                        <th>Телефоны</th>
+                        <td>Телефоны</td>
                         <td>{{ $post->phone }}</td>
                       </tr>
                       <tr>
-                        <th>Электронная почта</th>
+                        <td>Электронная почта</td>
                         <td>{{ $post->email }}</td>
                       </tr>
                     </tbody>
@@ -126,7 +126,7 @@
             @endunless
 
             @if ($post->comment === 'nobody')
-              <p>Комментарии отключены</p>
+              <p>Комментарии к этому объявлению отключены.</p>
             @elseif ($post->comment === 'all' OR ($post->comment === 'registered_users' AND Auth::check()))
               <div class="well">
                 <h4>Добавить комментарий</h4><br>

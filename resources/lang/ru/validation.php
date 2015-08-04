@@ -120,7 +120,8 @@ return [
 
     'attributes' => [
         'name' => 'Имя',
-        'comment' => 'Сообщение'
+        'comment' => 'Сообщение',
+        'stars' => 'Оценка услуги',
     ],
 
 ];
