@@ -95,23 +95,19 @@ body {
 .row-right {
   margin-right: -15px;
 }
-.tab-content .col-md-3 {
-  /*padding-right: 10px;*/
-  /*padding-left: 10px;*/
-}
 .service-block {
   background: #fff;
   padding: 10px;
   border: 1px solid #dddddd;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  /*box-shadow: 0 2px 4px rgba(0,0,0,0.1);*/
+  /*-webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.1);*/
 }
 .content-block {
   background: #fff;
   padding: 10px 20px;
   border: 1px solid #dddddd;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  /*box-shadow: 0 2px 4px rgba(0,0,0,0.1);*/
+  /*-webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.1);*/
 }
 .well-modified {
   background-color: #D4EEFF;

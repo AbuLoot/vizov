@@ -1,5 +1,9 @@
 @extends('layout')
 
+@section('title_description', $section->title_description)
+
+@section('meta_description', $section->meta_description)
+
 @section('content')
       <div class="col-md-8">
         <div class="row">
@@ -9,7 +13,7 @@
                 <input type="hidden" name="section_id" value="{{ $section->id }}">
                 <table class="table-condensed">
                   <tr>
-                    <th>Город</th>
+                    <td>Город</td>
                     <td>
                       <select class="form-control input-sm" name="city_id">
                         @foreach($cities as $city)
@@ -25,7 +29,7 @@
                     <td></td>
                   </tr>
                   <tr>
-                    <th>Цена</th>
+                    <td>Цена</td>
                     <td>
                       <div class="input-group input-group-sm">
                         <input type="text" class="form-control" name="from" placeholder="от">
@@ -105,11 +109,13 @@
                     <h5 class="media-heading"><a href="/profile/{{ $profile->id }}">{{ $profile->user->name }}</a></h5>
                     <p>{{ $profile->section->title }}</p>
                     <div>
-                      <i class="glyphicon glyphicon-star text-success"></i>
-                      <i class="glyphicon glyphicon-star text-success"></i>
-                      <i class="glyphicon glyphicon-star"></i>
-                      <i class="glyphicon glyphicon-star"></i>
-                      <i class="glyphicon glyphicon-star"></i>
+                      @for ($i = 1; $i <= 5; $i++)
+                        @if ($i <= $profile->stars)
+                          <i class="glyphicon glyphicon-star text-success"></i>
+                        @else
+                          <i class="glyphicon glyphicon-star text-muted"></i>
+                        @endif
+                      @endfor
                     </div>
                   </div>
                 </div>

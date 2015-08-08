@@ -7,8 +7,8 @@
         <div class="row">
           <div class="col-md-8">
 
-            <form action="{{ route('posts.store') }}" method="post" class="form-horizontal" enctype="multipart/form-data">
-              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <form action="{{ route('posts.store') }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
+              {!! csrf_field() !!}
               <div class="form-group">
                 <div class="col-md-offset-3 col-md-9">
                   <div class="row">
@@ -24,7 +24,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="section" class="col-md-3">Рубрика</label>
+                <label for="section" class="col-md-3">Рубрика *</label>
                 <div class="col-md-9">
                   <div class="row">
                     <select class="form-control" name="section_id" id="section">
@@ -178,7 +178,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="phone" class="col-md-3">Телефон</label>
+                <label for="phone" class="col-md-3">Телефон *</label>
                 <div class="col-md-9">
                   <div class="row">
                     <input type="tel" class="form-control" id="phone" name="phone" minlength="5" maxlength="40" value="{{ (old('phone')) ? old('phone') : $user->profile->phone }}" required>

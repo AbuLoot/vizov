@@ -21,47 +21,43 @@ class ProfileController extends Controller
     public function getProfile($id)
     {
         $profile = Profile::find($id);
+        $posts = $profile->user->posts()->orderBy('id', 'DESC')->get();
 
-        return view('profile.profile_user', compact('profile'));
+        return view('profile.profile_user', compact('posts', 'profile'));
     }
 
     public function getProfiles()
     {
-        $profiles = Profile::paginate(15);
+        $profiles = Profile::paginate(20);
 
         return view('profile.profiles_users', compact('profiles'));
     }
 
     public function getMyPosts()
     {
-        $posts = Auth::user()->posts;
+        $posts = Auth::user()->posts()->orderBy('id', 'DESC')->get();
 
     	return view('profile.my_posts', compact('posts'));
     }
 
     public function getMyProfile()
     {
-    	$user = User::find(Auth::id());
+        $profile = Auth::user()->profile;
 
-    	return view('profile.my_profile', compact('user'));
+    	return view('profile.my_profile', compact('profile'));
     }
 
     public function editMyProfile()
     {
-        $user = User::find(Auth::id());
+        $profile = Auth::user()->profile;
         $cities = City::all();
         $section = Section::all();
 
-        return view('profile.my_profile_edit', compact('user', 'cities', 'section'));
+        return view('profile.my_profile_edit', compact('profile', 'cities', 'section'));
     }
 
     public function postMyProfile(MyProfileRequest $request, $id)
     {
-        if (Auth::id() != $id)
-        {
-            return redirect('/my_profile')->with('status', 'Молодец! Нам нужны такие толковые парни как ты! =)');
-        }
-
         $profile = Auth::user()->profile;
 
         if ($request->hasFile('avatar'))

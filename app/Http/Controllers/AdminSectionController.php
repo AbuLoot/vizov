@@ -54,10 +54,12 @@ class AdminSectionController extends Controller
             $image = 'no-image';
         }
 
+        $count = $section->count();
+
         if ($request->sort_id > 0)
             $section->sort_id = $request->sort_id;
         else
-            $section->sort_id = $section->increment('sort_id', 1);
+            $section->sort_id = ++$count;
         $section->service_id = $request->service_id;
         $section->title = $request->title;
         $section->slug = ( ! empty($request->slug)) ? $request->slug : str_slug($request->title);
@@ -65,7 +67,6 @@ class AdminSectionController extends Controller
         $section->title_description = $request->title_description;
         $section->meta_description = $request->meta_description;
         $section->text = $request->text;
-        $section->lang = $request->lang;
         if ($request->status == 'on')
             $section->status = 1;
         else
@@ -120,10 +121,12 @@ class AdminSectionController extends Controller
             }
         }
 
+        $count = $section->count();
+
         if ($request->sort_id > 0)
             $section->sort_id = $request->sort_id;
         else
-            $section->sort_id = $section->increment('sort_id', Section::count());
+            $section->sort_id = ++$count;
         $section->service_id = $request->service_id;
         $section->title = $request->title;
         $section->slug = ( ! empty($request->slug)) ? $request->slug : str_slug($request->title);
@@ -132,7 +135,6 @@ class AdminSectionController extends Controller
         $section->title_description = $request->title_description;
         $section->meta_description = $request->meta_description;
         $section->text = $request->text;
-        $section->lang = $request->lang;
         if ($request->status == 'on')
             $section->status = 1;
         else

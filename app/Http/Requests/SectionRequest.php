@@ -13,7 +13,7 @@ class SectionRequest extends Request
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -28,7 +28,6 @@ class SectionRequest extends Request
             'service_id' => 'required|numeric',
             'title' => 'required|min:5|max:80',
             'slug' => 'min:5|max:80',
-            'lang' => 'required|min:2|max:4',
         ];
     }
 }

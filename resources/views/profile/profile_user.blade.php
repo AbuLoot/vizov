@@ -22,23 +22,11 @@
                   </tr>
                   <tr>
                     <td>Cфера работы</td>
-                    <td>
-                      @if ($profile->section_id == 0)
-                        Не указан
-                      @else
-                        {{ $profile->section->title }}
-                      @endif
-                    </td>
+                    <td>{{ ($profile->section_id == 0) ? 'Не указан' : $profile->section->title }}</td>
                   </tr>
                   <tr>
                     <td>Город</td>
-                    <td>
-                      @if ($profile->city_id == 0)
-                        Не указан
-                      @else
-                        {{ $profile->city->title }}
-                      @endif
-                    </td>
+                    <td>{{ ($profile->city_id == 0) ? 'Не указан' : $profile->city->title }}</td>
                   </tr>
                   <tr>
                     <td>Адрес работы</td>
@@ -59,11 +47,13 @@
                   <tr>
                     <td>Рейтинг</td>
                     <td>
-                      <i class="glyphicon glyphicon-star text-success"></i>
-                      <i class="glyphicon glyphicon-star text-success"></i>
-                      <i class="glyphicon glyphicon-star text-success"></i>
-                      <i class="glyphicon glyphicon-star text-muted"></i>
-                      <i class="glyphicon glyphicon-star text-muted"></i>
+                      @for ($i = 1; $i <= 5; $i++)
+                        @if ($i <= $profile->stars)
+                          <i class="glyphicon glyphicon-star text-success"></i>
+                        @else
+                          <i class="glyphicon glyphicon-star text-muted"></i>
+                        @endif
+                      @endfor
                     </td>
                   </tr>
                 </table>
@@ -76,7 +66,7 @@
               <br>
               <div id="myTabContent" class="tab-content">
                 <div class="tab-pane fade @if (old('id')) NULL @else active in @endif" id="posts">
-                  @forelse ($profile->user->posts as $post)
+                  @forelse ($posts as $post)
                     <div class="media">
                       <div class="media-left">
                         <a href="{{ route('show-post-call', ['post' => $post->slug, 'id' => $post->id]) }}">
@@ -96,10 +86,7 @@
                           </h4>
                           <h4 class="col-md-4 media-heading text-right text-success"><b>{{ $post->price }} тг</b></h4>
                         </div>
-                        <p>
-                          <b>Город:</b> {{ $post->city->title }}<br>
-                          <b>Рубрика:</b> {{ $post->section->title }}
-                        </p>
+                        <p>{{ $post->city->title }}<br> {{ $post->section->title }}</p>
                         <p>
                           <small>{{ $post->created_at }}</small> | <small>{{ $post->views }} просмотров</small> | <small>Комментарии: {{ $post->comments->count() }}</small>
                         </p>
@@ -117,26 +104,24 @@
                     </div>
                     <div class="panel-body">
                       @foreach ($profile->comments as $comment)
-                        <p>
-                          <b>{{ $comment->name }}</b><br>
-                          {{ $comment->comment }}<br>
-                          <span>
-                            @for ($i = 1; $i <= 5; $i++)
-                              @if ($i <= $comment->stars)
-                                <i class="glyphicon glyphicon-star text-success"></i>
-                              @else
-                                <i class="glyphicon glyphicon-star text-muted"></i>
-                              @endif
-                            @endfor
-                          </span><br>
-                          <small>Опубликовано {{ $comment->created_at }}.</small>
-                        </p><hr>
+                        <b>{{ $comment->name }}</b> &nbsp;&nbsp;&nbsp; <small class="text-muted">{{ $comment->created_at }}</small><br>
+                        {{ $comment->comment }}<br>
+                        Оценка:
+                        <span>
+                          @for ($i = 1; $i <= 5; $i++)
+                            @if ($i <= $comment->stars)
+                              <i class="glyphicon glyphicon-star text-success"></i>
+                            @else
+                              <i class="glyphicon glyphicon-star text-muted"></i>
+                            @endif
+                          @endfor
+                        </span><hr>
                       @endforeach
                     </div>
                   </div>
 
                   <div class="well">
-                    <h4>Добавить комментарий</h4><br>
+                    <h4>Добавить отзыв</h4><br>
                     <form action="/review" method="POST" class="form-horizontal">
                       <input name="_token" type="hidden" value="{{ csrf_token() }}">
                       <input name="id" type="hidden" value="{{ $profile->id }}">

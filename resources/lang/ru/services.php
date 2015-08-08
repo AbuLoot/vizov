@@ -14,4 +14,10 @@ return [
 		"title" => "Услуги ремонта",
 	],
 
+	"3" => [
+		"route" => "materials",
+		"slug" => "stroymaterialy",
+		"title" => "Стройматериалы",
+	],
+
 ];

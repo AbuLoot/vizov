@@ -9,7 +9,7 @@
                 <input type="hidden" name="section_id" value="{{ (isset($section)) ? $section->id : null }}">
                 <table class="table-condensed">
                   <tr>
-                    <th>Город</th>
+                    <td>Город</td>
                     <td>
                       <select class="form-control input-sm" name="city_id">
                         @foreach($cities as $city)
@@ -29,7 +29,7 @@
                     <td></td>
                   </tr>
                   <tr>
-                    <th>Цена</th>
+                    <td>Цена</td>
                     <td>
                       <div class="input-group input-group-sm">
                         <input type="text" class="form-control" name="from" placeholder="от" value="{{ (Request::input('from')) ? Request::input('from') : NULL }}">

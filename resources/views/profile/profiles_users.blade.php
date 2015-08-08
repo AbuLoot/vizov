@@ -6,8 +6,8 @@
           <div class="row-left">
             <div class="content-block">
               <h2>Все специалисты сервиса VIZOV.KZ</h2>
-              @foreach ($profiles as $profile)
-                <div class="panel-body">
+              <div class="panel-body">
+                @foreach ($profiles as $profile)
                   <div class="media">
                     <div class="media-left">
                       <a href="/profile/{{ $profile->id }}">
@@ -20,20 +20,22 @@
                     </div>
                     <div class="media-body">
                       <h5 class="media-heading"><a href="/profile/{{ $profile->id }}">{{ $profile->user->name }}</a></h5>
-                      @if ($profile->section_id == 0)
-                        <p>&nbsp;</p>
-                      @else
-                        <p>{{ $profile->section->title }}</p>
-                      @endif
-                      <i class="glyphicon glyphicon-star text-success"></i>
-                      <i class="glyphicon glyphicon-star text-success"></i>
-                      <i class="glyphicon glyphicon-star"></i>
-                      <i class="glyphicon glyphicon-star"></i>
-                      <i class="glyphicon glyphicon-star"></i>
+                      <p>{{ ($profile->section_id == 0) ? 'Не указан' : $profile->section->title }}</p>
+                      <div>
+                        @for ($i = 1; $i <= 5; $i++)
+                          @if ($i <= $profile->stars)
+                            <i class="glyphicon glyphicon-star text-success"></i>
+                          @else
+                            <i class="glyphicon glyphicon-star text-muted"></i>
+                          @endif
+                        @endfor
+                      </div>
                     </div>
                   </div>
-                </div>
-              @endforeach
+                @endforeach
+              </div>
+
+              {!! $profiles->render() !!}
             </div>
           </div>
         </div>

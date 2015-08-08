@@ -24,7 +24,7 @@
             <input type="email" class="form-control" id="email" name="email" minlength="8" maxlength="60" placeholder="Введите email" value="{{ old('email') }}" required>
           </div>
           <div class="form-group">
-            <label for="password" class="control-label">Пароль</label> (более 6 символов)
+            <label for="password" class="control-label">Пароль</label>
             <input type="password" class="form-control" id="password" name="password" minlength="6" maxlength="60" placeholder="Введите пароль" required>
           </div>
           <div class="form-group">
@@ -32,7 +32,7 @@
             <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" minlength="6" maxlength="60" placeholder="Введите еще раз пароль" required>
             <div class="checkbox">
               <label>
-                <input type="checkbox" name="rules"> Я согласен с <a href="#">правилами сайта</a>
+                <input type="checkbox" name="rules" required> Я согласен с <a href="#">правилами сайта</a>
               </label>
             </div>
           </div>

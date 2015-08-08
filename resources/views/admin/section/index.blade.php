@@ -13,8 +13,8 @@
               <table class="table-admin table table-striped table-condensed">
                 <tr>
                   <th>№</th>
-                  <th>Название</th>
                   <th>Картинка</th>
+                  <th>Название</th>
                   <th>Услуга</th>
                   <th>Номер</th>
                   <th>Статус</th>
@@ -24,8 +24,8 @@
                 @forelse ($section as $item)
                   <tr>
                     <td><b>{{ $i++ }}</b></td>
-                    <td><a href="{{ url(trans('services.'.$item->service_id.'.slug').'/'.$item->slug.'/'.$item->id) }}" target="_blank">{{ $item->title }}</a></td>
                     <td><img src="/img/section/{{ $item->image }}" width="64"></td>
+                    <td><a href="{{ url($item->service->slug.'/'.$item->slug.'/'.$item->id) }}" target="_blank">{{ $item->title }}</a></td>
                     <td>{{ trans('services.'.$item->service_id.'.title') }}</td>
                     <td>{{ $item->sort_id }}</td>
                     @if ($item->status == 1)

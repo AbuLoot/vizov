@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Requests\CommentRequest;
 use App\Http\Controllers\Controller;
 
 use App\City;
@@ -71,6 +70,39 @@ class IndexController extends Controller
     }
 
     public function showPostRepair($post, $id)
+    {
+        $post = Post::findOrFail($id);
+        $post->views = ++$post->views;
+        $post->save();
+
+        $profiles = Profile::take(5)->get();
+
+        return view('board.post', compact('post', 'profiles'));
+    }
+
+    // Section Materials
+
+    public function getMaterials()
+    {
+        $sections = Section::where('service_id', 3)
+            ->where('status', 1)
+            ->orderBy('sort_id')
+            ->get();
+
+        return view('board.section', compact('sections'));
+    }
+
+    public function showMaterials($section, $id)
+    {
+        $cities = City::all();
+        $section = Section::where('slug', $section)->first();
+        $posts = PostMaterial::where('section_id', $id)->orderBy('id', 'DESC')->paginate(10);
+        $profiles = Profile::take(5)->get();
+
+        return view('board.posts', compact('cities', 'posts', 'section', 'profiles'));
+    }
+
+    public function showPostMaterials($post, $id)
     {
         $post = Post::findOrFail($id);
         $post->views = ++$post->views;

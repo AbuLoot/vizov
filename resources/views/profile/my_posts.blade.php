@@ -22,11 +22,15 @@
                   </div>
                   <div class="media-body">
                     <div class="row">
-                      <h5 class="col-md-6 media-heading">
-                        <a href="{{ route('show-post-call', ['post' => $post->slug, 'id' => $post->id]) }}">
-                          <b>{{ $post->title }}</b>
-                        </a>
-                      </h5>
+                      <div class="col-md-6">
+                        <h4 class="media-heading">
+                          <a href="{{ route('show-post-call', ['post' => $post->slug, 'id' => $post->id]) }}">
+                            <b>{{ $post->title }}</b>
+                          </a>
+                        </h4>
+                        <p>{{ $post->city->title }}<br>{{ $post->section->title }}</p>
+                        <p><small>{{ $post->created_at }}</small> | <small>Просмотров: {{ $post->views }}</small> | <small>Комментарии: {{ $post->comments->count() }}</small></p>
+                      </div>
                       <h4 class="col-md-3 media-heading text-right text-success"><b>{{ $post->price }} тг</b> @if ($post->deal == 'on') Торг&nbsp;возможен @endif</h4>
                       <div class="col-md-3 text-right">
                         <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-block btn-primary btn-xs"><i class="fa fa-edit"></i> Редактировать</a>
@@ -38,13 +42,6 @@
                         </form>
                       </div>
                     </div>
-                    <p>
-                      <b>Город:</b> {{ $post->city->title }}<br>
-                      <b>Рубрика:</b> {{ $post->section->title }}
-                    </p>
-                    <p>
-                      <small>{{ $post->created_at }}</small> | <small>{{ $post->views }} просмотров</small> | <small>Комментарии: {{ $post->comments->count() }}</small>
-                    </p>
                   </div>
                 </div>
                 <hr>

@@ -93,18 +93,6 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="lang" class="col-md-3">Язык</label>
-                <div class="col-md-9">
-                  <div class="row">
-                    <select class="form-control" id="lang" name="lang">
-                      @foreach (trans('lang') as $key => $value)
-                        <option value="{{ $key }}">{{ $value }}</option>
-                      @endforeach
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
                 <label for="status" class="col-md-3">Статус</label>
                 <div class="col-md-9">
                   <div class="row">

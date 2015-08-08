@@ -48,6 +48,7 @@ class AuthController extends Controller
             'city_id' => 'required|numeric|max:4',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
+            'rules' => 'accepted'
         ]);
     }
 

@@ -8,53 +8,41 @@
         <div class="col-md-9">
           <div class="row-left">
             <div class="content-block">
-              <h3>Мой профиль</h3>
               @include('partials.alerts')
+              <h3>Мой профиль</h3>
               <div class="table-responsive">
                 <table class="table table-striped table-hover">
                   <tr>
                     <td width="170">Email</td>
-                    <td>{{ $user->email }}</td>
+                    <td>{{ Auth::user()->email }}</td>
                   </tr>
                   <tr>
                     <td>Ваше ФИО</td>
-                    <td>{{ $user->name }}</td>
+                    <td>{{ Auth::user()->name }}</td>
                   </tr>
                   <tr>
                     <td>Cфера работы</td>
-                    <td>
-                      @if ($user->profile->section_id == 0)
-                        Не указан
-                      @else
-                        {{ $user->profile->section->title }}
-                      @endif
-                    </td>
+                    <td>{{ ($profile->section_id == 0) ? 'Не указан' : $profile->section->title }}</td>
                   </tr>
                   <tr>
                     <td>Город</td>
-                    <td>
-                      @if ($user->profile->city_id == 0)
-                        Не указан
-                      @else
-                        {{ $user->profile->city->title }}
-                      @endif
-                    </td>
+                    <td>{{ ($profile->city_id == 0) ? 'Не указан' : $profile->city->title }}</td>
                   </tr>
                   <tr>
                     <td>Адрес работы</td>
-                    <td>{{ $user->profile->address }}</td>
+                    <td>{{ $profile->address }}</td>
                   </tr>
                   <tr>
                     <td>Навыки</td>
-                    <td>{{ $user->profile->skills }}</td>
+                    <td>{{ $profile->skills }}</td>
                   </tr>
                   <tr>
                     <td>Телефон</td>
-                    <td>{{ $user->profile->phone }}</td>
+                    <td>{{ $profile->phone }}</td>
                   </tr>
                   <tr>
                     <td>Веб-сайт</td>
-                    <td>{{ $user->profile->website }}</td>
+                    <td>{{ $profile->website }}</td>
                   </tr>
                   <tr>
                     <td>Рейтинг</td>
@@ -70,7 +58,7 @@
               </div>
               <p>
                 <a href="/my_profile/edit" class="btn btn-default">Заполнить профиль</a>
-                <a href="/profile/{{ $user->profile->id }}" class="btn btn-info">Как видят меня другие?</a>
+                <a href="/profile/{{ $profile->id }}" class="btn btn-info">Как видят меня другие?</a>
               </p>
             </div>
           </div>

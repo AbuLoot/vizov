@@ -10,6 +10,10 @@ Route::get('uslugi_remonta', ['as' => 'repair', 'uses' => 'IndexController@getRe
 Route::get('uslugi_remonta/{section}/{id}', ['as' => 'show-repair', 'uses' => 'IndexController@showRepair'])->where(['id' => '[0-9]+']);
 Route::get('2/{post}/{id}', ['as' => 'show-post-repair', 'uses' => 'IndexController@showPostRepair'])->where(['id' => '[0-9]+']);
 
+Route::get('stroymaterialy', ['as' => 'materials', 'uses' => 'IndexController@getMaterials']);
+Route::get('stroymaterialy/{section}/{id}', ['as' => 'show-materials', 'uses' => 'IndexController@showMaterials'])->where(['id' => '[0-9]+']);
+Route::get('3/{post}/{id}', ['as' => 'show-post-materials', 'uses' => 'IndexController@showPostMaterials'])->where(['id' => '[0-9]+']);
+
 // Search tools
 Route::get('search', ['uses' => 'IndexController@searchPosts']);
 Route::get('filter', ['uses' => 'IndexController@filterPosts']);
@@ -37,6 +41,9 @@ Route::group(['middleware' => 'auth'], function()
 	Route::post('delete_account', ['as' => 'delete-account', 'uses' => 'ProfileController@postDeleteAccount']);
 });
 
+// Pages
+Route::get('{page}', ['uses' => 'PagesController@page']);
+
 Route::group(['prefix' => 'admin', 'middleware' => 'role:admin'], function()
 {
     Route::resource('users', 'AdminUsersController');
@@ -61,36 +68,6 @@ Route::post('password/email', 'Auth\PasswordController@postEmail');
 // Password reset routes...
 Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
-
-/*Route::get('add_posts', function() {
-
-    $faker = Faker\Factory::create();
-
-    for ($i = 1; $i <= 20; $i++)
-    {
-    	$post = new \App\Post;
-		$post->sort_id = $i;
-    	$post->user_id = rand(5, 9);
-    	$post->city_id = rand(1, 2);
-    	$post->service_id = 1;
-    	$post->section_id = rand(2, 3);
-
-    	$title = $faker->sentence(5);
-
-    	$post->slug = str_slug($title);
-		$post->title = $title;
-    	$post->title_description = $title;
-    	$post->meta_description = $faker->text(200);
-    	$post->price = $faker->numberBetween($min = 1000, $max = 9000);
-    	// $post->deal = 'on';
-		$post->description = $faker->text;
-    	$post->address = $faker->address;
-    	$post->phone = $faker->phoneNumber;
-    	$post->email = $faker->email;
-    	$post->save();
-    }
-    echo 'Allahu akbar!';
-});*/
 
 /*Route::get('add_cities', function() {
 	
@@ -128,37 +105,3 @@ Route::post('password/reset', 'Auth\PasswordController@postReset');
     echo 'Allahu akbar!';
 });*/
 
-
-/*Route::get('add_section', function() {
-
-	$sections = [
-		'Ремонт авто',
-		'Ремонт бытовой техники',
-		'Ремонт домов и квартир',
-		'Ремонт обуви',
-		'Ремонт одежды',
-		'Ремонт и реставрация мебели',
-		'Химчистка',
-	];
-	$images = [
-		'vehicle18.png',
-		'kitchen51.png',
-		'gear63.png',
-		'mountain22.png',
-		'winter-clothes.png',
-		'sofa.png',
-		'washing11.png'
-	];
-
-    $i = 1;
-    foreach ($sections as $key => $value) {
-		$item = new \App\Section;
-    	$item->sort_id = $i++;
-    	$item->service_id = 2;
-    	$item->slug = str_slug($value);
-    	$item->title = $value;
-    	$item->image = $images[$key];
-    	$item->save();
-    }
-    echo 'Allahu akbar!';
-});*/

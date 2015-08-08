@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>VIZOV</title>
-    <meta name="author" content="Issayev Adilet">
-    <meta name="description" content="Vizov.kz">
+    <title>@yield('title_description', 'Vizov.kz')</title>
+    <meta name="author" content="Darkhan & Issayev Adilet">
+    <meta name="description" content="@yield('meta_description', 'Vizov.kz')">
 
     <link href="/bower_components/bootstrap/dist/css/bootstrap-cosmo.min.css" rel="stylesheet">
     <link href="/bower_components/bootstrap/dist/css/styles.css" rel="stylesheet">
@@ -82,14 +82,14 @@
         <div class="col-md-offset-2 col-sm-offset-2 col-md-6 col-sm-6">
           <div class="row">
             <ul class="nav nav-lines">
-              <li class="@if (Request::is('/') OR Request::is('uslugi_vyzova')) active @endif">
+              <li @if (Request::is('/') OR Request::is('uslugi_vyzova')) class="active" @endif>
                 <a href="{{ route('call') }}">Услуги вызова</a>
               </li>
-              <li class="@if (Request::is('uslugi_remonta')) active @endif">
+              <li @if (Request::is('uslugi_remonta')) class="active" @endif>
                 <a href="{{ route('repair') }}">Услуги ремонта</a>
               </li>
-              <li class="@if (Request::is('materials')) active @endif">
-                <a href="#">Стройматериалы</a>
+              <li @if (Request::is('stroymaterialy')) class="active" @endif>
+                <a href="{{ route('materials') }}">Стройматериалы</a>
               </li>
             </ul>
           </div>
@@ -117,11 +117,9 @@
         </div>
         <div class="col-md-9">
           <ul class="list-unstyled list-inline">
-            <li><a href="#">О проекте</a></li>
-            <li><a href="#">Написать письмо</a></li>
-            <li><a href="#">Правила сайта</a></li>
-            <li><a href="#">Реклама на сайте</a></li>
-            <li><a href="#">Карта сайта</a></li>
+            @foreach ($pages as $page)
+              <li><a href="{{ url($page->slug) }}">{{ $page->title }}</a></li>
+            @endforeach
           </ul>
         </div>
         <div class="col-md-12 text-center">
