@@ -15,6 +15,8 @@ use App\Section;
 use App\Http\Requests\MyProfileRequest;
 use Image;
 use Storage;
+use App\Post;
+use App\PostMaterial;
 
 class ProfileController extends Controller
 {
@@ -31,13 +33,6 @@ class ProfileController extends Controller
         $profiles = Profile::paginate(20);
 
         return view('profile.profiles_users', compact('profiles'));
-    }
-
-    public function getMyPosts()
-    {
-        $posts = Auth::user()->posts()->orderBy('id', 'DESC')->get();
-
-    	return view('profile.my_posts', compact('posts'));
     }
 
     public function getMyProfile()
@@ -96,6 +91,22 @@ class ProfileController extends Controller
         $profile->save();
 
         return redirect('/my_profile')->with('status', 'Профиль обновлен!');
+    }
+
+    public function getMyPosts()
+    {
+        $posts = Post::where('user_id', Auth::id())
+            ->orderBy('id', 'DESC')
+            ->get();
+
+        return view('profile.my_posts', compact('posts'));
+    }
+
+    public function getMyReviews()
+    {
+        $profile = Auth::user()->profile;
+
+        return view('profile.my_reviews', compact('profile'));
     }
 
     public function getMySetting()

@@ -42,6 +42,13 @@
                           @endif
                         @endforeach
                       </optgroup>
+                      <optgroup label="Товары">
+                        @foreach ($section as $item)
+                          @if ($item->service_id == 3)
+                            <option value="{{ $item->id }}">{{ $item->title }}</option>
+                          @endif
+                        @endforeach
+                      </optgroup>
                     </select>
                   </div>
                 </div>

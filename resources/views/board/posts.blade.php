@@ -54,7 +54,7 @@
             @forelse ($posts as $post)
               <div class="media">
                 <div class="media-left">
-                  <a href="{{ route('show-post-call', ['post' => $post->slug, 'id' => $post->id]) }}">
+                  <a href="{{ url($post->service_id . '/' . $post->slug . '/' . $post->id) }}">
                     @if ( ! empty($post->image))
                       <img class="media-object" src="/img/posts/{{ $post->user_id.'/'.$post->image }}" alt="{{ $post->title }}" width="200">
                     @else
@@ -65,7 +65,7 @@
                 <div class="media-body">
                   <div class="row">
                     <h4 class="col-md-8 media-heading">
-                      <a href="{{ route('show-post-call', ['post' => $post->slug, 'id' => $post->id]) }}">
+                      <a href="{{ url($post->service_id . '/' . $post->slug . '/' . $post->id) }}">
                         <b>{{ $post->title }}</b>
                       </a>
                     </h4>

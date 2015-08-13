@@ -7,7 +7,7 @@
             @include('partials.alerts')
             <ol class="breadcrumb">
               <li><a href="{{ route($post->section->service->route) }}">{{ $post->section->service->title }}</a></li>
-              <li><a href="{{ route('show-call', ['section' => $post->section->slug, 'id' => $post->section->id]) }}">{{ $post->section->title }}</a></li>
+              <li><a href="{{ route('show-' . $post->section->service->route, ['section' => $post->section->slug, 'id' => $post->section->id]) }}">{{ $post->section->title }}</a></li>
             </ol>
             <div class="media">
               <h3 class="media-heading">{{ $post->title }}</h3><br>
@@ -25,7 +25,7 @@
                 @endif
               </div>
               <div class="media-body">
-                <h5>&nbsp;&nbsp;<i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;<a href="/profile/{{ $post->user->profile->id }}">{{ $post->user->name }}</a></h5>
+                <h5>&nbsp;&nbsp;<i class="glyphicon glyphicon-user text-muted"></i>&nbsp;&nbsp;<a href="/profile/{{ $post->user->profile->id }}">{{ $post->user->name }}</a></h5>
                 <div class="table-responsive">
                   <table class="table table-condensed">
                     <tbody>
@@ -111,16 +111,20 @@
                 <div class="panel-heading">
                   <i class="glyphicon glyphicon-comment"></i> Комментарии: {{ $post->comments->count() }}
                 </div>
-                <div class="panel-body">
-                  @forelse ($post->comments as $comment)
-                    <p>
-                      <b>{{ $comment->name }}</b><br>
-                      {{ $comment->comment }}<br>
-                      <small>Опубликовано {{ $comment->created_at }}.</small>
-                    </p>
-                  @empty
-                    <p>Комментарии отсутствуют</p>
-                  @endforelse
+                <div class="table-responsive">
+                  <table class="table">
+                    <tbody>
+                      @foreach ($post->comments as $comment)
+                        <tr>
+                          <th width="100">{{ $comment->name }}</th>
+                          <td>
+                            {{ $comment->comment }}<br>
+                            <small>Опубликовано {{ $comment->created_at }}</small>
+                          </td>
+                        </tr>
+                      @endforeach
+                    </tbody>
+                  </table>
                 </div>
               </div>
             @endunless

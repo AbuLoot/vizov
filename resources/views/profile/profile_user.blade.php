@@ -10,62 +10,65 @@
             <div class="content-block">
               @include('partials.alerts')
               <h3>{{ $profile->user->name }}</h3>
-              <div class="table-responsive">
-                <table class="table table-striped table-hover">
-                  <tr>
-                    <td width="170">Email</td>
-                    <td>{{ $profile->user->email }}</td>
-                  </tr>
-                  <tr>
-                    <td>ФИО</td>
-                    <td>{{ $profile->user->name }}</td>
-                  </tr>
-                  <tr>
-                    <td>Cфера работы</td>
-                    <td>{{ ($profile->section_id == 0) ? 'Не указан' : $profile->section->title }}</td>
-                  </tr>
-                  <tr>
-                    <td>Город</td>
-                    <td>{{ ($profile->city_id == 0) ? 'Не указан' : $profile->city->title }}</td>
-                  </tr>
-                  <tr>
-                    <td>Адрес работы</td>
-                    <td>{{ $profile->address }}</td>
-                  </tr>
-                  <tr>
-                    <td>Навыки</td>
-                    <td>{{ $profile->skills }}</td>
-                  </tr>
-                  <tr>
-                    <td>Телефон</td>
-                    <td>{{ $profile->phone }}</td>
-                  </tr>
-                  <tr>
-                    <td>Веб-сайт</td>
-                    <td>{{ $profile->website }}</td>
-                  </tr>
-                  <tr>
-                    <td>Рейтинг</td>
-                    <td>
-                      @for ($i = 1; $i <= 5; $i++)
-                        @if ($i <= $profile->stars)
-                          <i class="glyphicon glyphicon-star text-success"></i>
-                        @else
-                          <i class="glyphicon glyphicon-star text-muted"></i>
-                        @endif
-                      @endfor
-                    </td>
-                  </tr>
-                </table>
-              </div>
 
               <ul class="nav nav-tabs">
-                <li class="@if (old('id')) NULL @else active @endif"><a href="#posts" data-toggle="tab"><i class="fa fa-th-list"></i> Все объявления</a></li>
+                <li class="@if (old('id')) NULL @else active @endif"><a href="#info" data-toggle="tab"><i class="fa fa-info-circle"></i> Информация</a></li>
+                <li><a href="#posts" data-toggle="tab"><i class="fa fa-th-list"></i> Объявления</a></li>
                 <li class="@if (old('id')) active @endif"><a href="#reviews" data-toggle="tab"><i class="fa fa-comments"></i> Отзывы</a></li>
               </ul>
               <br>
               <div id="myTabContent" class="tab-content">
-                <div class="tab-pane fade @if (old('id')) NULL @else active in @endif" id="posts">
+                <div class="tab-pane fade @if (old('id')) NULL @else active in @endif" id="info">
+                  <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                      <tr>
+                        <td width="170">Email</td>
+                        <td>{{ $profile->user->email }}</td>
+                      </tr>
+                      <tr>
+                        <td>ФИО</td>
+                        <td>{{ $profile->user->name }}</td>
+                      </tr>
+                      <tr>
+                        <th>Cфера работы</th>
+                        <td>{{ ($profile->section_id == 0) ? 'Не указан' : $profile->section->title }}</td>
+                      </tr>
+                      <tr>
+                        <td>Город</td>
+                        <td>{{ ($profile->city_id == 0) ? 'Не указан' : $profile->city->title }}</td>
+                      </tr>
+                      <tr>
+                        <td>Адрес работы</td>
+                        <td>{{ $profile->address }}</td>
+                      </tr>
+                      <tr>
+                        <td>Навыки</td>
+                        <td>{{ $profile->skills }}</td>
+                      </tr>
+                      <tr>
+                        <td>Телефон</td>
+                        <td>{{ $profile->phone }}</td>
+                      </tr>
+                      <tr>
+                        <td>Веб-сайт</td>
+                        <td>{{ $profile->website }}</td>
+                      </tr>
+                      <tr>
+                        <td>Рейтинг</td>
+                        <td>
+                          @for ($i = 1; $i <= 5; $i++)
+                            @if ($i <= $profile->stars)
+                              <i class="glyphicon glyphicon-star text-success"></i>
+                            @else
+                              <i class="glyphicon glyphicon-star text-muted"></i>
+                            @endif
+                          @endfor
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="posts">
                   @forelse ($posts as $post)
                     <div class="media">
                       <div class="media-left">
@@ -102,21 +105,30 @@
                     <div class="panel-heading">
                       <i class="fa fa-comments"></i> Отзывов: {{ $profile->comments->count() }}
                     </div>
-                    <div class="panel-body">
-                      @foreach ($profile->comments as $comment)
-                        <b>{{ $comment->name }}</b> &nbsp;&nbsp;&nbsp; <small class="text-muted">{{ $comment->created_at }}</small><br>
-                        {{ $comment->comment }}<br>
-                        Оценка:
-                        <span>
-                          @for ($i = 1; $i <= 5; $i++)
-                            @if ($i <= $comment->stars)
-                              <i class="glyphicon glyphicon-star text-success"></i>
-                            @else
-                              <i class="glyphicon glyphicon-star text-muted"></i>
-                            @endif
-                          @endfor
-                        </span><hr>
-                      @endforeach
+                    <div class="table-responsive">
+                      <table class="table">
+                        <tbody>
+                          @foreach ($profile->comments as $comment)
+                            <tr>
+                              <td width="110">{{ $comment->name }}</td>
+                              <td>
+                                <small class="text-muted">{{ $comment->created_at }}</small><br>
+                                {{ $comment->comment }}<br>
+                                Оценка:
+                                <span>
+                                  @for ($i = 1; $i <= 5; $i++)
+                                    @if ($i <= $comment->stars)
+                                      <i class="glyphicon glyphicon-star text-success"></i>
+                                    @else
+                                      <i class="glyphicon glyphicon-star text-muted"></i>
+                                    @endif
+                                  @endfor
+                                </span>
+                              </td>
+                            </tr>
+                          @endforeach
+                        </tbody>
+                      </table>
                     </div>
                   </div>
 

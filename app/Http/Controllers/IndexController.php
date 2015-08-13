@@ -96,7 +96,7 @@ class IndexController extends Controller
     {
         $cities = City::all();
         $section = Section::where('slug', $section)->first();
-        $posts = PostMaterial::where('section_id', $id)->orderBy('id', 'DESC')->paginate(10);
+        $posts = Post::where('section_id', $id)->orderBy('id', 'DESC')->paginate(10);
         $profiles = Profile::take(5)->get();
 
         return view('board.posts', compact('cities', 'posts', 'section', 'profiles'));

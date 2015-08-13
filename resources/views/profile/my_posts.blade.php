@@ -29,7 +29,10 @@
                           </a>
                         </h4>
                         <p>{{ $post->city->title }}<br>{{ $post->section->title }}</p>
-                        <p><small>{{ $post->created_at }}</small> | <small>Просмотров: {{ $post->views }}</small> | <small>Комментарии: {{ $post->comments->count() }}</small></p>
+                        <p>
+                          <small>{{ $post->created_at }}</small><br>
+                          <small>Просмотров: {{ $post->views }}</small> | <small>Комментарии: {{ $post->comments->count() }}</small>
+                        </p>
                       </div>
                       <h4 class="col-md-3 media-heading text-right text-success"><b>{{ $post->price }} тг</b> @if ($post->deal == 'on') Торг&nbsp;возможен @endif</h4>
                       <div class="col-md-3 text-right">

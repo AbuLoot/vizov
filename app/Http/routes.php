@@ -30,11 +30,14 @@ Route::group(['middleware' => 'auth'], function()
 {
 	Route::resource('posts', 'PostsController');
 
-	Route::get('my_posts', ['uses' => 'ProfileController@getMyPosts']);
-
 	Route::get('my_profile', ['uses' => 'ProfileController@getMyProfile']);
 	Route::get('my_profile/edit', ['uses' => 'ProfileController@editMyProfile']);
 	Route::post('my_profile/{id}', ['uses' => 'ProfileController@postMyProfile']);
+
+	Route::get('my_posts', ['uses' => 'ProfileController@getMyPosts']);
+
+	Route::get('my_reviews', ['uses' => 'ProfileController@getMyReviews']);
+	Route::post('my_reviews/{id}', ['uses' => 'ProfileController@deleteMyReviews']);
 
 	Route::get('my_setting', ['uses' => 'ProfileController@getMySetting']);
 	Route::post('reset_password', ['as' => 'reset-password', 'uses' => 'ProfileController@postResetPassword']);

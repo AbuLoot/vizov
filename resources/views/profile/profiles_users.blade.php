@@ -6,34 +6,32 @@
           <div class="row-left">
             <div class="content-block">
               <h2>Все специалисты сервиса VIZOV.KZ</h2>
-              <div class="panel-body">
-                @foreach ($profiles as $profile)
-                  <div class="media">
-                    <div class="media-left">
-                      <a href="/profile/{{ $profile->id }}">
-                        @if (empty($profile->avatar))
-                          <img src="/img/no-avatar.png" class="media-object" alt="..." width="90">
+              @foreach ($profiles as $profile)
+                <div class="media">
+                  <div class="media-left">
+                    <a href="/profile/{{ $profile->id }}">
+                      @if (empty($profile->avatar))
+                        <img src="/img/no-avatar.png" class="media-object" alt="..." width="90">
+                      @else
+                        <img src="/img/users/{{ $profile->user->id . '/' . $profile->avatar }}" class="media-object" alt="..." width="90">
+                      @endif
+                    </a>
+                  </div>
+                  <div class="media-body">
+                    <h5 class="media-heading"><a href="/profile/{{ $profile->id }}">{{ $profile->user->name }}</a></h5>
+                    <p>{{ ($profile->section_id == 0) ? 'Не указан' : $profile->section->title }}</p>
+                    <div>
+                      @for ($i = 1; $i <= 5; $i++)
+                        @if ($i <= $profile->stars)
+                          <i class="glyphicon glyphicon-star text-success"></i>
                         @else
-                          <img src="/img/users/{{ $profile->user->id . '/' . $profile->avatar }}" class="media-object" alt="..." width="90">
+                          <i class="glyphicon glyphicon-star text-muted"></i>
                         @endif
-                      </a>
-                    </div>
-                    <div class="media-body">
-                      <h5 class="media-heading"><a href="/profile/{{ $profile->id }}">{{ $profile->user->name }}</a></h5>
-                      <p>{{ ($profile->section_id == 0) ? 'Не указан' : $profile->section->title }}</p>
-                      <div>
-                        @for ($i = 1; $i <= 5; $i++)
-                          @if ($i <= $profile->stars)
-                            <i class="glyphicon glyphicon-star text-success"></i>
-                          @else
-                            <i class="glyphicon glyphicon-star text-muted"></i>
-                          @endif
-                        @endfor
-                      </div>
+                      @endfor
                     </div>
                   </div>
-                @endforeach
-              </div>
+                </div>
+              @endforeach
 
               {!! $profiles->render() !!}
             </div>
