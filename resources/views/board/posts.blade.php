@@ -54,7 +54,7 @@
             @forelse ($posts as $post)
               <div class="media">
                 <div class="media-left">
-                  <a href="{{ url($post->service_id . '/' . $post->slug . '/' . $post->id) }}">
+                  <a href="{{ url($post->service_id.'/'.$post->slug.'/'.$post->id) }}">
                     @if ( ! empty($post->image))
                       <img class="media-object" src="/img/posts/{{ $post->user_id.'/'.$post->image }}" alt="{{ $post->title }}" width="200">
                     @else
@@ -63,18 +63,13 @@
                   </a>
                 </div>
                 <div class="media-body">
-                  <div class="row">
+                  <div class="row post-title-fix">
                     <h4 class="col-md-8 media-heading">
-                      <a href="{{ url($post->service_id . '/' . $post->slug . '/' . $post->id) }}">
-                        <b>{{ $post->title }}</b>
-                      </a>
+                      <a href="{{ url($post->service_id.'/'.$post->slug.'/'.$post->id) }}">{{ $post->title }}</a>
                     </h4>
-                    <h4 class="col-md-4 media-heading text-right text-success"><b>{{ $post->price }} тг</b> @if ($post->deal == 'on') Торг&nbsp;возможен @endif</h4>
+                    <h4 class="col-md-4 media-heading text-right text-success">{{ $post->price }} тг @if ($post->deal == 'on') Торг&nbsp;возможен @endif</h4>
                   </div>
-                  <p>{{ $post->city->title }}</p>
-                  <p>
-                    <small>{{ $post->created_at }}</small> | <small>Просмотров: {{ $post->views }}</small>
-                  </p>
+                  <p>{{ $post->city->title }}<br><small>{{ $post->created_at }}</small> | <small>Просмотров: {{ $post->views }}</small></p>
                 </div>
               </div>
               <br>
@@ -101,7 +96,7 @@
                       @if (empty($profile->avatar))
                         <img src="/img/no-avatar.png" class="media-object" alt="..." width="90">
                       @else
-                        <img src="/img/users/{{ $profile->user->id . '/' . $profile->avatar }}" class="media-object" alt="..." width="90">
+                        <img src="/img/users/{{ $profile->user->id.'/'.$profile->avatar }}" class="media-object" alt="..." width="90">
                       @endif
                     </a>
                   </div>

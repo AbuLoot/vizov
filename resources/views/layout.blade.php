@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>@yield('title_description', 'Vizov.kz')</title>
-    <meta name="author" content="Darkhan & Issayev Adilet">
+    <meta name="author" content="Darkhan &amp; Issayev Adilet">
     <meta name="description" content="@yield('meta_description', 'Vizov.kz')">
 
-    <link href="/bower_components/bootstrap/dist/css/bootstrap-cosmo.min.css" rel="stylesheet">
+    <link href="/bower_components/bootstrap/dist/css/bootstrap-cosmo.css" rel="stylesheet">
     <link href="/bower_components/bootstrap/dist/css/styles.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     @yield('styles')
@@ -25,7 +25,7 @@
       <div class="container">
         <div class="col-md-2 col-sm-2 el-logo-space">
           <div class="row">
-            <a href="{{ route('index') }}" class="logo"><i class="fa fa-exchange"></i> VIZOV</a>
+            <a href="{{ route('index') }}" class="logo"><i class="fa fa-exchange"></i>VIZOV</a>
           </div>
         </div>
         <div class="col-md-6 col-sm-6 el-search-space">

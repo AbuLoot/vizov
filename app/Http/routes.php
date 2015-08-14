@@ -3,16 +3,16 @@
 // Board
 Route::get('/', ['as' => 'index', 'uses' => 'IndexController@getCall']);
 Route::get('uslugi_vyzova', ['as' => 'call', 'uses' => 'IndexController@getCall']);
-Route::get('uslugi_vyzova/{section}/{id}', ['as' => 'show-call', 'uses' => 'IndexController@showCall'])->where(['id' => '[0-9]+']);
-Route::get('1/{post}/{id}', ['as' => 'show-post-call', 'uses' => 'IndexController@showPostCall'])->where(['id' => '[0-9]+']);
+Route::get('uslugi_vyzova/{section}/{id}', ['as' => 'show-call', 'uses' => 'IndexController@showCall']);
+Route::get('1/{post}/{id}', ['as' => 'show-post-call', 'uses' => 'IndexController@showPostCall']);
 
 Route::get('uslugi_remonta', ['as' => 'repair', 'uses' => 'IndexController@getRepair']);
-Route::get('uslugi_remonta/{section}/{id}', ['as' => 'show-repair', 'uses' => 'IndexController@showRepair'])->where(['id' => '[0-9]+']);
-Route::get('2/{post}/{id}', ['as' => 'show-post-repair', 'uses' => 'IndexController@showPostRepair'])->where(['id' => '[0-9]+']);
+Route::get('uslugi_remonta/{section}/{id}', ['as' => 'show-repair', 'uses' => 'IndexController@showRepair']);
+Route::get('2/{post}/{id}', ['as' => 'show-post-repair', 'uses' => 'IndexController@showPostRepair']);
 
 Route::get('stroymaterialy', ['as' => 'materials', 'uses' => 'IndexController@getMaterials']);
-Route::get('stroymaterialy/{section}/{id}', ['as' => 'show-materials', 'uses' => 'IndexController@showMaterials'])->where(['id' => '[0-9]+']);
-Route::get('3/{post}/{id}', ['as' => 'show-post-materials', 'uses' => 'IndexController@showPostMaterials'])->where(['id' => '[0-9]+']);
+Route::get('stroymaterialy/{section}/{id}', ['as' => 'show-materials', 'uses' => 'IndexController@showMaterials']);
+Route::get('3/{post}/{id}', ['as' => 'show-post-materials', 'uses' => 'IndexController@showPostMaterials']);
 
 // Search tools
 Route::get('search', ['uses' => 'IndexController@searchPosts']);
@@ -71,40 +71,3 @@ Route::post('password/email', 'Auth\PasswordController@postEmail');
 // Password reset routes...
 Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
-
-/*Route::get('add_cities', function() {
-	
-	$cities = [
-		'Алматы',
-		'Астана',
-		'Актау',
-		'Актобе',
-		'Атырау',
-		'Жезказган',
-		'Караганда',
-		'Кокшетау',
-		'Костанай',
-		'Кызылорда',
-		'Павлодар',
-		'Петропавловск',
-		'Семей',
-		'Талдыкорган',
-		'Тараз',
-		'Темиртау',
-		'Уральск',
-		'Усть-Каменогорск',
-		'Шымкент',
-		'Экибастуз'
-	];
-
-    $i = 1;
-    foreach ($cities as $key => $value) {
-		$city = new \App\City;
-    	$city->sort_id = $i++;
-    	$city->slug = str_slug($value);
-    	$city->title = $value;
-    	$city->save();
-    }
-    echo 'Allahu akbar!';
-});*/
-

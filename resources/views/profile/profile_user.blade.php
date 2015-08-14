@@ -22,12 +22,12 @@
                   <div class="table-responsive">
                     <table class="table table-striped table-hover">
                       <tr>
-                        <td width="170">Email</td>
-                        <td>{{ $profile->user->email }}</td>
+                        <td width="170">ФИО</td>
+                        <td>{{ $profile->user->name }}</td>
                       </tr>
                       <tr>
-                        <td>ФИО</td>
-                        <td>{{ $profile->user->name }}</td>
+                        <td>Email</td>
+                        <td>{{ $profile->user->email }}</td>
                       </tr>
                       <tr>
                         <th>Cфера работы</th>
@@ -72,7 +72,7 @@
                   @forelse ($posts as $post)
                     <div class="media">
                       <div class="media-left">
-                        <a href="{{ route('show-post-call', ['post' => $post->slug, 'id' => $post->id]) }}">
+                        <a href="{{ url($post->service_id.'/'.$post->slug.'/'.$post->id) }}">
                           @if ( ! empty($post->image))
                             <img class="media-object" src="/img/posts/{{ $post->user_id.'/'.$post->image }}" alt="{{ $post->title }}" width="200">
                           @else
@@ -81,21 +81,19 @@
                         </a>
                       </div>
                       <div class="media-body">
-                        <div class="row">
+                        <div class="row post-title-fix">
                           <h4 class="col-md-8 media-heading">
-                            <a href="{{ route('show-post-call', ['post' => $post->slug, 'id' => $post->id]) }}">
-                              <b>{{ $post->title }}</b>
-                            </a>
+                            <a href="{{ url($post->service_id.'/'.$post->slug.'/'.$post->id) }}">{{ $post->title }}</a>
                           </h4>
-                          <h4 class="col-md-4 media-heading text-right text-success"><b>{{ $post->price }} тг</b></h4>
+                          <h4 class="col-md-4 media-heading text-right text-success">{{ $post->price }} тг @if ($post->deal == 'on') Торг&nbsp;возможен @endif</h4>
                         </div>
-                        <p>{{ $post->city->title }}<br> {{ $post->section->title }}</p>
                         <p>
-                          <small>{{ $post->created_at }}</small> | <small>{{ $post->views }} просмотров</small> | <small>Комментарии: {{ $post->comments->count() }}</small>
+                          {{ $post->city->title }} | <b>{{ $post->section->title }}</b><br>
+                          <small>{{ $post->created_at }}</small> | <small>Просмотров: {{ $post->views }}</small> | <small>Комментарии: {{ $post->comments->count() }}</small>
                         </p>
                       </div>
                     </div>
-                    <hr>
+                    <br>
                   @empty
                     <h4>Нет объявлений.</h4>
                   @endforelse
@@ -132,88 +130,90 @@
                     </div>
                   </div>
 
-                  <div class="well">
-                    <h4>Добавить отзыв</h4><br>
-                    <form action="/review" method="POST" class="form-horizontal">
-                      <input name="_token" type="hidden" value="{{ csrf_token() }}">
-                      <input name="id" type="hidden" value="{{ $profile->id }}">
-                      <input name="type" type="hidden" value="profile">
-                      <div class="form-group">
-                        <label for="name" class="col-md-2">Ваше имя</label>
-                        <div class="col-md-10">
-                          <input type="text" class="form-control input-sm" id="name" name="name" minlength="3" maxlength="60" placeholder="Введите имя" value="{{ old('name') }}" required>
+                  @if ($profile->user_id != Auth::id())
+                    <div class="well">
+                      <h4>Добавить отзыв</h4><br>
+                      <form action="/review" method="POST" class="form-horizontal">
+                        <input name="_token" type="hidden" value="{{ csrf_token() }}">
+                        <input name="id" type="hidden" value="{{ $profile->id }}">
+                        <input name="type" type="hidden" value="profile">
+                        <div class="form-group">
+                          <label for="name" class="col-md-2">Ваше имя</label>
+                          <div class="col-md-10">
+                            <input type="text" class="form-control input-sm" id="name" name="name" minlength="3" maxlength="60" placeholder="Введите имя" value="{{ old('name') }}" required>
+                          </div>
                         </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="email" class="col-md-2">Email адрес</label>
-                        <div class="col-md-10">
-                          <input type="email" class="form-control input-sm" id="email" name="email" minlength="8" maxlength="60" placeholder="Введите email" value="{{ old('email') }}" required>
+                        <div class="form-group">
+                          <label for="email" class="col-md-2">Email адрес</label>
+                          <div class="col-md-10">
+                            <input type="email" class="form-control input-sm" id="email" name="email" minlength="8" maxlength="60" placeholder="Введите email" value="{{ old('email') }}" required>
+                          </div>
                         </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="comment" class="col-md-2">Сообщение</label>
-                        <div class="col-md-10">
-                          <textarea rows="3" class="form-control" id="comment" name="comment" maxlength="2000" required>{{ old('comment') }}</textarea>
+                        <div class="form-group">
+                          <label for="comment" class="col-md-2">Сообщение</label>
+                          <div class="col-md-10">
+                            <textarea rows="3" class="form-control" id="comment" name="comment" maxlength="2000" required>{{ old('comment') }}</textarea>
+                          </div>
                         </div>
-                      </div>
-                      <!-- <div class="form-group">
-                        <label for="captcha" class="col-md-2">Код</label>
-                        <div class="col-md-10">
-                          {!! captcha !!}
+                        <!-- <div class="form-group">
+                          <label for="captcha" class="col-md-2">Код</label>
+                          <div class="col-md-10">
+                            {!! captcha !!}
+                          </div>
+                        </div> -->
+                        <div class="form-group">
+                          <label for="comment" class="col-md-2">Оценка услуги</label>
+                          <div class="col-md-10">
+                            <label>
+                              <input type="radio" name="stars" value="1">
+                              <i class="glyphicon glyphicon-star text-success"></i>
+                              <i class="glyphicon glyphicon-star text-muted"></i>
+                              <i class="glyphicon glyphicon-star text-muted"></i>
+                              <i class="glyphicon glyphicon-star text-muted"></i>
+                              <i class="glyphicon glyphicon-star text-muted"></i>
+                            </label><br>
+                            <label>
+                              <input type="radio" name="stars" value="2">
+                              <i class="glyphicon glyphicon-star text-success"></i>
+                              <i class="glyphicon glyphicon-star text-success"></i>
+                              <i class="glyphicon glyphicon-star text-muted"></i>
+                              <i class="glyphicon glyphicon-star text-muted"></i>
+                              <i class="glyphicon glyphicon-star text-muted"></i>
+                            </label><br>
+                            <label>
+                              <input type="radio" name="stars" value="3">
+                              <i class="glyphicon glyphicon-star text-success"></i>
+                              <i class="glyphicon glyphicon-star text-success"></i>
+                              <i class="glyphicon glyphicon-star text-success"></i>
+                              <i class="glyphicon glyphicon-star text-muted"></i>
+                              <i class="glyphicon glyphicon-star text-muted"></i>
+                            </label><br>
+                            <label>
+                              <input type="radio" name="stars" value="4">
+                              <i class="glyphicon glyphicon-star text-success"></i>
+                              <i class="glyphicon glyphicon-star text-success"></i>
+                              <i class="glyphicon glyphicon-star text-success"></i>
+                              <i class="glyphicon glyphicon-star text-success"></i>
+                              <i class="glyphicon glyphicon-star text-muted"></i>
+                            </label><br>
+                            <label>
+                              <input type="radio" name="stars" value="5">
+                              <i class="glyphicon glyphicon-star text-success"></i>
+                              <i class="glyphicon glyphicon-star text-success"></i>
+                              <i class="glyphicon glyphicon-star text-success"></i>
+                              <i class="glyphicon glyphicon-star text-success"></i>
+                              <i class="glyphicon glyphicon-star text-success"></i>
+                            </label>
+                          </div>
                         </div>
-                      </div> -->
-                      <div class="form-group">
-                        <label for="comment" class="col-md-2">Оценка услуги</label>
-                        <div class="col-md-10">
-                          <label>
-                            <input type="radio" name="stars" value="1">
-                            <i class="glyphicon glyphicon-star text-success"></i>
-                            <i class="glyphicon glyphicon-star text-muted"></i>
-                            <i class="glyphicon glyphicon-star text-muted"></i>
-                            <i class="glyphicon glyphicon-star text-muted"></i>
-                            <i class="glyphicon glyphicon-star text-muted"></i>
-                          </label><br>
-                          <label>
-                            <input type="radio" name="stars" value="2">
-                            <i class="glyphicon glyphicon-star text-success"></i>
-                            <i class="glyphicon glyphicon-star text-success"></i>
-                            <i class="glyphicon glyphicon-star text-muted"></i>
-                            <i class="glyphicon glyphicon-star text-muted"></i>
-                            <i class="glyphicon glyphicon-star text-muted"></i>
-                          </label><br>
-                          <label>
-                            <input type="radio" name="stars" value="3">
-                            <i class="glyphicon glyphicon-star text-success"></i>
-                            <i class="glyphicon glyphicon-star text-success"></i>
-                            <i class="glyphicon glyphicon-star text-success"></i>
-                            <i class="glyphicon glyphicon-star text-muted"></i>
-                            <i class="glyphicon glyphicon-star text-muted"></i>
-                          </label><br>
-                          <label>
-                            <input type="radio" name="stars" value="4">
-                            <i class="glyphicon glyphicon-star text-success"></i>
-                            <i class="glyphicon glyphicon-star text-success"></i>
-                            <i class="glyphicon glyphicon-star text-success"></i>
-                            <i class="glyphicon glyphicon-star text-success"></i>
-                            <i class="glyphicon glyphicon-star text-muted"></i>
-                          </label><br>
-                          <label>
-                            <input type="radio" name="stars" value="5">
-                            <i class="glyphicon glyphicon-star text-success"></i>
-                            <i class="glyphicon glyphicon-star text-success"></i>
-                            <i class="glyphicon glyphicon-star text-success"></i>
-                            <i class="glyphicon glyphicon-star text-success"></i>
-                            <i class="glyphicon glyphicon-star text-success"></i>
-                          </label>
+                        <div class="form-group">
+                          <div class="col-md-offset-2 col-md-10">
+                            <button type="submit" class="btn btn-default btn-sm">Добавить</button>
+                          </div>
                         </div>
-                      </div>
-                      <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                          <button type="submit" class="btn btn-default btn-sm">Добавить</button>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
+                      </form>
+                    </div>
+                  @endif
                 </div>
               </div>
             </div>

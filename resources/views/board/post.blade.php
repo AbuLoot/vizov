@@ -30,8 +30,8 @@
                   <table class="table table-condensed">
                     <tbody>
                       <tr>
-                        <td>Цена</td>
-                        <td class="text-success"><b>{{ $post->price }} тг  @if ($post->deal == 'on') | Торг&nbsp;возможен @endif</b></td>
+                        <td width="150">Цена</td>
+                        <td class="text-success"><b>{{ $post->price }}</b> тг  @if ($post->deal == 'on') | Торг&nbsp;возможен @endif</td>
                       </tr>
                       <tr>
                         <td>Город</td>
@@ -196,11 +196,15 @@
                   <div class="media-body">
                     <h5 class="media-heading"><a href="/profile/{{ $profile->id }}">{{ $profile->user->name }}</a></h5>
                     <p>{{ $profile->section->title }}</p>
-                    <i class="glyphicon glyphicon-star text-success"></i>
-                    <i class="glyphicon glyphicon-star text-success"></i>
-                    <i class="glyphicon glyphicon-star"></i>
-                    <i class="glyphicon glyphicon-star"></i>
-                    <i class="glyphicon glyphicon-star"></i>
+                    <div>
+                      @for ($i = 1; $i <= 5; $i++)
+                        @if ($i <= $profile->stars)
+                          <i class="glyphicon glyphicon-star text-success"></i>
+                        @else
+                          <i class="glyphicon glyphicon-star text-muted"></i>
+                        @endif
+                      @endfor
+                    </div>
                   </div>
                 </div>
               @endforeach

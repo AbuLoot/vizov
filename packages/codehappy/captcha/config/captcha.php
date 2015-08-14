@@ -7,6 +7,5 @@ return [
     'quality'       => 90, // качество изображения
     'countLines'    => 20, // количетсво линий
     'bgColor'       => '#ecf2f4', // цвет фона,
-    // 'fontFile'      => public_path('Roboto-Medium.ttf'), //путь до файла шрифта
-    'fontFile'      => 'http://fonts.googleapis.com/css?family=Roboto', //путь до файла шрифта
+    'fontFile'      => public_path('fonts/Roboto-Medium.ttf'), //путь до файла шрифта
 ];

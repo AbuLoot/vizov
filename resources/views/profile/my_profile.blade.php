@@ -13,12 +13,12 @@
               <div class="table-responsive">
                 <table class="table table-striped table-hover">
                   <tr>
-                    <td width="170">Email</td>
-                    <td>{{ Auth::user()->email }}</td>
+                    <td width="170">Ваше ФИО</td>
+                    <td>{{ Auth::user()->name }}</td>
                   </tr>
                   <tr>
-                    <td>Ваше ФИО</td>
-                    <td>{{ Auth::user()->name }}</td>
+                    <td>Email</td>
+                    <td>{{ Auth::user()->email }}</td>
                   </tr>
                   <tr>
                     <td>Cфера работы</td>
@@ -47,18 +47,20 @@
                   <tr>
                     <td>Рейтинг</td>
                     <td>
-                      <i class="glyphicon glyphicon-star text-success"></i>
-                      <i class="glyphicon glyphicon-star text-success"></i>
-                      <i class="glyphicon glyphicon-star text-success"></i>
-                      <i class="glyphicon glyphicon-star text-muted"></i>
-                      <i class="glyphicon glyphicon-star text-muted"></i>
+                      @for ($i = 1; $i <= 5; $i++)
+                        @if ($i <= $profile->stars)
+                          <i class="glyphicon glyphicon-star text-success"></i>
+                        @else
+                          <i class="glyphicon glyphicon-star text-muted"></i>
+                        @endif
+                      @endfor
                     </td>
                   </tr>
                 </table>
               </div>
               <p>
                 <a href="/my_profile/edit" class="btn btn-default">Заполнить профиль</a>
-                <a href="/profile/{{ $profile->id }}" class="btn btn-info">Как видят меня другие?</a>
+                <a href="/profile/{{ $profile->id }}" class="btn btn-success">Как видят меня другие?</a>
               </p>
             </div>
           </div>
