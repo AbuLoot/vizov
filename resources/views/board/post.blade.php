@@ -25,13 +25,12 @@
                 @endif
               </div>
               <div class="media-body">
-                <h5>&nbsp;&nbsp;<i class="glyphicon glyphicon-user text-muted"></i>&nbsp;&nbsp;<a href="/profile/{{ $post->user->profile->id }}">{{ $post->user->name }}</a></h5>
                 <div class="table-responsive">
                   <table class="table table-condensed">
                     <tbody>
                       <tr>
                         <td width="150">Цена</td>
-                        <td class="text-success"><b>{{ $post->price }}</b> тг  @if ($post->deal == 'on') | Торг&nbsp;возможен @endif</td>
+                        <td><b class="text-success">{{ $post->price }} тг</b> @if ($post->deal == 'on') <small class="text-muted">- Торг&nbsp;возможен</small> @endif</td>
                       </tr>
                       <tr>
                         <td>Город</td>
@@ -48,6 +47,10 @@
                       <tr>
                         <td>Электронная почта</td>
                         <td>{{ $post->email }}</td>
+                      </tr>
+                      <tr>
+                        <td>Специалист</td>
+                        <td><a href="/profile/{{ $post->user->profile->id }}">{{ $post->user->name }}</a></td>
                       </tr>
                     </tbody>
                   </table>
@@ -116,7 +119,7 @@
                     <tbody>
                       @foreach ($post->comments as $comment)
                         <tr>
-                          <th width="100">{{ $comment->name }}</th>
+                          <th width="110">{{ $comment->name }}</th>
                           <td>
                             {{ $comment->comment }}<br>
                             <small>Опубликовано {{ $comment->created_at }}</small>
@@ -138,6 +141,8 @@
                   <input name="_token" type="hidden" value="{{ csrf_token() }}">
                   <input name="id" type="hidden" value="{{ $post->id }}">
                   <input name="type" type="hidden" value="post">
+                  <input name="type_1" type="hidden" value="post_{{ $first_number }}">
+                  <input name="type_2" type="hidden" value="post_{{ $second_number }}">
                   <div class="form-group">
                     <label for="name" class="col-md-2">Ваше имя</label>
                     <div class="col-md-10">
@@ -157,9 +162,15 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="captcha" class="col-md-2">Код</label>
-                    <div class="col-md-10">
-                      {!! captcha !!}
+                    <div class="col-md-offset-2 col-md-3">
+                      <table>
+                        <tbody>
+                          <tr>
+                            <th class="text-nowrap">{{ $second_number }} + {{ $first_number }} =&nbsp;</th>
+                            <td><input type="text" class="form-control input-sm" id="equal" name="equal" minlength="1" maxlength="5" placeholder="?" required></td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
                   </div>
                   <div class="form-group">

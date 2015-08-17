@@ -43,8 +43,10 @@ class IndexController extends Controller
         $post->save();
 
         $profiles = Profile::take(5)->get();
+        $first_number = rand(1, 10);
+        $second_number = rand(1, 10);
 
-        return view('board.post', compact('post', 'profiles'));
+        return view('board.post', compact('post', 'profiles', 'first_number', 'second_number'));
     }
 
     // Section Repair
@@ -76,8 +78,10 @@ class IndexController extends Controller
         $post->save();
 
         $profiles = Profile::take(5)->get();
+        $first_number = rand(1, 10);
+        $second_number = rand(1, 10);
 
-        return view('board.post', compact('post', 'profiles'));
+        return view('board.post', compact('post', 'profiles', 'first_number', 'second_number'));
     }
 
     // Section Materials
@@ -109,8 +113,10 @@ class IndexController extends Controller
         $post->save();
 
         $profiles = Profile::take(5)->get();
+        $first_number = rand(1, 10);
+        $second_number = rand(1, 10);
 
-        return view('board.post', compact('post', 'profiles'));
+        return view('board.post', compact('post', 'profiles', 'first_number', 'second_number'));
     }
 
     // Additional functionality

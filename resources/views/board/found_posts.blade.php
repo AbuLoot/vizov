@@ -75,17 +75,15 @@
                     <h4 class="col-md-8 media-heading">
                       <a href="{{ url($post->service_id.'/'.$post->slug.'/'.$post->id) }}">{{ $post->title }}</a>
                     </h4>
-                    <h4 class="col-md-4 media-heading text-right text-success">{{ $post->price }} тг @if ($post->deal == 'on') Торг&nbsp;возможен @endif</h4>
+                    <h4 class="col-md-4 media-heading text-right text-success">{{ $post->price }} тг @if ($post->deal == 'on') <small>Торг&nbsp;возможен</small> @endif</h4>
                   </div>
-                  <p>{{ $post->city->title }}<br><small>{{ $post->created_at }}</small> | <small>Просмотров: {{ $post->views }}</small></p>
+                  <p class="text-gray">{{ $post->city->title }}<br><small>{{ $post->created_at }}</small> / <small>Просмотров: {{ $post->views }}</small></p>
                 </div>
               </div>
               <br>
             @empty
               <h4>Ничего не найдено.</h4>
-              <p>
-                <a href="{{ route('posts.create') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Добавить объявление</a>
-              </p>
+              <a href="{{ route('posts.create') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Добавить объявление</a>
             @endforelse
 
             {!! $posts->render() !!}
@@ -113,11 +111,13 @@
                   <div class="media-body">
                     <h5 class="media-heading"><a href="/profile/{{ $profile->id }}">{{ $profile->user->name }}</a></h5>
                     <p>{{ $profile->section->title }}</p>
-                    <i class="glyphicon glyphicon-star text-success"></i>
-                    <i class="glyphicon glyphicon-star text-success"></i>
-                    <i class="glyphicon glyphicon-star"></i>
-                    <i class="glyphicon glyphicon-star"></i>
-                    <i class="glyphicon glyphicon-star"></i>
+                    @for ($i = 1; $i <= 5; $i++)
+                      @if ($i <= $profile->stars)
+                        <i class="glyphicon glyphicon-star text-success"></i>
+                      @else
+                        <i class="glyphicon glyphicon-star text-muted"></i>
+                      @endif
+                    @endfor
                   </div>
                 </div>
               @endforeach

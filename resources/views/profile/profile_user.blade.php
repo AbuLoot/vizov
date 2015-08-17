@@ -30,8 +30,8 @@
                         <td>{{ $profile->user->email }}</td>
                       </tr>
                       <tr>
-                        <th>Cфера работы</th>
-                        <td>{{ ($profile->section_id == 0) ? 'Не указан' : $profile->section->title }}</td>
+                        <td>Cфера работы</td>
+                        <th>{{ ($profile->section_id == 0) ? 'Не указан' : $profile->section->title }}</th>
                       </tr>
                       <tr>
                         <td>Город</td>
@@ -85,11 +85,11 @@
                           <h4 class="col-md-8 media-heading">
                             <a href="{{ url($post->service_id.'/'.$post->slug.'/'.$post->id) }}">{{ $post->title }}</a>
                           </h4>
-                          <h4 class="col-md-4 media-heading text-right text-success">{{ $post->price }} тг @if ($post->deal == 'on') Торг&nbsp;возможен @endif</h4>
+                          <h4 class="col-md-4 media-heading text-right text-success">{{ $post->price }} тг @if ($post->deal == 'on') <br><small>Торг&nbsp;возможен</small> @endif</h4>
                         </div>
-                        <p>
-                          {{ $post->city->title }} | <b>{{ $post->section->title }}</b><br>
-                          <small>{{ $post->created_at }}</small> | <small>Просмотров: {{ $post->views }}</small> | <small>Комментарии: {{ $post->comments->count() }}</small>
+                        <p class="text-gray">
+                          {{ $post->city->title }} / <b>{{ $post->section->title }}</b><br>
+                          <small>{{ $post->created_at }}</small> &nbsp; <small><i class="fa fa-smile-o"></i> {{ $post->views }}</small> &nbsp; <small><i class="fa fa-comment"></i> {{ $post->comments->count() }}</small>
                         </p>
                       </div>
                     </div>
@@ -108,9 +108,8 @@
                         <tbody>
                           @foreach ($profile->comments as $comment)
                             <tr>
-                              <td width="110">{{ $comment->name }}</td>
+                              <th width="110">{{ $comment->name }}</th>
                               <td>
-                                <small class="text-muted">{{ $comment->created_at }}</small><br>
                                 {{ $comment->comment }}<br>
                                 Оценка:
                                 <span>
@@ -121,7 +120,8 @@
                                       <i class="glyphicon glyphicon-star text-muted"></i>
                                     @endif
                                   @endfor
-                                </span>
+                                </span><br>
+                                <small class="text-muted">{{ $comment->created_at }}</small>
                               </td>
                             </tr>
                           @endforeach
@@ -137,6 +137,8 @@
                         <input name="_token" type="hidden" value="{{ csrf_token() }}">
                         <input name="id" type="hidden" value="{{ $profile->id }}">
                         <input name="type" type="hidden" value="profile">
+                        <input name="type_1" type="hidden" value="profile_{{ $first_number }}">
+                        <input name="type_2" type="hidden" value="profile_{{ $second_number }}">
                         <div class="form-group">
                           <label for="name" class="col-md-2">Ваше имя</label>
                           <div class="col-md-10">
@@ -155,12 +157,6 @@
                             <textarea rows="3" class="form-control" id="comment" name="comment" maxlength="2000" required>{{ old('comment') }}</textarea>
                           </div>
                         </div>
-                        <!-- <div class="form-group">
-                          <label for="captcha" class="col-md-2">Код</label>
-                          <div class="col-md-10">
-                            {!! captcha !!}
-                          </div>
-                        </div> -->
                         <div class="form-group">
                           <label for="comment" class="col-md-2">Оценка услуги</label>
                           <div class="col-md-10">
@@ -204,6 +200,18 @@
                               <i class="glyphicon glyphicon-star text-success"></i>
                               <i class="glyphicon glyphicon-star text-success"></i>
                             </label>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="col-md-offset-2 col-md-3">
+                            <table>
+                              <tbody>
+                                <tr>
+                                  <th class="text-nowrap">{{ $second_number }} + {{ $first_number }} =&nbsp;</th>
+                                  <td><input type="text" class="form-control input-sm" id="equal" name="equal" minlength="1" maxlength="5" placeholder="?" required></td>
+                                </tr>
+                              </tbody>
+                            </table>
                           </div>
                         </div>
                         <div class="form-group">

@@ -67,9 +67,9 @@
                     <h4 class="col-md-8 media-heading">
                       <a href="{{ url($post->service_id.'/'.$post->slug.'/'.$post->id) }}">{{ $post->title }}</a>
                     </h4>
-                    <h4 class="col-md-4 media-heading text-right text-success">{{ $post->price }} тг @if ($post->deal == 'on') Торг&nbsp;возможен @endif</h4>
+                    <h4 class="col-md-4 media-heading text-right text-success">{{ $post->price }} тг @if ($post->deal == 'on') <small>Торг&nbsp;возможен</small> @endif</h4>
                   </div>
-                  <p>{{ $post->city->title }}<br><small>{{ $post->created_at }}</small> | <small>Просмотров: {{ $post->views }}</small></p>
+                  <p class="text-gray">{{ $post->city->title }}<br><small>{{ $post->created_at }}</small> &nbsp; <small><i class="fa fa-smile-o"></i> {{ $post->views }}</small> &nbsp; <small><i class="fa fa-comments"></i> {{ $post->comments->count() }}</small></p>
                 </div>
               </div>
               <br>

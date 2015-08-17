@@ -20,6 +20,7 @@ class CommentController extends Controller
             'email' => 'required|min:8|max:60',
             'comment' => 'required|min:5|max:500',
             'stars' => 'required|integer|between:1,5',
+            'equal' => 'required|min:1|max:2',
 
         ]);
 
@@ -28,6 +29,19 @@ class CommentController extends Controller
             return redirect()
                 ->back()
                 ->withErrors($validator)
+                ->withInput();
+        }
+
+        list( , $first_number) = explode('_', $request->type_1);
+        list( , $second_number) = explode('_', $request->type_2);
+
+        $equal = (int) $first_number + (int) $second_number;
+
+        if ($equal != $request->equal)
+        {
+            return redirect()
+                ->back()
+                ->withErrors(['Уравнение не верно!'])
                 ->withInput();
         }
 
@@ -55,6 +69,34 @@ class CommentController extends Controller
 
     public function saveComment(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|min:3|max:60',
+            'email' => 'required|min:8|max:60',
+            'comment' => 'required|min:5|max:2000',
+            'equal' => 'required|min:1|max:2',
+        ]);
+
+        if ($validator->fails())
+        {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        list( , $first_number) = explode('_', $request->type_1);
+        list( , $second_number) = explode('_', $request->type_2);
+
+        $equal = (int) $first_number + (int) $second_number;
+        
+        if ($equal != $request->equal)
+        {
+            return redirect()
+                ->back()
+                ->withErrors(['Уравнение не верно!'])
+                ->withInput();
+        }
+
         $url = explode('/', URL::previous());
         $id = end($url);
 

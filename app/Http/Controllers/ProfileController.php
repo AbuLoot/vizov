@@ -24,8 +24,10 @@ class ProfileController extends Controller
     {
         $profile = Profile::find($id);
         $posts = $profile->user->posts()->orderBy('id', 'DESC')->get();
+        $first_number = rand(1, 10);
+        $second_number = rand(1, 10);
 
-        return view('profile.profile_user', compact('posts', 'profile'));
+        return view('profile.profile_user', compact('posts', 'profile', 'first_number', 'second_number'));
     }
 
     public function getProfiles()

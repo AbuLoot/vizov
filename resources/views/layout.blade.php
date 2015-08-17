@@ -20,7 +20,6 @@
     <![endif]-->
   </head>
   <body>
-
     <header class="slider">
       <div class="container">
         <div class="col-md-2 col-sm-2 el-logo-space">

@@ -6,8 +6,10 @@
       @foreach ($chunk as $section)
         <div class="col-md-3">
           <div class="service-block">
-            <img src="/img/section/{{ $section->image }}" class="img-responsive center-block" alt="{{ $section->title }}">
-            <h5 class="text-center"><a href="{{ url($section->service->slug.'/'.$section->slug.'/'.$section->id) }}">{{ $section->title }}</a></h5>
+            <a href="{{ url($section->service->slug.'/'.$section->slug.'/'.$section->id) }}" class="center-block text-center">
+              <img src="/img/section/{{ $section->image }}" class="img-responsive center-block" alt="{{ $section->title }}">
+              <h5>{{ $section->title }}</h5>
+            </a>
           </div>
         </div>
       @endforeach

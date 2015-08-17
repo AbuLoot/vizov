@@ -7,6 +7,9 @@ body {
   background-color: #f5f8fa;
   /*background-color: #F2F2F2;*/
 }
+.text-gray {
+  color: #666666;
+}
 
 /* Header */
 .slider {
@@ -120,7 +123,7 @@ body {
   margin-bottom: 5px;
 }
 .gallery ol li:hover {
-  outline: 3px solid #9954bb;
+  outline: 3px solid #2780e3;
 }
 
 /* Admin styles */

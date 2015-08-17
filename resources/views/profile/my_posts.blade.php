@@ -26,13 +26,13 @@
                         <h4 class="media-heading post-title-fix">
                           <a href="{{ route('show-post-call', ['post' => $post->slug, 'id' => $post->id]) }}">{{ $post->title }}</a>
                         </h4>
-                        <p>
-                          {{ $post->city->title }} | <b>{{ $post->section->title }}</b><br>
-                          <small>{{ $post->created_at }}</small> | <small>Просмотров: {{ $post->views }}</small> | <small>Комментарии: {{ $post->comments->count() }}</small>
+                        <p class="text-gray">
+                          {{ $post->city->title }} / <b>{{ $post->section->title }}</b><br>
+                          <small>{{ $post->created_at }}</small> &nbsp; <small><i class="fa fa-smile-o"></i>  {{ $post->views }}</small> &nbsp; <small><i class="fa fa-comment"></i> {{ $post->comments->count() }}</small>
                         </p>
                       </div>
                       <div class="col-md-4">
-                        <h4 class="media-heading text-right text-success"><b>{{ $post->price }} тг</b> @if ($post->deal == 'on') Торг&nbsp;возможен @endif</h4>
+                        <h4 class="media-heading text-right text-success"><b>{{ $post->price }} тг</b> @if ($post->deal == 'on') <small>Торг&nbsp;возможен</small> @endif</h4>
                         <br>
                         <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-block btn-primary btn-xs"><i class="fa fa-edit"></i> Редактировать</a>
                         <p></p>
