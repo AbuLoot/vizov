@@ -13,7 +13,7 @@
               <div class="table-responsive">
                 <table class="table table-striped table-hover">
                   <tr>
-                    <td width="170">Ваше ФИО</td>
+                    <td style="width:170px">Ваше ФИО</td>
                     <td>{{ Auth::user()->name }}</td>
                   </tr>
                   <tr>

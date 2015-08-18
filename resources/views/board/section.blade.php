@@ -13,7 +13,6 @@
           </div>
         </div>
       @endforeach
-    </div>
-    <br>
+    </div><br>
   @endforeach
 @endsection

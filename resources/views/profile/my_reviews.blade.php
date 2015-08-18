@@ -15,7 +15,7 @@
                   <tbody>
                     @foreach ($profile->comments as $comment)
                       <tr>
-                        <td width="110">{{ $comment->name }}</td>
+                        <td style="width:110px">{{ $comment->name }}</td>
                         <td>
                           <small class="text-muted">{{ $comment->created_at }}</small><br>
                           {{ $comment->comment }}<br>
@@ -30,11 +30,11 @@
                             @endfor
                           </span>
                         </td>
-                        <td width="40">
+                        <td style="width:100px">
                           <form method="POST" action="/my_reviews/{{ $comment->id }}" accept-charset="UTF-8">
                             <input name="_method" type="hidden" value="DELETE">
                             <input name="_token" type="hidden" value="{{ csrf_token() }}">
-                            <button type="submit" class="btn btn-block btn-danger btn-xs" onclick="return confirm('Удалить объявление?')"><span class="fa fa-times"></span></button>
+                            <button type="submit" class="btn btn-block btn-default btn-xs" onclick="return confirm('Удалить объявление?')"><i class="fa fa-minus"></i> Скрыть</button>
                           </form>
                         </td>
                       </tr>

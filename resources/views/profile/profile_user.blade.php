@@ -22,7 +22,7 @@
                   <div class="table-responsive">
                     <table class="table table-striped table-hover">
                       <tr>
-                        <td width="170">ФИО</td>
+                        <td style="width:170px">ФИО</td>
                         <td>{{ $profile->user->name }}</td>
                       </tr>
                       <tr>
@@ -74,9 +74,9 @@
                       <div class="media-left">
                         <a href="{{ url($post->service_id.'/'.$post->slug.'/'.$post->id) }}">
                           @if ( ! empty($post->image))
-                            <img class="media-object" src="/img/posts/{{ $post->user_id.'/'.$post->image }}" alt="{{ $post->title }}" width="200">
+                            <img class="media-object" src="/img/posts/{{ $post->user_id.'/'.$post->image }}" alt="{{ $post->title }}" style="width:200px">
                           @else
-                            <img class="media-object" src="/img/no-main-image.png" alt="{{ $post->title }}" width="200">
+                            <img class="media-object" src="/img/no-main-image.png" alt="{{ $post->title }}" style="width:200px">
                           @endif
                         </a>
                       </div>
@@ -89,7 +89,7 @@
                         </div>
                         <p class="text-gray">
                           {{ $post->city->title }} / <b>{{ $post->section->title }}</b><br>
-                          <small>{{ $post->created_at }}</small> &nbsp; <small><i class="fa fa-smile-o"></i> {{ $post->views }}</small> &nbsp; <small><i class="fa fa-comment"></i> {{ $post->comments->count() }}</small>
+                          <small>{{ $post->created_at }} &nbsp; <i class="fa fa-smile-o"></i> {{ $post->views }} &nbsp; <i class="fa fa-comments-o"></i> {{ $post->comments->count() }}</small>
                         </p>
                       </div>
                     </div>
@@ -108,7 +108,7 @@
                         <tbody>
                           @foreach ($profile->comments as $comment)
                             <tr>
-                              <th width="110">{{ $comment->name }}</th>
+                              <th style="width:110px">{{ $comment->name }}</th>
                               <td>
                                 {{ $comment->comment }}<br>
                                 Оценка:
@@ -208,7 +208,7 @@
                               <tbody>
                                 <tr>
                                   <th class="text-nowrap">{{ $second_number }} + {{ $first_number }} =&nbsp;</th>
-                                  <td><input type="text" class="form-control input-sm" id="equal" name="equal" minlength="1" maxlength="5" placeholder="?" required></td>
+                                  <td><input type="text" class="form-control input-sm" id="equal" name="equal" minlength="1" maxlength="2" placeholder="?" required></td>
                                 </tr>
                               </tbody>
                             </table>

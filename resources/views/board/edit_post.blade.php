@@ -90,7 +90,7 @@
                 <label for="price" class="col-md-3">Описание</label>
                 <div class="col-md-9">
                   <div class="row">
-                    <textarea class="form-control" id="description" name="description" rows="3" maxlength="2000">{{ (old('description')) ? old('description') : $post->description }}</textarea>
+                    <textarea class="form-control" id="description" name="description" rows="6" maxlength="2000">{{ (old('description')) ? old('description') : $post->description }}</textarea>
                   </div>
                 </div>
               </div>

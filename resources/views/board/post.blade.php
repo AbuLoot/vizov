@@ -19,9 +19,9 @@
                     $images = [];
                 ?>
                 @if ( ! empty($post->image))
-                  <img class="media-object" src="/img/posts/{{ $post->user_id.'/'.$post->image }}" alt="{{ $post->title }}" width="300">
+                  <img class="media-object" src="/img/posts/{{ $post->user_id.'/'.$post->image }}" alt="{{ $post->title }}" style="width:300px">
                 @else
-                  <img class="media-object" src="/img/no-main-image.png" alt="{{ $post->title }}" width="300">
+                  <img class="media-object" src="/img/no-main-image.png" alt="{{ $post->title }}" style="width:300px">
                 @endif
               </div>
               <div class="media-body">
@@ -29,7 +29,7 @@
                   <table class="table table-condensed">
                     <tbody>
                       <tr>
-                        <td width="150">Цена</td>
+                        <td style="width:150px">Цена</td>
                         <td><b class="text-success">{{ $post->price }} тг</b> @if ($post->deal == 'on') <small class="text-muted">- Торг&nbsp;возможен</small> @endif</td>
                       </tr>
                       <tr>
@@ -90,19 +90,18 @@
                 @foreach ($images as $key => $image)
                   @if ($i == 0)
                     <li data-target="#carousel-example-generic" data-slide-to="0" class="active">
-                      <a href="#" class="">
-                        <img src="/img/posts/{{ $post->user_id.'/'.$image['mini_image'] }}" class="img-responsive" width="95">
+                      <a href="#">
+                        <img src="/img/posts/{{ $post->user_id.'/'.$image['mini_image'] }}" class="img-responsive" style="width:95px">
                       </a>
                     </li>
-                    <?php $i++; ?>
                   @else
-                    <li data-target="#carousel-example-generic" data-slide-to="{{ $i }}" class="">
-                      <a href="#" class="">
-                        <img src="/img/posts/{{ $post->user_id.'/'.$image['mini_image'] }}" class="img-responsive" width="95">
+                    <li data-target="#carousel-example-generic" data-slide-to="{{ $i }}">
+                      <a href="#">
+                        <img src="/img/posts/{{ $post->user_id.'/'.$image['mini_image'] }}" class="img-responsive" style="width:95px">
                       </a>
                     </li>
-                    <?php $i++; ?>
                   @endif
+                  <?php $i++; ?>
                 @endforeach
               </ol>
             </div>
@@ -119,7 +118,7 @@
                     <tbody>
                       @foreach ($post->comments as $comment)
                         <tr>
-                          <th width="110">{{ $comment->name }}</th>
+                          <th style="width:110px">{{ $comment->name }}</th>
                           <td>
                             {{ $comment->comment }}<br>
                             <small>Опубликовано {{ $comment->created_at }}</small>
@@ -167,7 +166,7 @@
                         <tbody>
                           <tr>
                             <th class="text-nowrap">{{ $second_number }} + {{ $first_number }} =&nbsp;</th>
-                            <td><input type="text" class="form-control input-sm" id="equal" name="equal" minlength="1" maxlength="5" placeholder="?" required></td>
+                            <td><input type="text" class="form-control input-sm" id="equal" name="equal" minlength="1" maxlength="2" placeholder="?" required></td>
                           </tr>
                         </tbody>
                       </table>
@@ -198,9 +197,9 @@
                   <div class="media-left">
                     <a href="/profile/{{ $profile->id }}">
                       @if (empty($profile->avatar))
-                        <img src="/img/no-avatar.png" class="media-object" alt="..." width="90">
+                        <img src="/img/no-avatar.png" class="media-object" alt="..." style="width:90px">
                       @else
-                        <img src="/img/users/{{ $profile->user->id . '/' . $profile->avatar }}" class="media-object" alt="..." width="90">
+                        <img src="/img/users/{{ $profile->user->id . '/' . $profile->avatar }}" class="media-object" alt="..." style="width:90px">
                       @endif
                     </a>
                   </div>

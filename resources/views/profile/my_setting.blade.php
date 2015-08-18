@@ -11,8 +11,7 @@
               @include('partials.alerts')
               <h3>Изменение пароля</h3>
               <form method="POST" action="{{ route('reset-password') }}" role="form">
-                <input name="_method" type="hidden" value="PUT">
-                <input name="_token" type="hidden" value="{{ csrf_token() }}">
+                {!! csrf_field() !!}
                 <div class="form-group">
                   <label for="password">Старый пароль:</label>
                   <input class="form-control" placeholder="Старый пароль" name="password" id="password" type="password" minlength="6" maxlength="60" required>
@@ -27,8 +26,7 @@
                 </div>
                 <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-floppy-save"></span> Изменить</button>
               </form>
-            </div>
-            <br>
+            </div><br>
 
             <script type="text/javascript">
               window.onload = function () {

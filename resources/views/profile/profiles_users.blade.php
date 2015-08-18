@@ -11,9 +11,9 @@
                   <div class="media-left">
                     <a href="/profile/{{ $profile->id }}">
                       @if (empty($profile->avatar))
-                        <img src="/img/no-avatar.png" class="media-object" alt="..." width="90">
+                        <img src="/img/no-avatar.png" class="media-object" alt="..." style="width:90px">
                       @else
-                        <img src="/img/users/{{ $profile->user->id . '/' . $profile->avatar }}" class="media-object" alt="..." width="90">
+                        <img src="/img/users/{{ $profile->user->id . '/' . $profile->avatar }}" class="media-object" alt="..." style="width:90px">
                       @endif
                     </a>
                   </div>

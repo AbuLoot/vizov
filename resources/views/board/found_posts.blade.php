@@ -9,8 +9,8 @@
                 <input type="hidden" name="section_id" value="{{ (isset($section)) ? $section->id : null }}">
                 <table class="table-condensed">
                   <tr>
-                    <td>Город</td>
-                    <td>
+                    <td style="width:55px">Город</td>
+                    <td style="width:160px">
                       <select class="form-control input-sm" name="city_id">
                         @foreach($cities as $city)
                           @if ($city->id === Request::input('city_id'))
@@ -20,13 +20,14 @@
                           @endif
                         @endforeach
                       </select>
+                    </td>
+                    <td style="width:195px">
                       <div class="checkbox">
                         <label>
-                          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="image" @if (Request::input('image')) checked @endif> Только с фото
+                          <input type="checkbox" name="image" @if (Request::input('image')) checked @endif> Только с фото
                         </label>
                       </div>
                     </td>
-                    <td></td>
                   </tr>
                   <tr>
                     <td>Цена</td>
@@ -34,7 +35,8 @@
                       <div class="input-group input-group-sm">
                         <input type="text" class="form-control" name="from" placeholder="от" value="{{ (Request::input('from')) ? Request::input('from') : NULL }}">
                       </div>
-                      <label>-</label>
+                    </td>
+                    <td>
                       <div class="input-group input-group-sm">
                         <input type="text" class="form-control" name="to" placeholder="до" value="{{ (Request::input('to')) ? Request::input('to') : NULL }}">
                         <div class="input-group-addon">тг</div>
@@ -64,9 +66,9 @@
                 <div class="media-left">
                   <a href="{{ url($post->service_id.'/'.$post->slug.'/'.$post->id) }}">
                     @if ( ! empty($post->image))
-                      <img class="media-object" src="/img/posts/{{ $post->user_id.'/'.$post->image }}" alt="{{ $post->title }}" width="200">
+                      <img class="media-object" src="/img/posts/{{ $post->user_id.'/'.$post->image }}" alt="{{ $post->title }}" style="width:20px0">
                     @else
-                      <img class="media-object" src="/img/no-main-image.png" alt="{{ $post->title }}" width="200">
+                      <img class="media-object" src="/img/no-main-image.png" alt="{{ $post->title }}" style="width:20px0">
                     @endif
                   </a>
                 </div>
@@ -77,10 +79,9 @@
                     </h4>
                     <h4 class="col-md-4 media-heading text-right text-success">{{ $post->price }} тг @if ($post->deal == 'on') <small>Торг&nbsp;возможен</small> @endif</h4>
                   </div>
-                  <p class="text-gray">{{ $post->city->title }}<br><small>{{ $post->created_at }}</small> / <small>Просмотров: {{ $post->views }}</small></p>
+                  <p class="text-gray">{{ $post->city->title }}<br><small>{{ $post->created_at }} &nbsp; <i class="fa fa-smile-o"></i> {{ $post->views }} &nbsp; <i class="fa fa-comments-o"></i> {{ $post->comments->count() }}</small></p>
                 </div>
-              </div>
-              <br>
+              </div><br>
             @empty
               <h4>Ничего не найдено.</h4>
               <a href="{{ route('posts.create') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Добавить объявление</a>
@@ -102,9 +103,9 @@
                   <div class="media-left">
                     <a href="/profile/{{ $profile->id }}">
                       @if (empty($profile->avatar))
-                        <img src="/img/no-avatar.png" class="media-object" alt="..." width="90">
+                        <img src="/img/no-avatar.png" class="media-object" alt="..." style="width:90px">
                       @else
-                        <img src="/img/users/{{ $profile->user->id . '/' . $profile->avatar }}" class="media-object" alt="..." width="90">
+                        <img src="/img/users/{{ $profile->user->id . '/' . $profile->avatar }}" class="media-object" alt="..." style="width:90px">
                       @endif
                     </a>
                   </div>

@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>@yield('title_description', 'Vizov.kz')</title>
-    <meta name="author" content="Darkhan &amp; Issayev Adilet">
     <meta name="description" content="@yield('meta_description', 'Vizov.kz')">
 
     <link href="/bower_components/bootstrap/dist/css/bootstrap-cosmo.css" rel="stylesheet">

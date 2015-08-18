@@ -14,9 +14,9 @@
                   <div class="media-left">
                     <a href="{{ route('show-post-call', ['post' => $post->slug, 'id' => $post->id]) }}">
                       @if ( ! empty($post->image))
-                        <img class="media-object" src="/img/posts/{{ $post->user_id.'/'.$post->image }}" alt="{{ $post->title }}" width="200">
+                        <img class="media-object" src="/img/posts/{{ $post->user_id.'/'.$post->image }}" alt="{{ $post->title }}" style="width:200px">
                       @else
-                        <img class="media-object" src="/img/no-main-image.png" alt="{{ $post->title }}" width="200">
+                        <img class="media-object" src="/img/no-main-image.png" alt="{{ $post->title }}" style="width:200px">
                       @endif
                     </a>
                   </div>
@@ -28,11 +28,11 @@
                         </h4>
                         <p class="text-gray">
                           {{ $post->city->title }} / <b>{{ $post->section->title }}</b><br>
-                          <small>{{ $post->created_at }}</small> &nbsp; <small><i class="fa fa-smile-o"></i>  {{ $post->views }}</small> &nbsp; <small><i class="fa fa-comment"></i> {{ $post->comments->count() }}</small>
+                          <small>{{ $post->created_at }} &nbsp; <i class="fa fa-smile-o"></i>  {{ $post->views }} &nbsp; <i class="fa fa-comments-o"></i> {{ $post->comments->count() }}</small>
                         </p>
                       </div>
                       <div class="col-md-4">
-                        <h4 class="media-heading text-right text-success"><b>{{ $post->price }} тг</b> @if ($post->deal == 'on') <small>Торг&nbsp;возможен</small> @endif</h4>
+                        <h4 class="media-heading text-right text-success">{{ $post->price }} тг @if ($post->deal == 'on') <br><small>Торг&nbsp;возможен</small> @endif</h4>
                         <br>
                         <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-block btn-primary btn-xs"><i class="fa fa-edit"></i> Редактировать</a>
                         <p></p>

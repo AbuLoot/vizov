@@ -8,7 +8,6 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Auth;
-use App\User;
 use App\Profile;
 use App\City;
 use App\Section;
@@ -16,7 +15,6 @@ use App\Http\Requests\MyProfileRequest;
 use Image;
 use Storage;
 use App\Post;
-use App\PostMaterial;
 
 class ProfileController extends Controller
 {

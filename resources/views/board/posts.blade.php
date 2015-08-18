@@ -13,20 +13,21 @@
                 <input type="hidden" name="section_id" value="{{ $section->id }}">
                 <table class="table-condensed">
                   <tr>
-                    <td>Город</td>
-                    <td>
+                    <td style="width:55px">Город</td>
+                    <td style="width:160px">
                       <select class="form-control input-sm" name="city_id">
                         @foreach($cities as $city)
                           <option value="{{ $city->id }}">{{ $city->title }}</option>
                         @endforeach
                       </select>
+                    </td>
+                    <td style="width:195px">
                       <div class="checkbox">
                         <label>
-                          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="image"> Только с фото
+                          <input type="checkbox" name="image"> Только с фото
                         </label>
                       </div>
                     </td>
-                    <td></td>
                   </tr>
                   <tr>
                     <td>Цена</td>
@@ -34,7 +35,8 @@
                       <div class="input-group input-group-sm">
                         <input type="text" class="form-control" name="from" placeholder="от">
                       </div>
-                      <label>-</label>
+                    </td>
+                    <td>
                       <div class="input-group input-group-sm">
                         <input type="text" class="form-control" name="to" placeholder="до">
                         <div class="input-group-addon">тг</div>
@@ -56,9 +58,9 @@
                 <div class="media-left">
                   <a href="{{ url($post->service_id.'/'.$post->slug.'/'.$post->id) }}">
                     @if ( ! empty($post->image))
-                      <img class="media-object" src="/img/posts/{{ $post->user_id.'/'.$post->image }}" alt="{{ $post->title }}" width="200">
+                      <img class="media-object" src="/img/posts/{{ $post->user_id.'/'.$post->image }}" alt="{{ $post->title }}" style="width:200px">
                     @else
-                      <img class="media-object" src="/img/no-main-image.png" alt="{{ $post->title }}" width="200">
+                      <img class="media-object" src="/img/no-main-image.png" alt="{{ $post->title }}" style="width:200px">
                     @endif
                   </a>
                 </div>
@@ -69,10 +71,9 @@
                     </h4>
                     <h4 class="col-md-4 media-heading text-right text-success">{{ $post->price }} тг @if ($post->deal == 'on') <small>Торг&nbsp;возможен</small> @endif</h4>
                   </div>
-                  <p class="text-gray">{{ $post->city->title }}<br><small>{{ $post->created_at }}</small> &nbsp; <small><i class="fa fa-smile-o"></i> {{ $post->views }}</small> &nbsp; <small><i class="fa fa-comments"></i> {{ $post->comments->count() }}</small></p>
+                  <p class="text-gray">{{ $post->city->title }}<br><small>{{ $post->created_at }} &nbsp; <i class="fa fa-smile-o"></i> {{ $post->views }} &nbsp; <i class="fa fa-comments-o"></i> {{ $post->comments->count() }}</small></p>
                 </div>
-              </div>
-              <br>
+              </div><br>
             @empty
               <h4>В этой рубрике пока нет объявлений.</h4>
               <a href="{{ route('posts.create') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Добавить объявление</a>
@@ -94,9 +95,9 @@
                   <div class="media-left">
                     <a href="/profile/{{ $profile->id }}">
                       @if (empty($profile->avatar))
-                        <img src="/img/no-avatar.png" class="media-object" alt="..." width="90">
+                        <img src="/img/no-avatar.png" class="media-object" alt="..." style="width:90px">
                       @else
-                        <img src="/img/users/{{ $profile->user->id.'/'.$profile->avatar }}" class="media-object" alt="..." width="90">
+                        <img src="/img/users/{{ $profile->user->id.'/'.$profile->avatar }}" class="media-object" alt="..." style="width:90px">
                       @endif
                     </a>
                   </div>
