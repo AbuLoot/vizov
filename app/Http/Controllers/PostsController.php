@@ -313,6 +313,11 @@ class PostsController extends Controller
     {
         $post = Auth::user()->posts()->find($id);
 
+        foreach ($post->comments as $comment)
+        {
+            $comment->delete();
+        }
+
         if ( ! empty($post->images))
         {
             $images = unserialize($post->images);

@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Auth;
+use App\User;
 use App\Profile;
 use App\City;
 use App\Section;
@@ -15,6 +16,7 @@ use App\Http\Requests\MyProfileRequest;
 use Image;
 use Storage;
 use App\Post;
+use Validator;
 
 class ProfileController extends Controller
 {
@@ -51,7 +53,7 @@ class ProfileController extends Controller
         return view('profile.my_profile_edit', compact('profile', 'cities', 'section'));
     }
 
-    public function postMyProfile(MyProfileRequest $request, $id)
+    public function updateMyProfile(MyProfileRequest $request, $id)
     {
         $profile = Auth::user()->profile;
 
@@ -114,12 +116,38 @@ class ProfileController extends Controller
     	return view('profile.my_setting');
     }
 
-    public function postResetPassword(Request $request)
+    public function updatePassword(Request $request)
     {
-        dd($request->all());
+        $validator = Validator::make($request->all(), [
+            'password' => 'required|min:6|max:60',
+            'new_password' => 'required|confirmed|min:6|max:60',
+            'new_password_confirmation' => 'required|min:6|max:60'
+        ]);
+
+        if ($validator->fails())
+        {
+            return redirect()->back()->withErrors($validator);
+        }
+
+        if (Auth::attempt(['email' => Auth::user()->email, 'password' => $request->password]))
+        {
+            Auth::logout();
+            echo "qwerty";
+            exit();
+            $user = User::findOrFail(Auth::id());
+            $user->fill([
+                'password' => bcrypt($request->password)
+            ])->save();
+
+            return redirect()->back()->with('status', 'Пароль изменен!');
+        }
+        else
+        {
+            return redirect()->back()->withErrors('Пароль не верный!');
+        }
     }
 
-    public function postDeleteAccount(Request $request)
+    public function deleteAccount(Request $request)
     {
         dd($request->all());
     }

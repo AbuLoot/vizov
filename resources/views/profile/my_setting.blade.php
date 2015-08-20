@@ -10,7 +10,8 @@
             <div class="content-block">
               @include('partials.alerts')
               <h3>Изменение пароля</h3>
-              <form method="POST" action="{{ route('reset-password') }}" role="form">
+
+              <form method="POST" action="{{ route('update-password') }}" role="form">
                 {!! csrf_field() !!}
                 <div class="form-group">
                   <label for="password">Старый пароль:</label>

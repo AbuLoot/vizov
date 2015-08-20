@@ -7,6 +7,7 @@
             <div class="well well-modified well-sm hidden-xs">
               <form action="/filter" class="form-inline">
                 <input type="hidden" name="section_id" value="{{ (isset($section)) ? $section->id : null }}">
+                <input type="hidden" name="text" value="{{ (isset($text)) ? $text : null }}">
                 <table class="table-condensed">
                   <tr>
                     <td style="width:55px">Город</td>
@@ -66,9 +67,9 @@
                 <div class="media-left">
                   <a href="{{ url($post->service_id.'/'.$post->slug.'/'.$post->id) }}">
                     @if ( ! empty($post->image))
-                      <img class="media-object" src="/img/posts/{{ $post->user_id.'/'.$post->image }}" alt="{{ $post->title }}" style="width:20px0">
+                      <img class="media-object" src="/img/posts/{{ $post->user_id.'/'.$post->image }}" alt="{{ $post->title }}" style="width:200px">
                     @else
-                      <img class="media-object" src="/img/no-main-image.png" alt="{{ $post->title }}" style="width:20px0">
+                      <img class="media-object" src="/img/no-main-image.png" alt="{{ $post->title }}" style="width:200px">
                     @endif
                   </a>
                 </div>
@@ -79,7 +80,7 @@
                     </h4>
                     <h4 class="col-md-4 media-heading text-right text-success">{{ $post->price }} тг @if ($post->deal == 'on') <small>Торг&nbsp;возможен</small> @endif</h4>
                   </div>
-                  <p class="text-gray">{{ $post->city->title }}<br><small>{{ $post->created_at }} &nbsp; <i class="fa fa-smile-o"></i> {{ $post->views }} &nbsp; <i class="fa fa-comments-o"></i> {{ $post->comments->count() }}</small></p>
+                  <p class="text-gray">{{ $post->city->title }} / <b>{{ $post->section->title }}</b><br><small>{{ $post->created_at }} &nbsp; <i class="fa fa-smile-o"></i> {{ $post->views }} &nbsp; <i class="fa fa-comments-o"></i> {{ $post->comments->count() }}</small></p>
                 </div>
               </div><br>
             @empty
@@ -94,10 +95,8 @@
       <div class="col-md-4">
         <div class="row-right">
           <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">Топ по рейтингу</h3>
-            </div>
             <div class="panel-body">
+              <h4 class="rating-title">Топ по рейтингу</h4>
               @foreach ($profiles as $profile)
                 <div class="media">
                   <div class="media-left">

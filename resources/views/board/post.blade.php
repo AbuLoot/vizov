@@ -18,11 +18,7 @@
                   else
                     $images = [];
                 ?>
-                @if ( ! empty($post->image))
-                  <img class="media-object" src="/img/posts/{{ $post->user_id.'/'.$post->image }}" alt="{{ $post->title }}" style="width:300px">
-                @else
-                  <img class="media-object" src="/img/no-main-image.png" alt="{{ $post->title }}" style="width:300px">
-                @endif
+                <img class="media-object" src="/img/{{ ( ! empty($post->image)) ? 'posts/'.$post->user_id.'/'.$post->image : 'no-main-image.png' }}" alt="{{ $post->title }}" style="width:300px">
               </div>
               <div class="media-body">
                 <div class="table-responsive">
@@ -188,10 +184,8 @@
       <div class="col-md-4">
         <div class="row-right">
           <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">Топ по рейтингу</h3>
-            </div>
             <div class="panel-body">
+              <h4 class="rating-title">Топ по рейтингу</h4>
               @foreach ($profiles as $profile)
                 <div class="media">
                   <div class="media-left">

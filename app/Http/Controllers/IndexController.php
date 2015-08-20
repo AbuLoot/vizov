@@ -133,6 +133,8 @@ class IndexController extends Controller
             ->orderBy('id', 'DESC')
             ->paginate(10);
 
+        dd($posts);
+
         $posts->appends(['text' => $text]);
 
         return view('board.found_posts', compact('cities', 'text', 'posts', 'profiles'));
@@ -140,8 +142,14 @@ class IndexController extends Controller
 
     public function filterPosts(Request $request)
     {
+        // dd($request->all());
+
         $query  = ($request->section_id)
             ? 'section_id = ' . (int) $request->section_id . ' AND '
+            : NULL;
+
+        $query .= ($request->text)
+            ? ''
             : NULL;
 
         $query .= ($request->city_id)

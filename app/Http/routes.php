@@ -32,16 +32,15 @@ Route::group(['middleware' => 'auth'], function()
 
 	Route::get('my_profile', ['uses' => 'ProfileController@getMyProfile']);
 	Route::get('my_profile/edit', ['uses' => 'ProfileController@editMyProfile']);
-	Route::post('my_profile/{id}', ['uses' => 'ProfileController@postMyProfile']);
+	Route::post('my_profile/{id}', ['uses' => 'ProfileController@updateMyProfile']);
 
 	Route::get('my_posts', ['uses' => 'ProfileController@getMyPosts']);
 
 	Route::get('my_reviews', ['uses' => 'ProfileController@getMyReviews']);
-	Route::post('my_reviews/{id}', ['uses' => 'ProfileController@deleteMyReviews']);
 
 	Route::get('my_setting', ['uses' => 'ProfileController@getMySetting']);
-	Route::post('reset_password', ['as' => 'reset-password', 'uses' => 'ProfileController@postResetPassword']);
-	Route::post('delete_account', ['as' => 'delete-account', 'uses' => 'ProfileController@postDeleteAccount']);
+	Route::post('update_password', ['as' => 'update-password', 'uses' => 'ProfileController@updatePassword']);
+	Route::post('delete_account', ['as' => 'delete-account', 'uses' => 'ProfileController@deleteAccount']);
 });
 
 // Pages

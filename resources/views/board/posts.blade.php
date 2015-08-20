@@ -86,10 +86,8 @@
       <div class="col-md-4">
         <div class="row-right">
           <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">Топ по рейтингу</h3>
-            </div>
             <div class="panel-body">
+              <h4 class="rating-title">Топ по рейтингу</h4>
               @foreach ($profiles as $profile)
                 <div class="media">
                   <div class="media-left">
