@@ -7,27 +7,29 @@
         </div>
         <div class="col-md-9">
           <div class="row-left">
-            <div class="content-block">
-              @include('partials.alerts')
-              <h3>Изменение пароля</h3>
+            <div class="panel panel-default">
+              <div class="panel-body">
+                @include('partials.alerts')
+                <h3>Изменение пароля</h3>
 
-              <form method="POST" action="{{ route('update-password') }}" role="form">
-                {!! csrf_field() !!}
-                <div class="form-group">
-                  <label for="password">Старый пароль:</label>
-                  <input class="form-control" placeholder="Старый пароль" name="password" id="password" type="password" minlength="6" maxlength="60" required>
-                </div>
-                <div class="form-group">
-                  <label for="new_password">Новый пароль:</label>
-                  <input class="form-control" placeholder="Новый пароль" name="new_password" id="new_password" type="password" minlength="6" maxlength="60" required>
-                </div>
-                <div class="form-group">
-                  <label for="new_password_confirmation">Введите еще раз новый пароль:</label>
-                  <input class="form-control" placeholder="Подтвердите новый пароль" name="new_password_confirmation" id="new_password_confirmation" type="password" minlength="6" maxlength="60" required>
-                </div>
-                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-floppy-save"></span> Изменить</button>
-              </form>
-            </div><br>
+                <form method="POST" action="{{ route('update-password') }}" role="form">
+                  {!! csrf_field() !!}
+                  <div class="form-group">
+                    <label for="password">Старый пароль:</label>
+                    <input class="form-control" placeholder="Старый пароль" name="password" id="password" type="password" minlength="6" maxlength="60" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="new_password">Новый пароль:</label>
+                    <input class="form-control" placeholder="Новый пароль" name="new_password" id="new_password" type="password" minlength="6" maxlength="60" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="new_password_confirmation">Введите еще раз новый пароль:</label>
+                    <input class="form-control" placeholder="Подтвердите новый пароль" name="new_password_confirmation" id="new_password_confirmation" type="password" minlength="6" maxlength="60" required>
+                  </div>
+                  <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-floppy-save"></span> Изменить</button>
+                </form>
+              </div>
+            </div>
 
             <script type="text/javascript">
               window.onload = function () {

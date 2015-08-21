@@ -1,12 +1,12 @@
 @extends('layout')
 
 @section('content')
-      <div class="content-block">
+    <div class="panel panel-default">
+      <div class="panel-body">
         <h3 class="col-md-offset-2">Разместить услугу</h3>
 
         <div class="row">
           <div class="col-md-8">
-
             <form action="{{ route('posts.store') }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
               {!! csrf_field() !!}
               <div class="form-group">
@@ -225,6 +225,7 @@
           </div>
         </div>
       </div>
+    </div>
 @endsection
 
 @section('styles')

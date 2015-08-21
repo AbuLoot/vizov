@@ -131,13 +131,9 @@ class ProfileController extends Controller
 
         if (Auth::attempt(['email' => Auth::user()->email, 'password' => $request->password]))
         {
-            Auth::logout();
-            echo "qwerty";
-            exit();
             $user = User::findOrFail(Auth::id());
-            $user->fill([
-                'password' => bcrypt($request->password)
-            ])->save();
+            $user->password = bcrypt($request->password);
+            $user->update();
 
             return redirect()->back()->with('status', 'Пароль изменен!');
         }
