@@ -3,7 +3,7 @@
 @section('content')
     <div class="panel panel-default">
       <div class="panel-body">
-        <h3 class="col-md-offset-2">Редактирование объявления</h3>
+        <h3>Редактирование объявления</h3>
 
         <div class="row">
           <form action="{{ route('posts.update', $post->id) }}" method="POST" class="form-horizontal" enctype="multipart/form-data">

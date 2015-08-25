@@ -77,9 +77,8 @@ class ProfileController extends Controller
             }
         }
 
-        $user = Auth::user();
-        $user->name = $request->name;
-        $user->save();
+        $profile->user->name = $request->name;
+        $profile->user->save();
 
         $profile->city_id = $request->city_id;
         if ($request->section_id != 0)

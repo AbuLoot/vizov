@@ -2,10 +2,10 @@
 
 @section('content')
       @include('partials.admin_menu')
-      <div class="row">
-        <div class="col-md-12">
-          <div class="panel panel-default">
-            <div class="panel-body">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12">
               @include('partials.alerts')
               <p class="text-right">
                 <a href="#" class="btn btn-success btn-sm">Добавить</a>
@@ -14,10 +14,10 @@
                 <table class="table table-striped table-condensed table-hover">
                   <tr>
                     <th>№</th>
-                    <th>Номер</th>
                     <th>Рубрика</th>
                     <th>Название</th>
                     <th>Цена</th>
+                    <th>Номер</th>
                     <th>Статус</th>
                     <th class="text-right">Функции</th>
                   </tr>
@@ -25,10 +25,10 @@
                   @forelse ($posts as $post)
                     <tr>
                       <td><b>{{ $i++ }}</b></td>
-                      <td>{{ $post->sort_id }}</td>
                       <td>{{ $post->section->title }}</td>
                       <td><a href="{{ url($post->service_id.'/'.$post->slug.'/'.$post->id) }}" target="_blank">{{ $post->title }}</a></td>
-                      <td>{{ $post->price }} тг</td>
+                      <td class="text-nowrap">{{ $post->price }} тг</td>
+                      <td>{{ $post->sort_id }}</td>
                       @if ($post->status == 1)
                         <td class="success">Активен</td>
                       @else

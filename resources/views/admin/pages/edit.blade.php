@@ -2,11 +2,11 @@
 
 @section('content')
       @include('partials.admin_menu')
-      <div class="row">
-        <div class="col-md-8">
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <h3 class="col-md-offset-3">Редактирование</h3>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-8">
+              <h3>Редактирование страницы</h3>
               <form action="{{ route('admin.pages.update', $page->id) }}" method="post" class="form-horizontal" enctype="multipart/form-data">
                 <input name="_method" type="hidden" value="PUT">
                 {!! csrf_field() !!}

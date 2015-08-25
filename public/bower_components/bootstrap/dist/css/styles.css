@@ -1,5 +1,5 @@
 body {
-  background-color: #f5f8fa;
+  /*background-color: #f5f8fa;*/
   /*background-color: #F2F2F2;*/
 }
 .text-gray {
@@ -36,11 +36,11 @@ body {
 }
 .nav-lines > li > a {
   color: #737373;
-  padding: 15px 15px 14px;
+  padding: 20px 15px 20px;
   line-height: 1.42857143;
 }
 .nav-lines > li > a:hover {
-  padding-bottom: 10px;
+  padding-bottom: 16px;
   background-color: transparent;
   border-bottom: 4px solid #2780e3;
 }
@@ -49,14 +49,14 @@ body {
 .nav-lines > li.active > a:focus {
   color: #555;
   cursor: default;
-  padding-bottom: 10px;
+  padding-bottom: 16px;
   background-color: transparent;
   border-bottom: 4px solid #2780e3;
 }
 
 /* Locate Service */
 .btn-post-service {
-  margin: 8px 0;
+  margin: 14px 0;
 }
 
 /* Content */
@@ -78,9 +78,6 @@ body {
 }
 .post-title-fix {
   min-height: 45px;
-}
-.rating-title {
-  margin-top: 0;
 }
 
 /* Gallery */

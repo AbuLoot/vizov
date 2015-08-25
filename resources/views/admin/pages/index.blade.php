@@ -2,10 +2,10 @@
 
 @section('content')
       @include('partials.admin_menu')
-      <div class="row">
-        <div class="col-md-12">
-          <div class="panel panel-default">
-            <div class="panel-body">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12">
               @include('partials.alerts')
               <p class="text-right">
                 <a href="/admin/pages/create" class="btn btn-success btn-sm">Добавить</a>

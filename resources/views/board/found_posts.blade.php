@@ -98,7 +98,7 @@
         <div class="row-right">
           <div class="panel panel-default">
             <div class="panel-body">
-              <h4 class="rating-title">Топ по рейтингу</h4>
+              <h4>Топ по рейтингу</h4>
               @foreach ($profiles as $profile)
                 <div class="media">
                   <div class="media-left">

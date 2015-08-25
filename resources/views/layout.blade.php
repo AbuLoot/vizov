@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -42,7 +42,7 @@
               @if (Auth::guest())
                 <a class="btn btn-primary btn-sm" href="/auth/login">Войти</a>
                 <a class="btn btn-primary btn-sm" href="/auth/register">Регистрация</a>
-              @elseif (Auth::check() AND Auth::user()->is('user'))
+              @elseif (Auth::user()->is('user'))
                 <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="glyphicon glyphicon-user"></i> {{ Auth::user()->name }} <span class="caret"></span>
                 </button>
@@ -52,9 +52,7 @@
                   <li class="divider"></li>
                   <li><a href="/auth/logout">Выход</a></li>
                 </ul>
-              @endif
-
-              @role ('admin')
+              @elseif (Auth::user()->is('admin'))
                 <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="glyphicon glyphicon-user"></i> {{ Auth::user()->name }} <span class="caret"></span>
                 </button>
@@ -66,7 +64,7 @@
                   <li class="divider"></li>
                   <li><a href="/auth/logout">Выход</a></li>
                 </ul>
-              @endrole
+              @endif
             </div>
           </div>
         </div>
@@ -78,21 +76,19 @@
         <div class="row">
           <div class="col-md-offset-2 col-sm-offset-2 col-md-6 col-sm-6">
             <ul class="nav nav-lines">
-              <li @if (Request::is('/') OR Request::is('uslugi_vyzova')) class="active" @endif>
+              <li @if (Request::is('/', 'uslugi_vyzova', 'uslugi_vyzova/*')) class="active" @endif>
                 <a href="{{ route('call') }}">Услуги вызова</a>
               </li>
-              <li @if (Request::is('uslugi_remonta')) class="active" @endif>
+              <li @if (Request::is('uslugi_remonta', 'uslugi_remonta/*')) class="active" @endif>
                 <a href="{{ route('repair') }}">Услуги ремонта</a>
               </li>
-              <li @if (Request::is('stroymaterialy')) class="active" @endif>
+              <li @if (Request::is('stroymaterialy', 'stroymaterialy/*')) class="active" @endif>
                 <a href="{{ route('materials') }}">Стройматериалы</a>
               </li>
             </ul>
           </div>
           <div class="col-md-4 col-sm-4">
-            <a class="btn btn-success btn-sm btn-post-service pull-right" href="{{ route('posts.create') }}">
-              <i class="glyphicon glyphicon-plus"></i> Разместить услугу
-            </a>
+            <a class="btn btn-success btn-sm btn-post-service pull-right" href="{{ route('posts.create') }}">Разместить услугу</a>
           </div>
         </div>
       </div>

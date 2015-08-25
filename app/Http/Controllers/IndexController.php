@@ -133,8 +133,6 @@ class IndexController extends Controller
             ->orderBy('id', 'DESC')
             ->paginate(10);
 
-        dd($posts);
-
         $posts->appends(['text' => $text]);
 
         return view('board.found_posts', compact('cities', 'text', 'posts', 'profiles'));

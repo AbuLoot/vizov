@@ -3,7 +3,7 @@
 @section('content')
     <div class="panel panel-default">
       <div class="panel-body">
-        <h3 class="col-md-offset-2">Разместить услугу</h3>
+        <h3>Разместить услугу</h3>
 
         <div class="row">
           <div class="col-md-8">
