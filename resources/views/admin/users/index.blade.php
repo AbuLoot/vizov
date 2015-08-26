@@ -17,7 +17,9 @@
                     <th>Имя</th>
                     <th>Email</th>
                     <th>Город</th>
+                    <th>Рейтинг</th>
                     <th>ip</th>
+                    <th>Номер</th>
                     <th>Статус</th>
                     <th class="text-right">Функции</th>
                   </tr>
@@ -28,7 +30,17 @@
                       <td><a href="/profile/{{ $profile->id }}" target="_blank">{{ $profile->user->name }}</a></td>
                       <td>{{ $profile->user->email }}</td>
                       <td>{{ ($profile->city_id == 0) ? 'Не указан' : $profile->city->title }}</td>
+                      <td>
+                        @for ($i = 1; $i <= 5; $i++)
+                          @if ($i <= $profile->stars)
+                            <i class="glyphicon glyphicon-star text-success"></i>
+                          @else
+                            <i class="glyphicon glyphicon-star text-muted"></i>
+                          @endif
+                        @endfor
+                      </td>
                       <td>{{ $profile->user->ip }}</td>
+                      <td>{{ $profile->sort_id }}</td>
                       @if ($profile->user->status == 1)
                         <td class="success">Активен</td>
                       @else

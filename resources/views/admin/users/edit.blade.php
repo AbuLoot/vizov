@@ -8,7 +8,14 @@
             <div class="col-md-8">
               <h3>Редактирование</h3>
               <form action="{{ route('admin.users.update', $profile->id) }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                <input name="_method" type="hidden" value="PUT">
                 {!! csrf_field() !!}
+                <div class="form-group">
+                  <label for="sort_id" class="col-md-3">Номер</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control" id="sort_id" name="sort_id" value="{{ $profile->sort_id }}">
+                  </div>
+                </div>
                 <div class="form-group">
                   <label for="email" class="col-md-3">Email:</label>
                   <div class="col-md-9">
@@ -93,25 +100,70 @@
                         @if(empty($profile->avatar))
                           <img src="/img/no-avatar.png">
                         @else
-                          <img src="/img/users/{{ Auth::user()->id . '/' . $profile->avatar }}">
+                          <img src="/img/users/{{ $profile->user->id . '/' . $profile->avatar }}">
                         @endif
                       </div>
                       <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
                       <div>
-                        <span class="btn btn-default btn-sm btn-file"><span class="fileinput-new">Выберите картинку</span><span class="fileinput-exists">Изменить</span><input type="file" name="avatar" accept="image/*"></span>
+                        <span class="btn btn-default btn-sm btn-file">
+                          <span class="fileinput-new">Выберите картинку</span>
+                          <span class="fileinput-exists">Изменить</span><input type="file" name="avatar" accept="image/*">
+                        </span>
                         <a href="#" class="btn btn-default btn-sm fileinput-exists" data-dismiss="fileinput">Удалить</a>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="status" class="col-md-3">Статус:</label>
+                  <label for="stars" class="col-md-3">Рейтинг:</label>
                   <div class="col-md-9">
-                    @if ($profile->user->status == 1)
-                      <label><input type="checkbox" checked> Активен</label>
-                    @else
-                      <label><input type="checkbox"> Неактивен</label>
-                    @endif
+                    <label>
+                      <input type="radio" name="stars" value="1" @if ($profile->stars == 1) checked @endif>
+                      <i class="glyphicon glyphicon-star text-success"></i>
+                      <i class="glyphicon glyphicon-star text-muted"></i>
+                      <i class="glyphicon glyphicon-star text-muted"></i>
+                      <i class="glyphicon glyphicon-star text-muted"></i>
+                      <i class="glyphicon glyphicon-star text-muted"></i>
+                    </label><br>
+                    <label>
+                      <input type="radio" name="stars" value="2" @if ($profile->stars == 2) checked @endif>
+                      <i class="glyphicon glyphicon-star text-success"></i>
+                      <i class="glyphicon glyphicon-star text-success"></i>
+                      <i class="glyphicon glyphicon-star text-muted"></i>
+                      <i class="glyphicon glyphicon-star text-muted"></i>
+                      <i class="glyphicon glyphicon-star text-muted"></i>
+                    </label><br>
+                    <label>
+                      <input type="radio" name="stars" value="3" @if ($profile->stars == 3) checked @endif>
+                      <i class="glyphicon glyphicon-star text-success"></i>
+                      <i class="glyphicon glyphicon-star text-success"></i>
+                      <i class="glyphicon glyphicon-star text-success"></i>
+                      <i class="glyphicon glyphicon-star text-muted"></i>
+                      <i class="glyphicon glyphicon-star text-muted"></i>
+                    </label><br>
+                    <label>
+                      <input type="radio" name="stars" value="4" @if ($profile->stars == 4) checked @endif>
+                      <i class="glyphicon glyphicon-star text-success"></i>
+                      <i class="glyphicon glyphicon-star text-success"></i>
+                      <i class="glyphicon glyphicon-star text-success"></i>
+                      <i class="glyphicon glyphicon-star text-success"></i>
+                      <i class="glyphicon glyphicon-star text-muted"></i>
+                    </label><br>
+                    <label>
+                      <input type="radio" name="stars" value="5" @if ($profile->stars == 5) checked @endif>
+                      <i class="glyphicon glyphicon-star text-success"></i>
+                      <i class="glyphicon glyphicon-star text-success"></i>
+                      <i class="glyphicon glyphicon-star text-success"></i>
+                      <i class="glyphicon glyphicon-star text-success"></i>
+                      <i class="glyphicon glyphicon-star text-success"></i>
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="status" class="col-md-3">Статус:</label>
+                  <div class="col-md-9">                    
+                    <label><input type="radio" name="status" @if($profile->status == 1) checked @endif value="1"> Активен</label>
+                    <label><input type="radio" name="status" @if($profile->status == 0) checked @endif value="0"> Неактивен</label>
                   </div>
                 </div>
                 <div class="form-group">

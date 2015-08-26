@@ -28,6 +28,7 @@ class CreateProfilesTable extends Migration
             $table->string('avatar');
             $table->text('about');
             $table->text('portfolio');
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }

@@ -11,6 +11,8 @@ use App\User;
 use App\Profile;
 use App\City;
 use App\Section;
+use Image;
+use Storage;
 
 class AdminUsersController extends Controller
 {
@@ -95,9 +97,9 @@ class AdminUsersController extends Controller
             }
 
             $file = Image::make($request->file('avatar'));
-            $file->fit(300, null);
-            $file->crop(300, 300);
-            $file->save('img/users/'.$profile->user->id.'/'.$avatar);
+            $file->fit(250, null);
+            $file->crop(250, 250);
+            $file->save('img/users/'.$profile->user->id.'/'.$avatar, 50);
 
             if ( ! empty($profile->avatar))
             {
@@ -106,20 +108,24 @@ class AdminUsersController extends Controller
         }
 
         $profile->user->name = $request->name;
+        // $profile->user->email = $request->email;
         $profile->user->save();
 
+        $profile->sort_id = $request->sort_id;
         $profile->city_id = $request->city_id;
         if ($request->section_id != 0)
             $profile->section_id = $request->section_id;
+        $profile->stars =  $request->stars;
         $profile->phone =  $request->phone;
         $profile->skills = $request->skills;
         $profile->address = $request->address;
         $profile->website = $request->website;
         if (isset($avatar))
             $profile->avatar = $avatar;
+        $profile->status = $request->status;
         $profile->save();
 
-        return redirect('/my_profile')->with('status', 'Профиль обновлен!');
+        return redirect()->route('admin.users.index')->with('status', 'Профиль обновлен!');
     }
 
     /**
