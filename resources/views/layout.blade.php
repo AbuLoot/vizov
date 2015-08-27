@@ -57,10 +57,10 @@
                   <i class="glyphicon glyphicon-user"></i> {{ Auth::user()->name }} <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                  <li><a href="/admin/users">Пользователи</a></li>
+                  <li><a href="/admin/pages">Страницы</a></li>
                   <li><a href="/admin/section">Рубрики</a></li>
                   <li><a href="/admin/posts">Объявления</a></li>
-                  <li><a href="/admin/pages">Страницы</a></li>
+                  <li><a href="/admin/users">Пользователи</a></li>
                   <li class="divider"></li>
                   <li><a href="/auth/logout">Выход</a></li>
                 </ul>
@@ -76,13 +76,13 @@
         <div class="row">
           <div class="col-md-offset-2 col-sm-offset-2 col-md-6 col-sm-6">
             <ul class="nav nav-lines">
-              <li @if (Request::is('/', 'uslugi_vyzova', 'uslugi_vyzova/*')) class="active" @endif>
+              <li @if (Request::is('/', 'uslugi_vyzova')) class="active" @endif>
                 <a href="{{ route('call') }}">Услуги вызова</a>
               </li>
-              <li @if (Request::is('uslugi_remonta', 'uslugi_remonta/*')) class="active" @endif>
+              <li @if (Request::is('uslugi_remonta')) class="active" @endif>
                 <a href="{{ route('repair') }}">Услуги ремонта</a>
               </li>
-              <li @if (Request::is('stroymaterialy', 'stroymaterialy/*')) class="active" @endif>
+              <li @if (Request::is('stroymaterialy')) class="active" @endif>
                 <a href="{{ route('materials') }}">Стройматериалы</a>
               </li>
             </ul>

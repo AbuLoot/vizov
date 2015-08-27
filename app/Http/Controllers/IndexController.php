@@ -127,7 +127,8 @@ class IndexController extends Controller
 
         $cities = City::all();
         $profiles = Profile::take(5)->get();
-        $posts = Post::where('title', 'LIKE', '%'.$text.'%')
+        $posts = Post::where('city_id', 1)
+            ->where('title', 'LIKE', '%'.$text.'%')
             ->orWhere('description', 'LIKE', '%'.$text.'%')
             ->where('status', 1)
             ->orderBy('id', 'DESC')
@@ -146,10 +147,6 @@ class IndexController extends Controller
             ? 'section_id = ' . (int) $request->section_id . ' AND '
             : NULL;
 
-        $query .= ($request->text)
-            ? ''
-            : NULL;
-
         $query .= ($request->city_id)
             ? 'city_id = ' . (int) $request->city_id . ' AND '
             : NULL;
@@ -163,25 +160,35 @@ class IndexController extends Controller
             : 'price >= 0 AND ';
 
         $query .= ($request->to)
-            ? 'price <= ' . (int) $request->to
-            : 'price <= 9999999';
+            ? 'price <= ' . (int) $request->to . ' AND '
+            : 'price <= 9999999 AND ';
+
+        $query .= ($request->text)
+            ? "title LIKE '%$request->text%' or description LIKE '%$request->text%' AND "
+            : NULL;
+
+        $query .= 'status = 1';
 
         $cities = City::all();
         $section = Section::find($request->section_id);
+        $sections = Section::all();
         $profiles = Profile::take(5)->get();
         $posts = Post::whereRaw($query)
-            ->where('status', 1)
             ->orderBy('id', 'DESC')
             ->paginate(10);
+            // ->toSql();
+
+        // dd($posts);
 
         $posts->appends([
             'section_id' => (int) $request->section_id,
             'city_id' => (int) $request->city_id,
+            'text' => $request->text,
             'image' => ($request->image == 'on') ? 'on' : NULL,
             'from' => (int) $request->from,
             'to' => (int) $request->to,
         ]);
 
-        return view('board.found_posts', compact('cities', 'section', 'profiles', 'posts'));
+        return view('board.found_posts', compact('cities', 'section', 'sections', 'profiles', 'posts'));
     }
 }

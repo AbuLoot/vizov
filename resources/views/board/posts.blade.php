@@ -10,43 +10,45 @@
           <div class="panel panel-default">
             <div class="panel-body">
               <div class="well well-modified well-sm hidden-xs">
-                <form action="/filter" class="form-inline">
+                <form action="/filter">
                   <input type="hidden" name="section_id" value="{{ $section->id }}">
                   <table class="table-condensed">
-                    <tr>
-                      <td style="width:55px">Город</td>
-                      <td style="width:160px">
-                        <select class="form-control input-sm" name="city_id">
-                          @foreach($cities as $city)
-                            <option value="{{ $city->id }}">{{ $city->title }}</option>
-                          @endforeach
-                        </select>
-                      </td>
-                      <td style="width:195px">
-                        <div class="checkbox">
-                          <label>
-                            <input type="checkbox" name="image"> Только с фото
-                          </label>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Цена</td>
-                      <td>
-                        <div class="input-group input-group-sm">
-                          <input type="text" class="form-control" name="from" placeholder="от">
-                        </div>
-                      </td>
-                      <td>
-                        <div class="input-group input-group-sm">
-                          <input type="text" class="form-control" name="to" placeholder="до">
-                          <div class="input-group-addon">тг</div>
-                        </div>
-                      </td>
-                      <td>
-                        <button type="submit" class="btn btn-primary btn-sm">Показать</button>
-                      </td>
-                    </tr>
+                    <tbody>
+                      <tr>
+                        <td>Город</td>
+                        <td>
+                          <select class="form-control input-sm" name="city_id">
+                            @foreach($cities as $city)
+                              <option value="{{ $city->id }}">{{ $city->title }}</option>
+                            @endforeach
+                          </select>
+                        </td>
+                        <td>
+                          <div class="checkbox">
+                            <label>
+                              <input type="checkbox" name="image"> Только с фото
+                            </label>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Цена</td>
+                        <td>
+                          <div class="input-group input-group-sm">
+                            <input type="text" class="form-control" name="from" placeholder="от">
+                          </div>
+                        </td>
+                        <td>
+                          <div class="input-group input-group-sm">
+                            <input type="text" class="form-control" name="to" placeholder="до">
+                            <div class="input-group-addon">тг</div>
+                          </div>
+                        </td>
+                        <td>
+                          <button type="submit" class="btn btn-primary btn-sm">Показать</button>
+                        </td>
+                      </tr>
+                    </tbody>
                   </table>
                 </form>
               </div>

@@ -23,9 +23,10 @@ class AdminUsersController extends Controller
      */
     public function index()
     {
-        $profiles = Profile::paginate(40);
+        $profiles = Profile::paginate(50);
+        $cities = City::all();
 
-        return view('admin.users.index', compact('profiles'));
+        return view('admin.users.index', compact('profiles', 'cities'));
     }
 
     /**

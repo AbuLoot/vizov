@@ -22,50 +22,52 @@
                   <div class="tab-pane fade @if (old('id')) NULL @else active in @endif" id="info">
                     <div class="table-responsive">
                       <table class="table table-striped table-hover">
-                        <tr>
-                          <td style="width:170px">ФИО</td>
-                          <td>{{ $profile->user->name }}</td>
-                        </tr>
-                        <tr>
-                          <td>Email</td>
-                          <td>{{ $profile->user->email }}</td>
-                        </tr>
-                        <tr>
-                          <td>Cфера работы</td>
-                          <th>{{ ($profile->section_id == 0) ? 'Не указан' : $profile->section->title }}</th>
-                        </tr>
-                        <tr>
-                          <td>Город</td>
-                          <td>{{ ($profile->city_id == 0) ? 'Не указан' : $profile->city->title }}</td>
-                        </tr>
-                        <tr>
-                          <td>Адрес работы</td>
-                          <td>{{ $profile->address }}</td>
-                        </tr>
-                        <tr>
-                          <td>Навыки</td>
-                          <td>{{ $profile->skills }}</td>
-                        </tr>
-                        <tr>
-                          <td>Телефон</td>
-                          <td>{{ $profile->phone }}</td>
-                        </tr>
-                        <tr>
-                          <td>Веб-сайт</td>
-                          <td>{{ $profile->website }}</td>
-                        </tr>
-                        <tr>
-                          <td>Рейтинг</td>
-                          <td>
-                            @for ($i = 1; $i <= 5; $i++)
-                              @if ($i <= $profile->stars)
-                                <i class="glyphicon glyphicon-star text-success"></i>
-                              @else
-                                <i class="glyphicon glyphicon-star text-muted"></i>
-                              @endif
-                            @endfor
-                          </td>
-                        </tr>
+                        <tbody>
+                          <tr>
+                            <td style="width:170px">ФИО</td>
+                            <td>{{ $profile->user->name }}</td>
+                          </tr>
+                          <tr>
+                            <td>Email</td>
+                            <td>{{ $profile->user->email }}</td>
+                          </tr>
+                          <tr>
+                            <td>Cфера работы</td>
+                            <th>{{ ($profile->section_id == 0) ? 'Не указан' : $profile->section->title }}</th>
+                          </tr>
+                          <tr>
+                            <td>Город</td>
+                            <td>{{ ($profile->city_id == 0) ? 'Не указан' : $profile->city->title }}</td>
+                          </tr>
+                          <tr>
+                            <td>Адрес работы</td>
+                            <td>{{ $profile->address }}</td>
+                          </tr>
+                          <tr>
+                            <td>Навыки</td>
+                            <td>{{ $profile->skills }}</td>
+                          </tr>
+                          <tr>
+                            <td>Телефон</td>
+                            <td>{{ $profile->phone }}</td>
+                          </tr>
+                          <tr>
+                            <td>Веб-сайт</td>
+                            <td>{{ $profile->website }}</td>
+                          </tr>
+                          <tr>
+                            <td>Рейтинг</td>
+                            <td>
+                              @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= $profile->stars)
+                                  <i class="glyphicon glyphicon-star text-success"></i>
+                                @else
+                                  <i class="glyphicon glyphicon-star text-muted"></i>
+                                @endif
+                              @endfor
+                            </td>
+                          </tr>
+                        </tbody>
                       </table>
                     </div>
                   </div>

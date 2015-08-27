@@ -72,6 +72,9 @@ body {
   box-shadow: inset none;
   -webkit-box-shadow: none;
 }
+.well-modified .checkbox {
+  margin: 0;
+}
 .breadcrumb {
   padding: 8px 0px;
   background-color: #FFFFFF;
