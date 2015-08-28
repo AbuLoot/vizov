@@ -96,6 +96,7 @@ class PostsController extends Controller
                     $this->optimalResize(600, 450);
 
                     $moreFile->insert($this->file, 'center');
+                    $moreFile->insert('img/watermark.png', 'bottom-left', 10, 10);
                     $moreFile->rectangle(0, 0, 599, 449, function ($draw) {
                         $draw->border(1, '#dddddd');
                     });
@@ -225,6 +226,7 @@ class PostsController extends Controller
                     $this->optimalResize(600, 450);
 
                     $moreFile->insert($this->file, 'center');
+                    $moreFile->insert('img/watermark.png', 'bottom-left', 10, 10);
                     $moreFile->rectangle(0, 0, 599, 449, function ($draw) {
                         $draw->border(1, '#dddddd');
                     });
