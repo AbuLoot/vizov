@@ -9,7 +9,7 @@
           </div>
           <div class="panel-footer"><a href="/profiles">Все специалисты</a></div>
         </div>
-        @if (Auth::user()->is('user'))
+        @if (Auth::check())
           <div class="panel panel-default">
             <div class="list-group">
               <a href="/my_profile" class="list-group-item @if (Request::is('my_profile')) active @endif">Мой профиль</a>

@@ -141,8 +141,6 @@ class IndexController extends Controller
 
     public function filterPosts(Request $request)
     {
-        // dd($request->all());
-
         $query  = ($request->section_id)
             ? 'section_id = ' . (int) $request->section_id . ' AND '
             : NULL;
@@ -176,9 +174,6 @@ class IndexController extends Controller
         $posts = Post::whereRaw($query)
             ->orderBy('id', 'DESC')
             ->paginate(10);
-            // ->toSql();
-
-        // dd($posts);
 
         $posts->appends([
             'section_id' => (int) $request->section_id,

@@ -76,7 +76,7 @@
                     </div>
                     <p class="text-gray">{{ $post->city->title }}<br><small>{{ $post->created_at }} &nbsp; <i class="fa fa-smile-o"></i> {{ $post->views }} &nbsp; <i class="fa fa-comments-o"></i> {{ $post->comments->count() }}</small></p>
                   </div>
-                </div><br>
+                </div>
               @empty
                 <h4>В этой рубрике пока нет объявлений.</h4>
                 <a href="{{ route('posts.create') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Добавить объявление</a>

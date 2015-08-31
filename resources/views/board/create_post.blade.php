@@ -3,10 +3,9 @@
 @section('content')
     <div class="panel panel-default">
       <div class="panel-body">
-        <h3>Разместить услугу</h3>
-
         <div class="row">
           <div class="col-md-8">
+            <h3>Разместить услугу</h3>
             <form action="{{ route('posts.store') }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
               {!! csrf_field() !!}
               <div class="form-group">
@@ -16,7 +15,7 @@
                   </div>
                 </div>
 
-                <label for="title" class="col-md-3">Заголовок объявления *</label>
+                <label for="title" class="col-md-3">Заголовок объявления</label>
                 <div class="col-md-9">
                   <div class="row">
                     <input type="text" class="form-control" id="title" name="title" minlength="5" maxlength="80" value="{{ old('title') }}" required>
@@ -24,7 +23,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="section" class="col-md-3">Рубрика *</label>
+                <label for="section" class="col-md-3">Рубрика</label>
                 <div class="col-md-9">
                   <div class="row">
                     <select class="form-control" name="section_id" id="section">
@@ -54,7 +53,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="price" class="col-md-3">Цена *</label>
+                <label for="price" class="col-md-3">Цена</label>
                 <div class="col-md-9">
                   <div class="row">
                     <div class="input-group">
@@ -185,7 +184,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="phone" class="col-md-3">Телефон *</label>
+                <label for="phone" class="col-md-3">Телефон</label>
                 <div class="col-md-9">
                   <div class="row">
                     <input type="tel" class="form-control" id="phone" name="phone" minlength="5" maxlength="40" value="{{ (old('phone')) ? old('phone') : $user->profile->phone }}" required>
@@ -201,7 +200,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="comment" class="col-md-3">Разрешить комментарии *</label>
+                <label for="comment" class="col-md-3">Разрешить комментарии</label>
                 <div class="col-md-9">
                   <div class="row">
                     <select class="form-control" id="comment" name="comment">

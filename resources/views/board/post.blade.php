@@ -26,7 +26,7 @@
                     <table class="table table-condensed">
                       <tbody>
                         <tr>
-                          <td style="width:150px">Цена</td>
+                          <td>Цена</td>
                           <td><b class="text-success">{{ $post->price }} тг</b> @if ($post->deal == 'on') <small class="text-muted">- Торг&nbsp;возможен</small> @endif</td>
                         </tr>
                         <tr>
@@ -42,7 +42,7 @@
                           <td>{{ $post->phone }}</td>
                         </tr>
                         <tr>
-                          <td>Электронная почта</td>
+                          <td>Почта</td>
                           <td>{{ $post->email }}</td>
                         </tr>
                         <tr>
