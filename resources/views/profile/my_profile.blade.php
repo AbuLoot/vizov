@@ -62,7 +62,7 @@
                   </table>
                 </div>
                 <p>
-                  <a href="/my_profile/edit" class="btn btn-default">Заполнить профиль</a>
+                  <a href="/my_profile/edit" class="btn btn-primary">Заполнить профиль</a>
                   <a href="/profile/{{ $profile->id }}" class="btn btn-success">Как видят меня другие?</a>
                 </p>
               </div>

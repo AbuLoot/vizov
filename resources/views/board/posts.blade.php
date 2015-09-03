@@ -5,8 +5,8 @@
 @section('meta_description', $section->meta_description)
 
 @section('content')
-      <div class="col-md-8">
-        <div class="row">
+      <div class="row">
+        <div class="col-md-8">
           <div class="panel panel-default">
             <div class="panel-body">
               <div class="well well-modified well-sm hidden-xs">
@@ -69,10 +69,10 @@
                   </div>
                   <div class="media-body">
                     <div class="row post-title-fix">
-                      <h4 class="col-md-8 media-heading">
+                      <h4 class="col-md-8 col-sm-8 media-heading">
                         <a href="{{ url($post->service_id.'/'.$post->slug.'/'.$post->id) }}">{{ $post->title }}</a>
                       </h4>
-                      <h4 class="col-md-4 media-heading text-right text-success">{{ $post->price }} тг @if ($post->deal == 'on') <small>Торг&nbsp;возможен</small> @endif</h4>
+                      <h4 class="col-md-4 col-sm-4 media-heading text-right text-success">{{ $post->price }} тг @if ($post->deal == 'on') <small>Торг&nbsp;возможен</small> @endif</h4>
                     </div>
                     <p class="text-gray">{{ $post->city->title }}<br><small>{{ $post->created_at }} &nbsp; <i class="fa fa-smile-o"></i> {{ $post->views }} &nbsp; <i class="fa fa-comments-o"></i> {{ $post->comments->count() }}</small></p>
                   </div>
@@ -86,9 +86,7 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-md-4">
-        <div class="row-right">
+        <div class="col-md-4">
           <div class="panel panel-default">
             <div class="panel-body">
               <h4>Топ по рейтингу</h4>

@@ -8,9 +8,9 @@
     <title>@yield('title_description', 'Vizov.kz')</title>
     <meta name="description" content="@yield('meta_description', 'Vizov.kz')">
 
-    <link href="/bower_components/bootstrap/dist/css/bootstrap-cosmo.css" rel="stylesheet">
-    <link href="/bower_components/bootstrap/dist/css/styles.css" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap-cosmo.css">
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     @yield('styles')
 
     <!--[if lt IE 9]>
@@ -23,7 +23,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-2 col-sm-2">
-            <a href="{{ route('index') }}" class="logo"><i class="glyphicon glyphicon-send"></i> VIZOV</a>
+            <a href="{{ route('index') }}" class="logo"><i class="glyphicon glyphicon-send"></i>&nbsp;VIZOV</a>
           </div>
           <div class="col-md-6 col-sm-6">
             <form action="/search">
@@ -74,7 +74,7 @@
     <nav class="navbar-services">
       <div class="container">
         <div class="row">
-          <div class="col-md-offset-2 col-sm-offset-2 col-md-6 col-sm-6">
+          <div class="col-md-offset-2 col-md-6 col-sm-8">
             <ul class="nav nav-lines">
               <li @if (Request::is('/', 'uslugi_vyzova')) class="active" @endif>
                 <a href="{{ route('call') }}">Услуги вызова</a>

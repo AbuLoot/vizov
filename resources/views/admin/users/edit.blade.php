@@ -55,6 +55,17 @@
                           @endif
                         @endforeach
                       </optgroup>
+                      <optgroup label="Стройматериалы">
+                        @foreach ($section as $item)
+                          @if ($item->service_id == 3)
+                            @if ($item->id == $profile->section_id)
+                              <option value="{{ $item->id }}" selected>{{ $item->title }}</option>
+                            @else
+                              <option value="{{ $item->id }}">{{ $item->title }}</option>
+                            @endif
+                          @endif
+                        @endforeach
+                      </optgroup>
                     </select>
                   </div>
                 </div>

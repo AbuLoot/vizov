@@ -1,8 +1,8 @@
 @extends('layout')
 
 @section('content')
-      <div class="col-md-8">
-        <div class="row">
+      <div class="row">
+        <div class="col-md-8">
           <div class="panel panel-default">
             <div class="panel-body">
               @include('partials.alerts')
@@ -60,8 +60,8 @@
               </div>
               <br>
 
-              <div class="col-md-10">
-                <div class="row">
+              <div class="row">
+                <div class="col-md-10 col-sm-10 col-sx-12">
                   <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false">
                     <div class="carousel-inner" role="listbox">
                       <?php $i = 0; ?>
@@ -80,27 +80,27 @@
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="col-md-2 gallery">
-                <ol class="row-right list-unstyled pull-right">
-                  <?php $i = 0; ?>
-                  @foreach ($images as $key => $image)
-                    @if ($i == 0)
-                      <li data-target="#carousel-example-generic" data-slide-to="0" class="active">
-                        <a href="#">
-                          <img src="/img/posts/{{ $post->user_id.'/'.$image['mini_image'] }}" class="img-responsive" style="width:95px">
-                        </a>
-                      </li>
-                    @else
-                      <li data-target="#carousel-example-generic" data-slide-to="{{ $i }}">
-                        <a href="#">
-                          <img src="/img/posts/{{ $post->user_id.'/'.$image['mini_image'] }}" class="img-responsive" style="width:95px">
-                        </a>
-                      </li>
-                    @endif
-                    <?php $i++; ?>
-                  @endforeach
-                </ol>
+                <div class="col-md-2 col-sm-2 col-sx-12 gallery">
+                  <ol class="list-unstyled">
+                    <?php $i = 0; ?>
+                    @foreach ($images as $key => $image)
+                      @if ($i == 0)
+                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active">
+                          <a href="#">
+                            <img src="/img/posts/{{ $post->user_id.'/'.$image['mini_image'] }}" class="img-responsive">
+                          </a>
+                        </li>
+                      @else
+                        <li data-target="#carousel-example-generic" data-slide-to="{{ $i }}">
+                          <a href="#">
+                            <img src="/img/posts/{{ $post->user_id.'/'.$image['mini_image'] }}" class="img-responsive">
+                          </a>
+                        </li>
+                      @endif
+                      <?php $i++; ?>
+                    @endforeach
+                  </ol>
+                </div>
               </div>
               <div class="clearfix"></div>
 
@@ -182,9 +182,7 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-md-4">
-        <div class="row-right">
+        <div class="col-md-4">
           <div class="panel panel-default">
             <div class="panel-body">
               <h4>Топ по рейтингу</h4>
