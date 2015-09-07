@@ -1,69 +1,55 @@
 @extends('layout')
 
-@section('title_description', $post->title)
-
-@section('meta_description', $post->description)
-
 @section('content')
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-8">
           <div class="panel panel-default">
             <div class="panel-body">
               @include('partials.alerts')
-              <div class="row">
-                <div class="col-md-6">
-                  <ol class="breadcrumb">
-                    <li><a href="{{ route($post->section->service->route) }}">{{ $post->section->service->title }}</a></li>
-                    <li><a href="{{ route('show-' . $post->section->service->route, ['section' => $post->section->slug, 'id' => $post->section->id]) }}">{{ $post->section->title }}</a></li>
-                  </ol>
-                </div>
-                <div class="col-md-6">
-                  <ul class="breadcrumb text-right">
-                    <li><a href="#">← Предыдущий</a></li>
-                    <li><a href="#">Следуйщий →</a></li>
-                  </ul>
-                </div>
-              </div>
+              <ol class="breadcrumb">
+                <li><a href="{{ route($post->section->service->route) }}">{{ $post->section->service->title }}</a></li>
+                <li><a href="{{ route('show-' . $post->section->service->route, ['section' => $post->section->slug, 'id' => $post->section->id]) }}">{{ $post->section->title }}</a></li>
+              </ol>
               <h3>{{ $post->title }}</h3>
+              <?php $images = ( ! empty($post->images)) ? unserialize($post->images) : []; ?>
+              <img src="/img/{{ ( ! empty($post->image)) ? 'posts/'.$post->user_id.'/'.$post->image : 'no-main-image.png' }}" alt="{{ $post->title }}" class="pull-left">
+              <div class="table-responsive">
+                <table class="table table-striped table-condensed">
+                  <tbody>
+                    <tr>
+                      <td>Цена</td>
+                      <td><b class="text-success">{{ $post->price }} тг</b> @if ($post->deal == 'on') <small class="text-muted">- Торг&nbsp;возможен</small> @endif</td>
+                    </tr>
+                    <tr>
+                      <td>Город</td>
+                      <td>{{ $post->city->title }}</td>
+                    </tr>
+                    <tr>
+                      <td>Адрес</td>
+                      <td>{{ $post->address }}</td>
+                    </tr>
+                    <tr>
+                      <td>Телефоны</td>
+                      <td>{{ $post->phone }}</td>
+                    </tr>
+                    <tr>
+                      <td>Почта</td>
+                      <td>{{ $post->email }}</td>
+                    </tr>
+                    <tr>
+                      <td>Специалист</td>
+                      <td><a href="/profile/{{ $post->user->profile->id }}">{{ $post->user->name }}</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p>{{ $post->description }}</p>
+              <p><small>{{ $post->created_at }}</small> | <small>Просмотров: {{ $post->views }}</small></p>
+
               <div class="row">
-                <div class="col-md-5">
-                  <div class="table-responsive">
-                    <table class="table table-striped table-condensed">
-                      <tbody>
-                        <tr>
-                          <td>Цена</td>
-                          <td><b class="text-success">{{ $post->price }} тг</b> @if ($post->deal == 'on') <small class="text-muted">- Торг&nbsp;возможен</small> @endif</td>
-                        </tr>
-                        <tr>
-                          <td>Город</td>
-                          <td>{{ $post->city->title }}</td>
-                        </tr>
-                        <tr>
-                          <td>Адрес</td>
-                          <td>{{ $post->address }}</td>
-                        </tr>
-                        <tr>
-                          <td>Телефоны</td>
-                          <td>{{ $post->phone }}</td>
-                        </tr>
-                        <tr>
-                          <td>Почта</td>
-                          <td>{{ $post->email }}</td>
-                        </tr>
-                        <tr>
-                          <td>Специалист</td>
-                          <td><a href="/profile/{{ $post->user->profile->id }}">{{ $post->user->name }}</a></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <p>{{ $post->description }}</p>
-                  <p><small>{{ $post->created_at }}</small> | <small>Просмотров: {{ $post->views }}</small></p>
-                </div>
-                <div class="col-md-7 gallery">
+                <div class="col-md-10 col-sm-10 col-sx-12">
                   <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false">
                     <div class="carousel-inner" role="listbox">
-                      <?php $images = ( ! empty($post->images)) ? unserialize($post->images) : []; ?>
                       <?php $i = 0; ?>
                       @foreach ($images as $key => $image)
                         @if ($i == 0)
@@ -78,8 +64,10 @@
                         @endif
                       @endforeach
                     </div>
-                  </div><br>
-                  <ol class="list-inline">
+                  </div>
+                </div>
+                <div class="col-md-2 col-sm-2 col-sx-12 gallery">
+                  <ol class="list-unstyled">
                     <?php $i = 0; ?>
                     @foreach ($images as $key => $image)
                       @if ($i == 0)
@@ -87,7 +75,7 @@
                           <a href="#">
                             <img src="/img/posts/{{ $post->user_id.'/'.$image['mini_image'] }}" class="img-responsive">
                           </a>
-                        </li> 
+                        </li>
                       @else
                         <li data-target="#carousel-example-generic" data-slide-to="{{ $i }}">
                           <a href="#">
@@ -100,13 +88,10 @@
                   </ol>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-8">
-          <div class="panel panel-default">
-            <div class="panel-body">
+              <div class="clearfix"></div>
+
               @unless ($post->comment === 'nobody')
+                <br>
                 <div class="panel panel-default">
                   <div class="panel-heading">
                     <i class="glyphicon glyphicon-comment"></i> Комментарии: {{ $post->comments->count() }}

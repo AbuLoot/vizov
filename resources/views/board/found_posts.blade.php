@@ -7,8 +7,9 @@
             <div class="panel-body">
               <div class="well well-modified well-sm">
                 <form action="/filter">
-                  <input type="hidden" name="section_id" value="{{ (isset($section)) ? $section->id : null }}">
-                  <input type="hidden" name="text" value="{{ (isset($text)) ? $text : null }}">
+                  @if (isset($section))
+                    <input type="hidden" name="section_id" value="{{ $section->id }}">
+                  @endif
                   <table class="table-condensed">
                     <thead>
                       <tr>
@@ -62,10 +63,6 @@
                 </ol>
               @endif
 
-              @if (isset($text))
-                <h3>Результат поиска «{{ $text }}»</h3>
-              @endif
-
               @forelse ($posts as $post)
                 <div class="media">
                   <div class="media-left">
@@ -86,7 +83,7 @@
                     </div>
                     <p class="text-gray">{{ $post->city->title }} / <b>{{ $post->section->title }}</b><br><small>{{ $post->created_at }} &nbsp; <i class="fa fa-smile-o"></i> {{ $post->views }} &nbsp; <i class="fa fa-comments-o"></i> {{ $post->comments->count() }}</small></p>
                   </div>
-                </div>
+                </div><hr>
               @empty
                 <h4>Ничего не найдено.</h4>
                 <a href="{{ route('posts.create') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Добавить объявление</a>

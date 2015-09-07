@@ -3,7 +3,7 @@
             @if (empty($profile->avatar))
               <img src="/img/no-avatar.png" class="img-responsive">
             @else
-              <img src="/img/users/{{ $profile->user->id . '/' . $profile->avatar }}" class="img-responsive">
+              <img src="/img/users/{{ $profile->user->id . '/' . $profile->avatar }}" class="center-block img-responsive">
             @endif
             <h5 class="text-center">{{ $profile->user->name }}</h5>
           </div>

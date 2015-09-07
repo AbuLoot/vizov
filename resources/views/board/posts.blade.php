@@ -61,9 +61,9 @@
                   <div class="media-left">
                     <a href="{{ url($post->service_id.'/'.$post->slug.'/'.$post->id) }}">
                       @if ( ! empty($post->image))
-                        <img class="media-object" src="/img/posts/{{ $post->user_id.'/'.$post->image }}" alt="{{ $post->title }}" style="width:200px">
+                        <img class="media-object" src="/img/posts/{{ $post->user_id.'/'.$post->image }}" alt="{{ $post->title }}" style="width:200px;">
                       @else
-                        <img class="media-object" src="/img/no-main-image.png" alt="{{ $post->title }}" style="width:200px">
+                        <img class="media-object" src="/img/no-main-image.png" alt="{{ $post->title }}" style="width:200px;">
                       @endif
                     </a>
                   </div>
@@ -76,7 +76,7 @@
                     </div>
                     <p class="text-gray">{{ $post->city->title }}<br><small>{{ $post->created_at }} &nbsp; <i class="fa fa-smile-o"></i> {{ $post->views }} &nbsp; <i class="fa fa-comments-o"></i> {{ $post->comments->count() }}</small></p>
                   </div>
-                </div>
+                </div><hr>
               @empty
                 <h4>В этой рубрике пока нет объявлений.</h4>
                 <a href="{{ route('posts.create') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Добавить объявление</a>

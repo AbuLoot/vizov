@@ -24,7 +24,6 @@ body {
 
 /* Navbar Services */
 .navbar-services {
-  background-color: #FFFFFF;
   -webkit-box-shadow: 0 1px 0 rgb(221, 221, 221);
   box-shadow: 0 1px 0 rgb(221, 221, 221);
 }
@@ -87,6 +86,10 @@ body {
 }
 
 /* Gallery */
+.list-inline > li {
+  padding-left: 4px;
+  padding-right: 4px;
+}
 .gallery ol li {
   display: inline-block;
 }

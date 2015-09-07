@@ -48,7 +48,7 @@ class ProfileController extends Controller
     {
         $profile = Auth::user()->profile;
         $cities = City::all();
-        $section = Section::all();
+        $section = Section::orderBy('sort_id')->get();
 
         return view('profile.my_profile_edit', compact('profile', 'cities', 'section'));
     }
@@ -67,9 +67,9 @@ class ProfileController extends Controller
             }
 
             $file = Image::make($request->file('avatar'));
-            $file->fit(300, null);
-            $file->crop(300, 300);
-            $file->save('img/users/'.$profile->user->id.'/'.$avatar);
+            $file->fit(90, null);
+            $file->crop(90, 90);
+            $file->save('img/users/'.$profile->user->id.'/'.$avatar, 50);
 
             if ( ! empty($profile->avatar))
             {

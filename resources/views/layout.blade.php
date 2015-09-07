@@ -23,9 +23,9 @@
       <div class="container">
         <div class="row">
           <div class="col-md-2 col-sm-2">
-            <a href="{{ route('index') }}" class="logo"><i class="glyphicon glyphicon-send"></i>&nbsp;VIZOV</a>
+            <a href="{{ route('index') }}" class="logo">VIZOV</a>
           </div>
-          <div class="col-md-6 col-sm-6">
+          <div class="col-md-6 col-sm-7">
             <form action="/search">
               <div class="input-group">
                 <input type="text" class="form-control input-sm" name="text" minlength="2" maxlength="100" placeholder="Введите название услуги или товара" required>
@@ -37,7 +37,7 @@
               </div>
             </form>
           </div>
-          <div class="col-md-4 col-sm-4">
+          <div class="col-md-4 col-sm-3">
             <div class="btn-group pull-right">
               @if (Auth::guest())
                 <a class="btn btn-primary btn-sm" href="/auth/login">Войти</a>
@@ -58,6 +58,7 @@
                 </button>
                 <ul class="dropdown-menu">
                   <li><a href="/admin/pages">Страницы</a></li>
+                  <li><a href="#">Разделы</a></li>
                   <li><a href="/admin/section">Рубрики</a></li>
                   <li><a href="/admin/posts">Объявления</a></li>
                   <li><a href="/admin/users">Пользователи</a></li>
@@ -99,34 +100,31 @@
       @yield('content')
     </div>
 
+    <hr>
     <footer class="footer">
       <br>
       <div class="container">
-        <div class="col-md-3">
-          <p>© 2015 — 2016 «VIZOV»</p>
-        </div>
-        <div class="col-md-9">
+        <div class="col-md-8">
           <ul class="list-unstyled list-inline">
             @foreach ($pages as $page)
               <li><a href="{{ url($page->slug) }}">{{ $page->title }}</a></li>
             @endforeach
           </ul>
         </div>
-        <div class="col-md-12 text-center">
-          <br>
+        <div class="col-md-4 text-right">
           <ul class="list-inline">
-            <li><a href="#"><i class="fa fa-facebook fa-2x"></i> </a></li>
-            <li><a href="#"><i class="fa fa-vk fa-2x"></i> </a></li>
-            <li><a href="#"><i class="fa fa-google-plus fa-2x"></i> </a></li>
-            <li><a href="#"><i class="fa fa-twitter fa-2x"></i> </a></li>
-            <li><a href="#"><i class="fa fa-instagram fa-2x"></i> </a></li>
+            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="#"><i class="fa fa-vk"></i></a></li>
+            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
           </ul>
         </div>
+        <p class="text-center">© 2015 — 2016 «VIZOV»</p>
       </div>
       <br>
     </footer>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <!-- // <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

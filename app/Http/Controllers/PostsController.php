@@ -38,7 +38,7 @@ class PostsController extends Controller
     {
         $user = Auth::user();
         $cities = City::all();
-        $section = Section::all();
+        $section = Section::orderBy('sort_id')->get();
 
         return view('board.create_post', compact('user', 'cities', 'section'));
     }
@@ -89,15 +89,15 @@ class PostsController extends Controller
                     }
 
                     // Creating images
-                    $moreFile = Image::canvas(600, 450, '#ffffff');
+                    $moreFile = Image::canvas(660, 450, '#ffffff');
                     $file = Image::make($image);
 
                     $this->file = $file;
-                    $this->optimalResize(600, 450);
+                    $this->optimalResize(660, 450);
 
                     $moreFile->insert($this->file, 'center');
                     $moreFile->insert('img/watermark.png', 'bottom-left', 10, 10);
-                    $moreFile->rectangle(0, 0, 599, 449, function ($draw) {
+                    $moreFile->rectangle(0, 0, 659, 449, function ($draw) {
                         $draw->border(1, '#dddddd');
                     });
 
@@ -165,7 +165,7 @@ class PostsController extends Controller
     {
         $post = Auth::user()->posts()->find($id);
         $cities = City::all();
-        $section = Section::all();
+        $section = Section::orderBy('sort_id')->get();
 
         return view('board.edit_post', compact('post', 'cities', 'section'));
     }
@@ -219,15 +219,15 @@ class PostsController extends Controller
                     }
 
                     // Creating images
-                    $moreFile = Image::canvas(600, 450, '#ffffff');
+                    $moreFile = Image::canvas(660, 450, '#ffffff');
                     $file = Image::make($image);
 
                     $this->file = $file;
-                    $this->optimalResize(600, 450);
+                    $this->optimalResize(660, 450);
 
                     $moreFile->insert($this->file, 'center');
                     $moreFile->insert('img/watermark.png', 'bottom-left', 10, 10);
-                    $moreFile->rectangle(0, 0, 599, 449, function ($draw) {
+                    $moreFile->rectangle(0, 0, 659, 449, function ($draw) {
                         $draw->border(1, '#dddddd');
                     });
                     $moreFile->save('img/posts/'.$post->user_id.'/'.$imageName);
