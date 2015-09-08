@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\User;
+use App\Profile;
+use App\City;
+use App\Section;
+use Image;
+use Storage;
+
 class AdminUsersController extends Controller
 {
     /**
@@ -16,9 +23,10 @@ class AdminUsersController extends Controller
      */
     public function index()
     {
-        $users = \App\User::all();
+        $profiles = Profile::paginate(50);
+        $cities = City::all();
 
-        return view('admin.users.index', compact('users'));
+        return view('admin.users.index', compact('profiles', 'cities'));
     }
 
     /**
@@ -49,7 +57,10 @@ class AdminUsersController extends Controller
      */
     public function show($id)
     {
-        //
+        $profile = Profile::findOrFail($id);
+        $posts = $profile->user->posts()->orderBy('id', 'DESC')->get();
+
+        return view('admin.users.show', compact('profile', 'posts'));
     }
 
     /**
@@ -60,7 +71,11 @@ class AdminUsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $profile = Profile::findOrFail($id);
+        $cities = City::all();
+        $section = Section::all();
+
+        return view('admin.users.edit', compact('profile', 'cities', 'section'));
     }
 
     /**
@@ -69,9 +84,49 @@ class AdminUsersController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update(Request $request, $id)
     {
-        //
+        $profile = Profile::findOrFail($id);
+
+        if ($request->hasFile('avatar'))
+        {
+            $avatar = 'ava-'.str_random(20).'.'.$request->file('avatar')->getClientOriginalExtension();
+
+            if ( ! file_exists('img/users/'.$profile->user->id))
+            {
+                Storage::makeDirectory('img/users/'.$profile->user->id);
+            }
+
+            $file = Image::make($request->file('avatar'));
+            $file->fit(250, null);
+            $file->crop(250, 250);
+            $file->save('img/users/'.$profile->user->id.'/'.$avatar, 50);
+
+            if ( ! empty($profile->avatar))
+            {
+                Storage::delete('img/users/'.$profile->user->id.'/'.$profile->avatar);
+            }
+        }
+
+        $profile->user->name = $request->name;
+        // $profile->user->email = $request->email;
+        $profile->user->save();
+
+        $profile->sort_id = $request->sort_id;
+        $profile->city_id = $request->city_id;
+        if ($request->section_id != 0)
+            $profile->section_id = $request->section_id;
+        $profile->stars =  $request->stars;
+        $profile->phone =  $request->phone;
+        $profile->skills = $request->skills;
+        $profile->address = $request->address;
+        $profile->website = $request->website;
+        if (isset($avatar))
+            $profile->avatar = $avatar;
+        $profile->status = $request->status;
+        $profile->save();
+
+        return redirect()->route('admin.users.index')->with('status', 'Профиль обновлен!');
     }
 
     /**

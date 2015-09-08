@@ -25,8 +25,6 @@ class CreatePostsTable extends Migration
             $table->foreign('section_id')->references('id')->on('section');
             $table->string('slug');
             $table->string('title');
-            $table->string('title_description');
-            $table->string('meta_description');
             $table->string('price');
             $table->string('deal');
             $table->text('description');

@@ -1,100 +1,129 @@
 @extends('layout')
 
 @section('content')
-      <div class="col-md-8">
-        <div class="row">
-          <div class="content-block">
-            <div class="well well-sm hidden-xs">
-              <form action="/filter" class="form-inline">
-                <input type="hidden" name="section_id" value="{{ (isset($section)) ? $section->id : null }}">
-                <table class="table-condensed">
-                  <tr>
-                    <th>Город</th>
-                    <td>
-                      <select class="form-control input-sm" name="city_id">
-                        @foreach(\App\City::all() as $city)
-                          <option value="{{ $city->id }}">{{ $city->title }}</option>
-                        @endforeach
-                      </select>
-                      <div class="checkbox">
-                        <label>
-                          &nbsp;&nbsp;&nbsp;<input type="checkbox" name="image"> Только с фото
-                        </label>
-                      </div>
-                    </td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th>Цена</th>
-                    <td>
-                      <div class="input-group input-group-sm">
-                        <input type="text" class="form-control" name="from" placeholder="от">
-                      </div>
-                      <label>-</label>
-                      <div class="input-group input-group-sm">
-                        <input type="text" class="form-control" name="to" placeholder="до">
-                        <div class="input-group-addon">тг</div>
-                      </div>
-                    </td>
-                    <td>
-                      <button type="submit" class="btn btn-primary btn-sm">Показать</button>
-                    </td>
-                  </tr>
-                </table>
-              </form>
-            </div>
-
-            @if (isset($section))
-              <ol class="breadcrumb">
-                <li><a href="{{ route(trans('services.'.$section->service_id.'.route')) }}">{{ trans('services.'.$section->service_id.'.title') }}</a></li>
-                <li class="active">{{ $section->title }}</li>
-              </ol>
-            @endif
-
-            @if (isset($text))
-              <h3>Результат поиска «{{ $text }}»</h3>
-            @endif
-
-            @forelse ($posts as $post)
-              <div class="media">
-                <div class="media-left">
-                  <a href="{{ route('show-post-call', ['post' => $post->slug, 'id' => $post->id]) }}">
-                    @if ( ! empty($post->image))
-                      <img class="media-object" src="/img/posts/{{ $post->user_id.'/'.$post->image }}" alt="{{ $post->title }}" width="200">
-                    @else
-                      <img class="media-object" src="/img/no-main-image.png" alt="{{ $post->title }}" width="200">
-                    @endif
-                  </a>
-                </div>
-                <div class="media-body">
-                  <div class="row">
-                    <h4 class="col-md-8 media-heading">
-                      <a href="{{ route('show-post-call', ['post' => $post->slug, 'id' => $post->id]) }}">
-                        <b>{{ $post->title }}</b>
-                      </a>
-                    </h4>
-                    <h4 class="col-md-4 media-heading text-right text-success"><b>{{ $post->price }} тг</b></h4>
-                  </div>
-                  <p>{{ $post->city->title }}</p>
-                  <p>
-                    <small><i class="glyphicon glyphicon-calendar"></i> {{ $post->created_at }}</small><br>
-                    <small><i class="glyphicon glyphicon-user"></i> 26 просмотров</small>
-                  </p>
-                </div>
+      <div class="row">
+        <div class="col-md-8">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="well well-modified well-sm">
+                <form action="/filter">
+                  @if (isset($section))
+                    <input type="hidden" name="section_id" value="{{ $section->id }}">
+                  @endif
+                  <table class="table-condensed">
+                    <thead>
+                      <tr>
+                        <td>Город</td>
+                        <td>
+                          <select class="form-control input-sm" name="city_id">
+                            @foreach($cities as $city)
+                              @if ($city->id === Request::input('city_id'))
+                                <option value="{{ $city->id }}" selected>{{ $city->title }}</option>
+                              @else
+                                <option value="{{ $city->id }}">{{ $city->title }}</option>
+                              @endif
+                            @endforeach
+                          </select>
+                        </td>
+                        <td>
+                          <input type="text" class="form-control input-sm" name="text" placeholder="Поиск по тексту" value="{{ (Request::input('text')) ? Request::input('text') : NULL }}">
+                        </td>
+                        <td>
+                          <div class="checkbox">
+                            <label>
+                              <input type="checkbox" name="image" @if (Request::input('image')) checked @endif> Только с фото
+                            </label>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Цена</td>
+                        <td>
+                          <input type="text" class="form-control input-sm" name="from" placeholder="от" value="{{ (Request::input('from')) ? Request::input('from') : NULL }}">
+                        </td>
+                        <td>
+                          <div class="input-group input-group-sm">
+                            <input type="text" class="form-control" name="to" placeholder="до" value="{{ (Request::input('to')) ? Request::input('to') : NULL }}">
+                            <div class="input-group-addon">тг</div>
+                          </div>
+                        </td>
+                        <td>
+                          <button type="submit" class="btn btn-primary btn-block btn-sm">Показать</button>
+                        </td>
+                      </tr>
+                    </thead>
+                  </table>
+                </form>
               </div>
-              <br>
-            @empty
-              <h4>Ничего не найдено.</h4>
-              <a href="{{ route('posts.create') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Добавить объявление</a>
-            @endforelse
 
-            {!! $posts->render() !!}
+              @if (isset($section))
+                <ol class="breadcrumb">
+                  <li><a href="{{ route($section->service->route) }}">{{ $section->service->title }}</a></li>
+                  <li class="active">{{ $section->title }}</li>
+                </ol>
+              @endif
+
+              @forelse ($posts as $post)
+                <div class="media">
+                  <div class="media-left">
+                    <a href="{{ url($post->service_id.'/'.$post->slug.'/'.$post->id) }}">
+                      @if ( ! empty($post->image))
+                        <img class="media-object" src="/img/posts/{{ $post->user_id.'/'.$post->image }}" alt="{{ $post->title }}" style="width:200px">
+                      @else
+                        <img class="media-object" src="/img/no-main-image.png" alt="{{ $post->title }}" style="width:200px">
+                      @endif
+                    </a>
+                  </div>
+                  <div class="media-body">
+                    <div class="row post-title-fix">
+                      <h4 class="col-md-8 col-sm-8 media-heading">
+                        <a href="{{ url($post->service_id.'/'.$post->slug.'/'.$post->id) }}">{{ $post->title }}</a>
+                      </h4>
+                      <h4 class="col-md-4 col-sm-4 media-heading text-right text-success">{{ $post->price }} тг @if ($post->deal == 'on') <small>Торг&nbsp;возможен</small> @endif</h4>
+                    </div>
+                    <p class="text-gray">{{ $post->city->title }} / <b>{{ $post->section->title }}</b><br><small>{{ $post->created_at }} &nbsp; <i class="fa fa-smile-o"></i> {{ $post->views }} &nbsp; <i class="fa fa-comments-o"></i> {{ $post->comments->count() }}</small></p>
+                  </div>
+                </div><hr>
+              @empty
+                <h4>Ничего не найдено.</h4>
+                <a href="{{ route('posts.create') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Добавить объявление</a>
+              @endforelse
+
+              {!! $posts->render() !!}
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-md-4">
-        <div class="row-right">
-          @include('partials.top_rated')
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <h4>Топ по рейтингу</h4>
+              @foreach ($profiles as $profile)
+                <div class="media">
+                  <div class="media-left">
+                    <a href="/profile/{{ $profile->id }}">
+                      @if (empty($profile->avatar))
+                        <img src="/img/no-avatar.png" class="media-object" alt="..." style="width:90px">
+                      @else
+                        <img src="/img/users/{{ $profile->user->id . '/' . $profile->avatar }}" class="media-object" alt="..." style="width:90px">
+                      @endif
+                    </a>
+                  </div>
+                  <div class="media-body">
+                    <h5 class="media-heading"><a href="/profile/{{ $profile->id }}">{{ $profile->user->name }}</a></h5>
+                    <p>{{ $profile->section->title }}</p>
+                    @for ($i = 1; $i <= 5; $i++)
+                      @if ($i <= $profile->stars)
+                        <i class="glyphicon glyphicon-star text-success"></i>
+                      @else
+                        <i class="glyphicon glyphicon-star text-muted"></i>
+                      @endif
+                    @endfor
+                  </div>
+                </div>
+              @endforeach
+            </div>
+            <div class="panel-footer"><a href="/profiles">Все специалисты</a></div>
+          </div>
         </div>
       </div>
 @endsection

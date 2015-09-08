@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Post;
+use App\Section;
+
 class AdminPostsController extends Controller
 {
     /**
@@ -16,7 +19,10 @@ class AdminPostsController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::paginate(20);
+        $sections = Section::all();
+
+        return view('admin.posts.index', compact('posts', 'sections'));
     }
 
     /**

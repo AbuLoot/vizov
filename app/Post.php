@@ -42,6 +42,11 @@ class Post extends Model
         'status'
     ];
 
+    public function getCreatedAtAttribute($value)
+    {
+        return date('j '.trans('date.month.'.date('F', strtotime($value))).', Y', strtotime($value));
+    }
+
     public function section()
     {
         return $this->belongsTo('App\Section');
@@ -55,5 +60,10 @@ class Post extends Model
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+    public function comments()
+    {
+        return $this->morphMany('App\Comment', 'parent');
     }
 }

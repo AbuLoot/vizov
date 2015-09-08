@@ -8,13 +8,12 @@
         <div class="col-md-9">
           <div class="row-left">
             <div class="panel panel-default">
-              <div class="panel-heading">
-                <h3 class="panel-title">Изменение пароля</h3>
-              </div>
               <div class="panel-body">
-                <form method="POST" action="{{ route('reset-password') }}" role="form">
-                  <input name="_method" type="hidden" value="PUT">
-                  <input name="_token" type="hidden" value="{{ csrf_token() }}">
+                @include('partials.alerts')
+                <h3>Изменение пароля</h3>
+
+                <form method="POST" action="{{ route('update-password') }}" role="form">
+                  {!! csrf_field() !!}
                   <div class="form-group">
                     <label for="password">Старый пароль:</label>
                     <input class="form-control" placeholder="Старый пароль" name="password" id="password" type="password" minlength="6" maxlength="60" required>
@@ -48,7 +47,7 @@
               }
             </script>
 
-            <div class="panel panel-warning">
+            <div class="panel panel-danger">
               <div class="panel-heading">
                 <h3 class="panel-title">Удаление аккаунта</h3>
               </div>
@@ -56,7 +55,7 @@
                 <form method="POST" action="{{ route('delete-account') }}" accept-charset="UTF-8">
                   <input name="_method" type="hidden" value="DELETE">
                   <input name="_token" type="hidden" value="{{ csrf_token() }}">
-                  <button type="submit" class="btn btn-warning" onclick="return confirm('Удалить аккаунт?')"><span class="glyphicon glyphicon-fire"></span> Удалить</button>
+                  <button type="submit" class="btn btn-danger" onclick="return confirm('Удалить аккаунт?')"><span class="glyphicon glyphicon-fire"></span> Удалить</button>
                 </form>
               </div>
             </div>

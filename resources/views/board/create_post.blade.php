@@ -1,13 +1,12 @@
 @extends('layout')
 
 @section('content')
-      <div class="content-block">
-        <h3 class="col-md-offset-2">Разместить услугу</h3>
-
+    <div class="panel panel-default">
+      <div class="panel-body">
         <div class="row">
           <div class="col-md-8">
-
-            <form action="{{ route('posts.store') }}" method="post" class="form-horizontal" enctype="multipart/form-data">
+            <h3>Разместить услугу</h3>
+            <form action="{{ route('posts.store') }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
               {!! csrf_field() !!}
               <div class="form-group">
                 <div class="col-md-offset-3 col-md-9">
@@ -16,7 +15,7 @@
                   </div>
                 </div>
 
-                <label for="title" class="col-md-3">Заголовок объявления *</label>
+                <label for="title" class="col-md-3">Заголовок объявления</label>
                 <div class="col-md-9">
                   <div class="row">
                     <input type="text" class="form-control" id="title" name="title" minlength="5" maxlength="80" value="{{ old('title') }}" required>
@@ -42,12 +41,19 @@
                           @endif
                         @endforeach
                       </optgroup>
+                      <optgroup label="Товары">
+                        @foreach ($section as $item)
+                          @if ($item->service_id == 3)
+                            <option value="{{ $item->id }}">{{ $item->title }}</option>
+                          @endif
+                        @endforeach
+                      </optgroup>
                     </select>
                   </div>
                 </div>
               </div>
               <div class="form-group">
-                <label for="price" class="col-md-3">Цена *</label>
+                <label for="price" class="col-md-3">Цена</label>
                 <div class="col-md-9">
                   <div class="row">
                     <div class="input-group">
@@ -194,7 +200,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="comment" class="col-md-3">Разрешить комментарии *</label>
+                <label for="comment" class="col-md-3">Разрешить комментарии</label>
                 <div class="col-md-9">
                   <div class="row">
                     <select class="form-control" id="comment" name="comment">
@@ -218,6 +224,7 @@
           </div>
         </div>
       </div>
+    </div>
 @endsection
 
 @section('styles')

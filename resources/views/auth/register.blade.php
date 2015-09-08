@@ -1,45 +1,51 @@
 @extends('layout')
 
 @section('content')
-      <div class="col-md-6 col-md-offset-2 content-block">
-        <h3 class="text-center">Регистрация</h3>
-        @include('partials.alerts')
+      <div class="row">
+        <div class="col-md-6 col-md-offset-2">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <h3 class="text-center">Регистрация</h3>
+              @include('partials.alerts')
 
-        <form method="POST" class="/auth/register">
-          {!! csrf_field() !!}
-          <div class="form-group">
-            <label for="name" class="control-label">Ваше имя</label>
-            <input type="text" class="form-control" id="name" name="name" minlength="3" maxlength="60" placeholder="Введите имя" value="{{ old('name') }}" required>
-          </div>
-          <div class="form-group">
-            <label for="city" class="control-label">Город</label>
-            <select class="form-control" id="city" name="city_id">
-              @foreach ($cities as $city)
-                <option value="{{ $city->id }}">{{ $city->title }}</option>
-              @endforeach
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="email" class="control-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" minlength="8" maxlength="60" placeholder="Введите email" value="{{ old('email') }}" required>
-          </div>
-          <div class="form-group">
-            <label for="password" class="control-label">Пароль</label>
-            <input type="password" class="form-control" id="password" name="password" minlength="6" maxlength="60" placeholder="Введите пароль" required>
-          </div>
-          <div class="form-group">
-            <label for="password_confirmation" class="control-label">Подтвердите Пароль</label>
-            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" minlength="6" maxlength="60" placeholder="Введите еще раз пароль" required>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" name="rules"> Я согласен с <a href="#">правилами сайта</a>
-              </label>
+              <form method="POST" class="/auth/register">
+                {!! csrf_field() !!}
+                <div class="form-group">
+                  <label for="name" class="control-label">Ваше имя</label>
+                  <input type="text" class="form-control" id="name" name="name" minlength="3" maxlength="60" placeholder="Введите имя" value="{{ old('name') }}" required>
+                </div>
+                <div class="form-group">
+                  <label for="city" class="control-label">Город</label>
+                  <select class="form-control" id="city" name="city_id">
+                    @foreach ($cities as $city)
+                      <option value="{{ $city->id }}">{{ $city->title }}</option>
+                    @endforeach
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="email" class="control-label">Email</label>
+                  <input type="email" class="form-control" id="email" name="email" minlength="8" maxlength="60" placeholder="Введите email" value="{{ old('email') }}" required>
+                </div>
+                <div class="form-group">
+                  <label for="password" class="control-label">Пароль</label>
+                  <input type="password" class="form-control" id="password" name="password" minlength="6" maxlength="60" placeholder="Введите пароль" required>
+                </div>
+                <div class="form-group">
+                  <label for="password_confirmation" class="control-label">Подтвердите Пароль</label>
+                  <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" minlength="6" maxlength="60" placeholder="Введите еще раз пароль" required>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name="rules" required> Я согласен с <a href="#">правилами сайта</a>
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+                </div>
+              </form>
             </div>
           </div>
-          <div class="form-group">
-            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
-          </div>
-        </form>
+        </div>
       </div>
 
       <script type="text/javascript">

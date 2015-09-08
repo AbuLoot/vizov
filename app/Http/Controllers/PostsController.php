@@ -17,6 +17,8 @@ use Storage;
 
 class PostsController extends Controller
 {
+    protected $file;
+
     /**
      * Display a listing of the resource.
      *
@@ -36,7 +38,7 @@ class PostsController extends Controller
     {
         $user = Auth::user();
         $cities = City::all();
-        $section = Section::all();
+        $section = Section::orderBy('sort_id')->get();
 
         return view('board.create_post', compact('user', 'cities', 'section'));
     }
@@ -48,7 +50,6 @@ class PostsController extends Controller
      */
     public function store(PostRequest $request)
     {
-        $post = new Post;
         $section = Section::findOrFail($request->section_id);
 
         $introImage = null;
@@ -69,32 +70,51 @@ class PostsController extends Controller
                         Storage::makeDirectory('img/posts/'.Auth::id());
                     }
 
-                    $file = Image::make($image);
-
-                    $file->resize(600, null, function ($constraint) {
-                        $constraint->aspectRatio();
-                    });
-                    $file->crop(600, 450);
-                    $file->save('img/posts/'.Auth::id().'/'.$imageName);
-
                     if ($i == 0)
                     {
-                        $introFile = Image::make($image);
-                        $introFile->resize(300, null, function ($constraint) {
-                            $constraint->aspectRatio();
-                        });
-                        $introFile->crop(300, 200);
-                        $introFile->save('img/posts/'.Auth::id().'/main-'.$imageName);
-                        $introImage = 'main-'.$imageName;
                         $i++;
+                        $mainFile = Image::canvas(300, 200, '#ffffff');
+                        $introFile = Image::make($image);
+
+                        $this->file = $introFile;
+                        $this->optimalResize(300, 200);
+
+                        $mainFile->insert($this->file, 'center');
+                        $mainFile->rectangle(0, 0, 299, 199, function ($draw) {
+                            $draw->border(1, '#dddddd');
+                        });
+
+                        $mainFile->save('img/posts/'.Auth::id().'/main-'.$imageName);
+                        $introImage = 'main-'.$imageName;
                     }
 
-                    // Creating mini images
-                    $file->resize(95, null, function ($constraint) {
-                        $constraint->aspectRatio();
+                    // Creating images
+                    $moreFile = Image::canvas(660, 450, '#ffffff');
+                    $file = Image::make($image);
+
+                    $this->file = $file;
+                    $this->optimalResize(660, 450);
+
+                    $moreFile->insert($this->file, 'center');
+                    $moreFile->insert('img/watermark.png', 'bottom-left', 10, 10);
+                    $moreFile->rectangle(0, 0, 659, 449, function ($draw) {
+                        $draw->border(1, '#dddddd');
                     });
-                    $file->crop(95, 71);
-                    $file->save('img/posts/'.Auth::id().'/mini-'.$imageName);
+
+                    $moreFile->save('img/posts/'.Auth::id().'/'.$imageName);
+
+                    // Creating mini images
+                    $miniFile = Image::canvas(95, 71, '#ffffff');
+
+                    $this->file = $file;
+                    $this->optimalResize(95, 71);
+
+                    $miniFile->insert($this->file, 'center');
+                    $miniFile->rectangle(0, 0, 94, 70, function ($draw) {
+                        $draw->border(1, '#dddddd');
+                    });
+
+                    $miniFile->save('img/posts/'.Auth::id().'/mini-'.$imageName);
 
                     $images[$key]['image'] = $imageName;
                     $images[$key]['mini_image'] = 'mini-'.$imageName;
@@ -102,7 +122,7 @@ class PostsController extends Controller
             }
         }
 
-        // $post->sort_id = 1;
+        $post = new Post;
         $post->user_id = Auth::id();
         $post->city_id = $request->city_id;
         $post->service_id = $section->service_id;
@@ -110,7 +130,7 @@ class PostsController extends Controller
         $post->slug = str_slug($request->title);
         $post->title = $request->title;
         $post->price = $request->price;
-        if (isset($post->deal))
+        if ($request->deal)
             $post->deal = $request->deal;
         $post->description = $request->description;
         $post->image = $introImage;
@@ -145,7 +165,7 @@ class PostsController extends Controller
     {
         $post = Auth::user()->posts()->find($id);
         $cities = City::all();
-        $section = Section::all();
+        $section = Section::orderBy('sort_id')->get();
 
         return view('board.edit_post', compact('post', 'cities', 'section'));
     }
@@ -177,36 +197,52 @@ class PostsController extends Controller
                         Storage::makeDirectory('img/posts/'.$post->user_id);
                     }
 
-                    $file = Image::make($image);
-                    $file->resize(600, null, function ($constraint) {
-                        $constraint->aspectRatio();
-                    });
-                    $file->crop(600, 450);
-                    $file->save('img/posts/'.$post->user_id.'/'.$imageName);
-
-                    // Creating mini images
-                    $file->resize(95, null, function ($constraint) {
-                        $constraint->aspectRatio();
-                    });
-                    $file->crop(95, 71);
-                    $file->save('img/posts/'.$post->user_id.'/mini-'.$imageName);
-
-                    if ($i == 0)
+                    if ($key == 0)
                     {
-                        if (isset($images[$key]))
+                        if ($post->image != NULL AND file_exists('img/posts/'.$post->user_id.'/'.$post->image))
                         {
-                            Storage::delete('img/posts/'.$post->user_id.'/main-'.$images[$key]['image']);
+                            Storage::delete('img/posts/'.$post->user_id.'/'.$post->image);
                         }
 
+                        $mainFile = Image::canvas(300, 200, '#ffffff');
                         $introFile = Image::make($image);
-                        $introFile->resize(300, null, function ($constraint) {
-                            $constraint->aspectRatio();
+
+                        $this->file = $introFile;
+                        $this->optimalResize(300, 200);
+
+                        $mainFile->insert($this->file, 'center');
+                        $mainFile->rectangle(0, 0, 299, 199, function ($draw) {
+                            $draw->border(1, '#dddddd');
                         });
-                        $introFile->crop(300, 200);
-                        $introFile->save('img/posts/'.$post->user_id.'/main-'.$imageName);
+                        $mainFile->save('img/posts/'.$post->user_id.'/main-'.$imageName);
                         $introImage = 'main-'.$imageName;
-                        $i++;
                     }
+
+                    // Creating images
+                    $moreFile = Image::canvas(660, 450, '#ffffff');
+                    $file = Image::make($image);
+
+                    $this->file = $file;
+                    $this->optimalResize(660, 450);
+
+                    $moreFile->insert($this->file, 'center');
+                    $moreFile->insert('img/watermark.png', 'bottom-left', 10, 10);
+                    $moreFile->rectangle(0, 0, 659, 449, function ($draw) {
+                        $draw->border(1, '#dddddd');
+                    });
+                    $moreFile->save('img/posts/'.$post->user_id.'/'.$imageName);
+
+                    // Creating mini images
+                    $miniFile = Image::canvas(95, 71, '#ffffff');
+
+                    $this->file = $file;
+                    $this->optimalResize(95, 71);
+
+                    $miniFile->insert($this->file, 'center');
+                    $miniFile->rectangle(0, 0, 94, 70, function ($draw) {
+                        $draw->border(1, '#dddddd');
+                    });
+                    $miniFile->save('img/posts/'.$post->user_id.'/mini-'.$imageName);
 
                     if (isset($images[$key]))
                     {
@@ -230,7 +266,6 @@ class PostsController extends Controller
             $images = serialize($images);
         }
 
-        // $post->sort_id = 1,
         $post->city_id = $request->city_id;
         $post->section_id = $request->section_id;
         $post->slug = str_slug($request->title);
@@ -251,6 +286,25 @@ class PostsController extends Controller
         return redirect('my_posts')->with('status', 'Объявление добавлено!');
     }
 
+    public function optimalResize($width, $height)
+    {
+        if ($this->file->width() <= $this->file->height())
+        {
+            $this->file->resize(null, $height, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+        }
+        else
+        {
+            $this->file->resize($width, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+        }
+
+        if ($this->file->width() > $width OR $this->file->height() > $height)
+            $this->file->crop($width, $height);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -261,15 +315,20 @@ class PostsController extends Controller
     {
         $post = Auth::user()->posts()->find($id);
 
+        foreach ($post->comments as $comment)
+        {
+            $comment->delete();
+        }
+
         if ( ! empty($post->images))
         {
             $images = unserialize($post->images);
 
-            foreach ($images as $key => $image)
+            foreach ($images as $image)
             {
-                if ($key == 0)
+                if ($post->image != NULL AND file_exists('img/posts/'.$post->user_id.'/'.$post->image))
                 {
-                    Storage::delete('img/posts/'.$post->user_id.'/main-'.$image['image']);
+                    Storage::delete('img/posts/'.$post->user_id.'/'.$post->image);
                 }
 
                 Storage::delete([

@@ -1,14 +1,14 @@
 @extends('layout')
 
 @section('content')
-      <div class="content-block">
-        <h3 class="col-md-offset-2">Редактирование объявления</h3>
-
-          <div class="row">
-            <div class="col-md-8">
-            <form action="{{ route('posts.update', $post->id) }}" method="post" class="form-horizontal" enctype="multipart/form-data">
-              <input name="_method" type="hidden" value="PUT">
-              {!! csrf_field() !!}
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-8">
+            <h3>Редактирование объявления</h3>
+            <form action="{{ route('posts.update', $post->id) }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
+              <input type="hidden" name="_method" value="PUT">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div class="form-group">
                 <div class="col-md-offset-3 col-md-9">
                   <div class="row">
@@ -16,7 +16,7 @@
                   </div>
                 </div>
 
-                <label for="title" class="col-md-3">Заголовок объявления *</label>
+                <label for="title" class="col-md-3">Заголовок объявления</label>
                 <div class="col-md-9">
                   <div class="row">
                     <input type="text" class="form-control" id="title" name="title" minlength="5" maxlength="80" value="{{ (old('title')) ? old('title') : $post->title }}" required>
@@ -50,12 +50,23 @@
                           @endif
                         @endforeach
                       </optgroup>
+                      <optgroup label="Товары">
+                        @foreach ($section as $item)
+                          @if ($item->service_id == 3)
+                            @if ($item->id == $post->section_id)
+                              <option value="{{ $item->id }}" selected>{{ $item->title }}</option>
+                            @else
+                              <option value="{{ $item->id }}">{{ $item->title }}</option>
+                            @endif
+                          @endif
+                        @endforeach
+                      </optgroup>
                     </select>
                   </div>
                 </div>
               </div>
               <div class="form-group">
-                <label for="price" class="col-md-3">Цена *</label>
+                <label for="price" class="col-md-3">Цена</label>
                 <div class="col-md-9">
                   <div class="row">
                     <div class="input-group">
@@ -79,7 +90,7 @@
                 <label for="price" class="col-md-3">Описание</label>
                 <div class="col-md-9">
                   <div class="row">
-                    <textarea class="form-control" id="description" name="description" rows="3" maxlength="2000">{{ (old('description')) ? old('description') : $post->description }}</textarea>
+                    <textarea class="form-control" id="description" name="description" rows="6" maxlength="2000">{{ (old('description')) ? old('description') : $post->description }}</textarea>
                   </div>
                 </div>
               </div>
@@ -165,13 +176,17 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="comment" class="col-md-3">Разрешить комментарии *</label>
+                <label for="comment" class="col-md-3">Разрешить комментарии</label>
                 <div class="col-md-9">
                   <div class="row">
                     <select class="form-control" id="comment" name="comment">
-                      <option value="all">Всем</option>
-                      <option value="nobody">Никому</option>
-                      <option value="registered_users">Только зарегистрированным пользователям</option>
+                      @foreach (trans('comment') as $key => $value)
+                        @if ($key === $post->comment)
+                          <option value="{{ $key }}" selected>{{ $value }}</option>
+                        @else
+                          <option value="{{ $key }}">{{ $value }}</option>
+                        @endif
+                      @endforeach
                     </select>
                     <br>
                     <p>Размещая объявления на сайте, вы соглашаетесь с <a href="#">этими правилами</a>.</p>
@@ -189,6 +204,7 @@
           </div>
         </div>
       </div>
+    </div>
 @endsection
 
 @section('styles')

@@ -13,15 +13,15 @@
               </div>
               <div class="panel-body">
                 @include('partials.alerts')
-                <form action="/my_profile/{{ $user->profile->user_id }}" method="post" enctype="multipart/form-data">
+                <form action="/my_profile/{{ Auth::user()->id }}" method="POST" enctype="multipart/form-data">
                   {!! csrf_field() !!}
                   <div class="form-group">
                     <label for="email">Email:</label>
-                    <input type="email" class="form-control" name="email" id="email" minlength="8" maxlength="60" value="{{ $user->email }}" required disabled>
+                    <input type="email" class="form-control" name="email" id="email" minlength="8" maxlength="60" value="{{ Auth::user()->email }}" required disabled>
                   </div>
                   <div class="form-group">
                     <label for="name">Ваше ФИО:</label>
-                    <input type="text" class="form-control" name="name" id="name" minlength="3" maxlength="60" value="{{ $user->name }}" required>
+                    <input type="text" class="form-control" name="name" id="name" minlength="3" maxlength="60" value="{{ Auth::user()->name }}" required>
                   </div>
                   <div class="form-group">
                     <label for="phone">В какой сфере вы работаете:</label>
@@ -30,7 +30,7 @@
                       <optgroup label="Услуги вызова">
                         @foreach ($section as $item)
                           @if ($item->service_id == 1)
-                            @if ($item->id == $user->profile->section_id)
+                            @if ($item->id == $profile->section_id)
                               <option value="{{ $item->id }}" selected>{{ $item->title }}</option>
                             @else
                               <option value="{{ $item->id }}">{{ $item->title }}</option>
@@ -41,7 +41,7 @@
                       <optgroup label="Услуги ремонта">
                         @foreach ($section as $item)
                           @if ($item->service_id == 2)
-                            @if ($item->id == $user->profile->section_id)
+                            @if ($item->id == $profile->section_id)
                               <option value="{{ $item->id }}" selected>{{ $item->title }}</option>
                             @else
                               <option value="{{ $item->id }}">{{ $item->title }}</option>
@@ -61,27 +61,27 @@
                   </div>
                   <div class="form-group">
                     <label for="address">Адрес вашей работы:</label>
-                    <input type="text" class="form-control" name="address" id="address" maxlength="200" placeholder="Адрес" value="{{ $user->profile->address }}">
+                    <input type="text" class="form-control" name="address" id="address" maxlength="200" placeholder="Адрес" value="{{ $profile->address }}">
                   </div>
                   <div class="form-group">
                     <label for="phone">Контакты (телефон):</label>
-                    <input type="tel" class="form-control" name="phone" id="phone" maxlength="40" placeholder="Номер телефона" value="{{ $user->profile->phone }}">
+                    <input type="tel" class="form-control" name="phone" id="phone" maxlength="40" placeholder="Номер телефона" value="{{ $profile->phone }}">
                   </div>
                   <div class="form-group">
                     <label for="skills">Навыки:</label>
-                    <input type="text" class="form-control" name="skills" id="skills" placeholder="Какими навыками вы владете" value="{{ $user->profile->skills }}">
+                    <input type="text" class="form-control" name="skills" id="skills" placeholder="Какими навыками вы владете" value="{{ $profile->skills }}">
                   </div>
                   <div class="form-group">
                     <label for="website">Веб-сайт:</label>
-                    <input type="text" class="form-control" name="website" id="website" placeholder="Веб-сайт" maxlength="80" value="{{ $user->profile->website }}">
+                    <input type="text" class="form-control" name="website" id="website" placeholder="Веб-сайт" maxlength="80" value="{{ $profile->website }}">
                   </div>
                   <div class="form-group">
                     <div class="fileinput fileinput-new" data-provides="fileinput">
                       <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
-                        @if(empty($user->profile->avatar))
+                        @if(empty($profile->avatar))
                           <img src="/img/no-avatar.png">
                         @else
-                          <img src="/img/users/{{ $user->id . '/' . $user->profile->avatar }}">
+                          <img src="/img/users/{{ Auth::user()->id . '/' . $profile->avatar }}">
                         @endif
                       </div>
                       <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>

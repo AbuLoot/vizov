@@ -7,71 +7,65 @@
         </div>
         <div class="col-md-9">
           <div class="row-left">
-            <div class="content-block">
-              <h3>Мой профиль</h3>
-              @include('partials.alerts')
-              <div class="table-responsive">
-                <table class="table table-striped table-hover">
-                  <tr>
-                    <th>Email:</th>
-                    <td>{{ $user->email }}</td>
-                  </tr>
-                  <tr>
-                    <th>Ваше ФИО:</th>
-                    <td>{{ $user->name }}</td>
-                  </tr>
-                  <tr>
-                    <th>Cфера работы:</th>
-                    <td>
-                      @if ($user->profile->section_id == 0)
-                        Не указан
-                      @else
-                        {{ $user->profile->section->title }}
-                      @endif
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>Город:</th>
-                    <td>
-                      @if ($user->profile->city_id == 0)
-                        Не указан
-                      @else
-                        {{ $user->profile->city->title }}
-                      @endif
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>Адрес работы:</th>
-                    <td>{{ $user->profile->address }}</td>
-                  </tr>
-                  <tr>
-                    <th>Навыки:</th>
-                    <td>{{ $user->profile->skills }}</td>
-                  </tr>
-                  <tr>
-                    <th>Телефон:</th>
-                    <td>{{ $user->profile->phone }}</td>
-                  </tr>
-                  <tr>
-                    <th>Веб-сайт:</th>
-                    <td>{{ $user->profile->website }}</td>
-                  </tr>
-                  <tr>
-                    <th>Рейтинг:</th>
-                    <td>
-                      <i class="glyphicon glyphicon-star text-success"></i>
-                      <i class="glyphicon glyphicon-star text-success"></i>
-                      <i class="glyphicon glyphicon-star text-success"></i>
-                      <i class="glyphicon glyphicon-star text-muted"></i>
-                      <i class="glyphicon glyphicon-star text-muted"></i>
-                    </td>
-                  </tr>
-                </table>
+            <div class="panel panel-default">
+              <div class="panel-body">
+                @include('partials.alerts')
+                <h3>Мой профиль</h3>
+                <div class="table-responsive">
+                  <table class="table table-striped table-hover">
+                    <tbody>
+                      <tr>
+                        <td style="width:170px">Ваше ФИО</td>
+                        <td>{{ Auth::user()->name }}</td>
+                      </tr>
+                      <tr>
+                        <td>Email</td>
+                        <td>{{ Auth::user()->email }}</td>
+                      </tr>
+                      <tr>
+                        <td>Cфера работы</td>
+                        <td>{{ ($profile->section_id == 0) ? 'Не указан' : $profile->section->title }}</td>
+                      </tr>
+                      <tr>
+                        <td>Город</td>
+                        <td>{{ ($profile->city_id == 0) ? 'Не указан' : $profile->city->title }}</td>
+                      </tr>
+                      <tr>
+                        <td>Адрес работы</td>
+                        <td>{{ $profile->address }}</td>
+                      </tr>
+                      <tr>
+                        <td>Навыки</td>
+                        <td>{{ $profile->skills }}</td>
+                      </tr>
+                      <tr>
+                        <td>Телефон</td>
+                        <td>{{ $profile->phone }}</td>
+                      </tr>
+                      <tr>
+                        <td>Веб-сайт</td>
+                        <td>{{ $profile->website }}</td>
+                      </tr>
+                      <tr>
+                        <td>Рейтинг</td>
+                        <td>
+                          @for ($i = 1; $i <= 5; $i++)
+                            @if ($i <= $profile->stars)
+                              <i class="glyphicon glyphicon-star text-success"></i>
+                            @else
+                              <i class="glyphicon glyphicon-star text-muted"></i>
+                            @endif
+                          @endfor
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p>
+                  <a href="/my_profile/edit" class="btn btn-primary">Заполнить профиль</a>
+                  <a href="/profile/{{ $profile->id }}" class="btn btn-success">Как видят меня другие?</a>
+                </p>
               </div>
-              <p>
-                <a href="/my_profile/edit" class="btn btn-default">Заполнить профиль</a>
-                <a href="/profile/{{ $user->profile->id }}" class="btn btn-info">Как видят меня другие?</a>
-              </p>
             </div>
           </div>
         </div>
