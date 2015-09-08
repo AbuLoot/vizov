@@ -26,40 +26,6 @@
               </div>
               <h3>{{ $post->title }}</h3>
               <div class="row">
-                <div class="col-md-5">
-                  <div class="table-responsive">
-                    <table class="table table-striped table-condensed">
-                      <tbody>
-                        <tr>
-                          <td>Цена</td>
-                          <td><b class="text-success">{{ $post->price }} тг</b> @if ($post->deal == 'on') <small class="text-muted">- Торг&nbsp;возможен</small> @endif</td>
-                        </tr>
-                        <tr>
-                          <td>Город</td>
-                          <td>{{ $post->city->title }}</td>
-                        </tr>
-                        <tr>
-                          <td>Адрес</td>
-                          <td>{{ $post->address }}</td>
-                        </tr>
-                        <tr>
-                          <td>Телефоны</td>
-                          <td>{{ $post->phone }}</td>
-                        </tr>
-                        <tr>
-                          <td>Почта</td>
-                          <td>{{ $post->email }}</td>
-                        </tr>
-                        <tr>
-                          <td>Специалист</td>
-                          <td><a href="/profile/{{ $post->user->profile->id }}">{{ $post->user->name }}</a></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <p>{{ $post->description }}</p>
-                  <p><small>{{ $post->created_at }}</small> | <small>Просмотров: {{ $post->views }}</small></p>
-                </div>
                 <div class="col-md-7 gallery">
                   <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false">
                     <div class="carousel-inner" role="listbox">
@@ -98,6 +64,40 @@
                       <?php $i++; ?>
                     @endforeach
                   </ol>
+                </div>
+                <div class="col-md-5">
+                  <div class="table-responsive">
+                    <table class="table table-striped table-condensed">
+                      <tbody>
+                        <tr>
+                          <td>Цена</td>
+                          <td><b class="text-success">{{ $post->price }} тг</b> @if ($post->deal == 'on') <small class="text-muted">- Торг&nbsp;возможен</small> @endif</td>
+                        </tr>
+                        <tr>
+                          <td>Город</td>
+                          <td>{{ $post->city->title }}</td>
+                        </tr>
+                        <tr>
+                          <td>Адрес</td>
+                          <td>{{ $post->address }}</td>
+                        </tr>
+                        <tr>
+                          <td>Телефоны</td>
+                          <td>{{ $post->phone }}</td>
+                        </tr>
+                        <tr>
+                          <td>Почта</td>
+                          <td>{{ $post->email }}</td>
+                        </tr>
+                        <tr>
+                          <td>Специалист</td>
+                          <td><a href="/profile/{{ $post->user->profile->id }}">{{ $post->user->name }}</a></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <p>{{ $post->description }}</p>
+                  <p><small>{{ $post->created_at }}</small> | <small>Просмотров: {{ $post->views }}</small></p>
                 </div>
               </div>
             </div>
